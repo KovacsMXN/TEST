@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}SuipluMX - Platform settings{% endblock %}
+{% block content %}
+      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">Storage locations</h1>
+        <div class="btn-toolbar mb-2 mb-md-0">
+          <div class="btn-group me-2">
+          </div>
+        </div>
+      </div>
+<h5>Editing</h5>
+<hr>
+<form action="" method="POST">
+{% csrf_token %}
+<p>Name:</p>
+{{ form.name }}
+<br>
+<button class="btn btn-dark" type="submit">Save</button>
+</form>
+{% endblock %}

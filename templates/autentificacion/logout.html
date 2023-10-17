@@ -1,0 +1,30 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <title>S2 · Logout</title>
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/sign-in.css' %}" rel="stylesheet">
+	<link href="{% static 'css/loginextra.css' %}" rel="stylesheet">
+  </head>
+  <body class="text-center">
+    <main class="form-signin w-100 m-auto">
+      <form>
+            <div class="alert alert-light" role="alert">
+              <hr>
+              <img width="90%" src="{% static 'images/logo.png' %}" >
+              <br>
+              <h4 class="alert-heading"></h4>
+              <hr>
+            </div>
+            <p>
+                <button type="button" class="btn btn-warning">You are now successfully logged out.</button>
+            </p>
+            <a href="../login" class="w-100 btn btn-lg btn-primary" type="submit">Sign in</a>
+      </form>
+    </main>
+  </body>
+</html>

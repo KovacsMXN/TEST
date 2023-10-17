@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}SuipluMX - Add new storage location{% endblock %}
+{% block content %}
+      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">Storage locations</h1>
+        <div class="btn-toolbar mb-2 mb-md-0">
+          <div class="btn-group me-2">
+          </div>
+        </div>
+      </div>
+<h5>Add new storage location</h5>
+<hr>
+<form action="{% url 'configuracion_storage_add' %}" method="POST">
+  {% csrf_token %}
+  {{form.name}}
+<br>
+{{form.add_date}}
+<br>
+<button type="submit" class="btn btn-dark">Save</button>
+</form>
+{% endblock %}

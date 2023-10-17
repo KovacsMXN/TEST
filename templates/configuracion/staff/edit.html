@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% block title %}S2 - Editing {{ registro.username }}'s account{% endblock %}
+{% block content %}
+      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">Change user</h1>
+      </div>
+<h5>Editing</h5>
+<hr>
+<form action="" method="POST">
+{% csrf_token %}
+<table class="table table-borderless">
+  <thead>
+    <tr>
+      <th scope="col"></th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">Username:</th>
+      <td>  <div class="col-auto">
+    <label class="visually-hidden" for="autoSizingInputGroup">Username</label>
+    <div class="input-group">
+      <div class="input-group-text">@</div>
+      {{ form.username }}
+    </div>
+  </div></td>
+    </tr>
+    <tr>
+      <th scope="row">Name:</th>
+      <td><div class="row">
+  <div class="col">
+    {{ form.first_name }}
+  </div>
+  <div class="col">
+    {{ form.last_name }}
+  </div>
+</div></td>
+    </tr>
+    <tr>
+      <th scope="row">Email:</th>
+      <td>{{ form.email }}</td>
+    </tr>
+        <tr>
+      <th scope="row">Options:</th>
+      <td>
+    <div class="col-sm-10">
+      <div class="form-check">
+        {{ form.is_active }}
+        <label class="form-check-label" for="gridRadios1">
+          Active account
+        </label>
+      </div>
+      <div class="form-check">
+        {{ form.is_staff }}
+        <label class="form-check-label" for="gridRadios2">
+          Staff account
+        </label>
+      </div>
+      <div class="form-check disabled">
+        {{ form.is_superuser }}
+        <label class="form-check-label" for="gridRadios3">
+          Superuser account
+        </label>
+      </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<p class="text-end"><button type="submit" class="btn btn-primary">Save</button>
+</form>
+</div>
+
+{% endblock %}

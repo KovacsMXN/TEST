@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}SuipluMX - Editing brand{% endblock %}
+{% block content %}
+      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">Equipment settings</h1>
+      </div>
+<h5>Editing</h5>
+<hr>
+<form action="" method="POST">
+{% csrf_token %}
+<table class="table table-borderless">
+  <thead>
+    <tr>
+      <th scope="col"></th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">Name:</th>
+      <td>{{ form.name }}</td>
+    </tr>
+  </tbody>
+</table>
+<p class="text-end"><button type="submit" class="btn btn-primary">Save</button>
+</form>
+</div>
+
+{% endblock %}

@@ -1,0 +1,44 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Sign in to Suiplu">
+    <title>SuipluMX · Sign in</title>
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/loginextra.css' %}" rel="stylesheet">
+    <link href="{% static 'css/sign-in.css' %}" rel="stylesheet">
+  </head>
+    <body class="text-center">
+		<main class="form-signin w-100 m-auto">
+			{% block content %}
+				<form method="post">
+					{% csrf_token %}
+						<div class="alert alert-light" role="alert">
+							<hr>
+							<img width="90%" src="{% static 'images/logo.png' %}" >
+							<br>
+								{% if error %}
+							<hr>
+							<p><button type="button" class="btn btn-warning">{{ error }}</button></p>
+								{% endif %}
+						<hr>
+						</div>
+								<div class="form-floating">
+									<input type="text" name="floatingInput" class="form-control" id="floatingInput" placeholder="Ingeniero">
+									<label for="floatingInput">Username</label>
+								</div>
+
+								<div class="form-floating">
+									<input type="password" name="floatingPassword" class="form-control" id="floatingPassword" placeholder="Password">
+									<label for="floatingPassword">Password</label>
+								</div>
+								<button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
+				</form>
+
+			{% endblock %}
+			<br>
+		</main>
+    </body>
+</html>
