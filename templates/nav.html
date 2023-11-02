@@ -1,83 +1,58 @@
 {% load static %}
 <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
-      <div class="position-sticky pt-3 sidebar-sticky">
-        <ul class="nav flex-column">
-          <li class="nav-item">
-            <a class="nav-link" aria-current="page" href="{% url 'index' %}">
-              <span data-feather="home" class="align-text-bottom"></span>
-              Dashboard
-            </a>
-          </li>
-		  <li class="nav-item">
-            <a class="nav-link" href="#">
-              <span data-feather="archive" class="align-text-bottom"></span>
-              Inventory
-            </a>
-          </li>
-		  <li class="nav-item">
-            <a class="nav-link" href="{% url 'equipment_index' %}">
-              <span data-feather="tool" class="align-text-bottom"></span>
-              Equipment
-            </a>
-          </li>
-        </ul>
-
+<div class="position-sticky pt-3 sidebar-sticky">
+<!-- FIRST SECTION-->
+    <ul class="nav flex-column">
+        <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="{% url 'index' %}"><span data-feather="home" class="align-text-bottom"></span>Dashboard</a>
+        </li>
+		<li class="nav-item">
+            <a class="nav-link" href="#"><span data-feather="archive" class="align-text-bottom"></span>Inventory</a>
+        </li>
+		<li class="nav-item">
+            <a class="nav-link" href="{% url 'equipment_index' %}"><span data-feather="tool" class="align-text-bottom"></span>Equipment</a>
+        </li>
+    </ul>
 {% if request.user.is_superuser %}
-    <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted text-uppercase">
-          <span>Storage settings</span>
-    </h6>
-    
+<!-- SECOND SECTION ADMIN -->
+<h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted text-uppercase">
+    <span>Storage settings</span>
+</h6>
     <ul class="nav flex-column mb-2">
-      <li class="nav-item">
-            <a class="nav-link" href="{% url 'configuracion_storage_index' %}">
-              <span data-feather="map-pin" class="align-text-bottom"></span>
-              Storage locations
-            </a>
-      </li>
+		<li class="nav-item">
+            <a class="nav-link" href="{% url 'configuracion_storage_index' %}"><span data-feather="map-pin" class="align-text-bottom"></span>Storage locations</a>
+		</li>
     </ul>
-    <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted text-uppercase">
-          <span>Equipment settings</span>
-    </h6>
-    
+<h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted text-uppercase">
+    <span>Equipment settings</span>
+</h6>
     <ul class="nav flex-column mb-2">
-      <li class="nav-item">
-            <a class="nav-link" href="{% url 'equipment_locations_index' %}">
-              <span data-feather="map-pin" class="align-text-bottom"></span>
-              Equipment locations
-            </a>
-      </li>
-      <li class="nav-item">
-            <a class="nav-link" href="{% url 'equipment_brands' %}">
-              <span data-feather="package" class="align-text-bottom"></span>
-              Equipment manufacturers
-            </a>
-      </li>
+		<li class="nav-item">
+            <a class="nav-link" href="{% url 'equipment_locations_index' %}"><span data-feather="map-pin" class="align-text-bottom"></span>Equipment locations</a>
+		</li>
+		<li class="nav-item">
+            <a class="nav-link" href="{% url 'equipment_brands' %}"><span data-feather="package" class="align-text-bottom"></span>Equipment manufacturers</a>
+		</li>
     </ul>
-    <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted text-uppercase">
-          <span>Platform settings</span>
-    </h6>
-		
+<h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted text-uppercase">
+    <span>Platform settings</span>
+</h6>	
     <ul class="nav flex-column mb-2">
-      <li class="nav-item">
-            <a class="nav-link" href="{% url 'configuracion_index' %}">
-              <span data-feather="settings" class="align-text-bottom"></span>
-              General settings
-            </a>
-      </li>
+		<li class="nav-item">
+            <a class="nav-link" href="{% url 'configuracion_index' %}"><span data-feather="settings" class="align-text-bottom"></span>General settings</a>
+		</li>
     </ul>
-            <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted text-uppercase">
-				<span>Staff</span>
-			</h6>
-				<ul class="nav flex-column mb-2">
-                    <li class="nav-item">
-						<a class="nav-link" href="{% url 'configuracion_staff_usuarios' %}">
-						<span data-feather="users" class="align-text-bottom"></span>Accounts</a>
-					</li>
-				</ul>
-		{% else %}
-
-		{% endif %}
-
-      </div>
-	<footer id="footer">{% include "copy.html" %}</footer>
-    </nav>
+<h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted text-uppercase">
+	<span>Staff</span>
+</h6>
+	<ul class="nav flex-column mb-2">
+        <li class="nav-item">
+			<a class="nav-link" href="{% url 'configuracion_staff_usuarios' %}"><span data-feather="users" class="align-text-bottom"></span>Accounts</a>
+		</li>
+	</ul>
+{% else %}
+{% endif %}
+</div>
+<!-- INCLUDE FOOTER -->
+<footer id="footer">{% include "copy.html" %}</footer>
+</nav>

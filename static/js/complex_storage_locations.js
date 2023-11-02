@@ -3,8 +3,8 @@ let dataTableIsInitialized = false;
 
 const dataTableOptions = {
     columnDefs: [
-        { orderable: false, targets: [ 2, 3] },
-        { searchable: false, targets: [0, 2] }
+        { orderable: false, targets: [1,2] },
+        { searchable: false, targets: [1,2] }
     ],
     destroy: true
 };
@@ -30,10 +30,9 @@ const listProgrammers = async () => {
         data.storage_location.forEach((storage_location, index) => {
             content += `
                 <tr>
-                    <td>${storage_location.id}</td>
                     <td>${storage_location.name}</></td>
                     <td>${storage_location.add_date}</></td>
-                    <td class='text-end'><a type="button" href="/configuracion/storage/edit/${storage_location.id}/" class="btn btn-primary">View</a> <button onClick="modal_storage_location_delete(${storage_location.id})" type="button" class="btn btn-danger">Delete</button></td>
+                    <td class='text-end'><a type="button" href="/configuracion/storage/edit/${storage_location.id}/" class="btn btn-dark">View</a> <button onClick="modal_storage_location_delete(${storage_location.id})" type="button" class="btn btn-danger">Delete</button></td>
                 </tr>`;
         });
         tableBody_storage_locations.innerHTML = content;

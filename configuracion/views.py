@@ -148,6 +148,12 @@ def configuracion_locations_add(request):
 		return render(request, 'configuracion/settings/equipment_location_add.html', {'form': form})
 
 @user_passes_test(lambda u: u.is_superuser)
+def equipment_locations_json_response(request):
+    db_request1 = list(Equipment_Locations.objects.values())
+    data = {'data_raw':db_request1}
+    return JsonResponse(data)
+
+@user_passes_test(lambda u: u.is_superuser)
 def equipment_brands(request):
 	if request.method == 'POST':
 		form = CreateNewEquipmentBrands(request.POST)
@@ -201,15 +207,16 @@ def equipment_brands_delete(request, id):
     else:
         return JsonResponse({'mensaje': 'Método no permitido'}, status=405)
 
-###############################################################################################################################
-##########################################################################
+# VIEWS FOR STAFF SECTIONS
 
+#VIEW FOR JSON RESPONSE TO STAFF VIEW
 @user_passes_test(lambda u: u.is_superuser)
 def configuracion_staff_json_response(request):
-    db_request1 = list(User.objects.values())
+    db_request1 = list(User.objects.values('id','first_name', 'last_name', 'username', 'is_active', 'is_staff', 'is_superuser', 'last_login'))
     data = {'usuarios':db_request1}
     return JsonResponse(data)
 
+#VIEW FOR STAFF INDEX
 @user_passes_test(lambda u: u.is_superuser)
 def configuracion_staff_index(request):
 	if request.method == 'POST':
@@ -226,11 +233,13 @@ def configuracion_staff_index(request):
 		return render(request, 'configuracion/staff/index.html', {'usuarios': usuarios, 'form': form})
 	else:
 		form = UserCreationForm(request.POST)
+		#CUSTOM ATTRS CLASS
 		form.fields['username'].widget.attrs['class'] = 'form-control'
 		form.fields['password1'].widget.attrs['class'] = 'form-control'
 		form.fields['password2'].widget.attrs['class'] = 'form-control'
 		return render(request, 'configuracion/staff/index.html', {'form': form})
 
+#VIEW FOR STAFF EDIT
 @user_passes_test(lambda u: u.is_superuser)
 def configuracion_staff_edit(request, id):
 	registro = get_object_or_404(User, id=id)
@@ -244,7 +253,6 @@ def configuracion_staff_edit(request, id):
 		else:
 			return render(request, 'configuracion/staff/edit.html',{'form': form, 'registro':registro})
 		return redirect('../../')
-
 	else:
 		registro = get_object_or_404(User, id=id)
 		form = CustomUserChangeForm(instance=registro)
@@ -253,6 +261,7 @@ def configuracion_staff_edit(request, id):
 		form.fields['is_superuser'].widget.attrs['class'] = 'form-check-input'
 		return render(request, 'configuracion/staff/edit.html',{'form': form, 'registro':registro})
 
+#VIEW FOR STAFF PASSWORD EDIT
 @user_passes_test(lambda u: u.is_superuser)
 def configuracion_staff_password_edit(request, id):
 	if request.method == 'POST':
@@ -264,7 +273,6 @@ def configuracion_staff_password_edit(request, id):
 		else:
 			messages.error(request, 'Please correct the error below.')
 			return redirect('../../../../../')
-			
 	else:
 		registro = get_object_or_404(User, id=id)
 		form = SetPasswordForm(request.user)
@@ -272,6 +280,7 @@ def configuracion_staff_password_edit(request, id):
 		form.fields['new_password2'].widget.attrs['class'] = 'form-control'
 		return render(request, 'configuracion/staff/updatepassword.html', {'form': form, 'registro':registro})
 
+#VIEW FOR STAFF DELETE
 @user_passes_test(lambda u: u.is_superuser)
 def configuracion_staff_delete(request, id):
     if request.method == 'POST':

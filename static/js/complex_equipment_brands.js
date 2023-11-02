@@ -32,7 +32,7 @@ const listProgrammers = async () => {
                 <tr>
                     <td>${brands.name}</td>
                     <td class='text-end'>
-<a href="/configuracion/equipment/brands/edit/${brands.id}/" type="button" class="btn btn-primary">Edit</a>
+<a href="/configuracion/equipment/brands/edit/${brands.id}/" type="button" class="btn btn-dark">View</a>
 <button type="button" onClick="delete_id(${brands.id})" data-id="${brands.id}" type="button" class="btn btn-danger eliminar-registro">Delete</button>
 </td>
                 </tr>`;

@@ -32,5 +32,6 @@ class Equipment(models.Model):
 	serial = models.CharField(max_length=255)
 	location = models.ForeignKey(Equipment_Locations, on_delete=models.CASCADE)
 	description = models.TextField()
+	imagen = models.ImageField(upload_to='equipment/main/', null=True)
 	def __str__(self):
 		return self.name
