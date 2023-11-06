@@ -1,13 +1,10 @@
 from django.db import models
 from django.utils import timezone
 
-class SupluMX(models.Model):
-	id = models.AutoField(primary_key=True)
-	copy = models.BooleanField(default=True)
-
 class Storage_Locations(models.Model):
 	id = models.AutoField(primary_key=True)
 	name = models.CharField(max_length=255)
+	color = color = models.CharField(max_length=10, default="10162d")
 	add_date = models.DateTimeField(default=timezone.now)
 	def __str__(self):
 		return self.name
@@ -15,6 +12,7 @@ class Storage_Locations(models.Model):
 class Equipment_Locations(models.Model):
 	id = models.AutoField(primary_key=True)
 	name = models.CharField(max_length=255)
+	color = models.CharField(max_length=10, default="10162d")
 	def __str__(self):
 		return self.name
 

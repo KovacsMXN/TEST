@@ -13,8 +13,20 @@
 <hr>
 <form action="" method="POST">
 {% csrf_token %}
-<p>Name:</p>
-{{ form.name }}
+<div class="row">
+  <div class="col-sm-9">
+    <div class="input-group mb-3">
+    <span class="input-group-text" id="basic-addon1">Name</span>
+    {{ form.name }}
+</div>
+  </div>
+  <div class="col-sm-3">
+    <div class="input-group mb-3">
+    <span class="input-group-text" id="basic-addon1">Color</span>
+    {{ form.color }}
+</div>
+  </div>
+</div>
 <br>
 <button class="btn btn-success" type="submit">Save</button>
 </form>

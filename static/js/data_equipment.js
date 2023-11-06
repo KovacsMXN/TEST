@@ -38,9 +38,9 @@ const listProgrammers = async () => {
                     <td>${equipment.brand__name}</td>
                     <td>${equipment.model}</td>
                     <td>${equipment.serial}</td>
-                    <td>${equipment.location__name}</td>
-                    <td>${equipment.fa_number}</td>
-                    <td class='text-end'><a href="view/${equipment.id}/" type="button" class="btn btn-dark">View</a></td>
+                    <td><span style="height: 18px;width: 18px;background-color: ${equipment.location__color};border-radius: 0%;vertical-align: sub;display: inline-block;" class="dot"></span> ${equipment.location__name}</td>
+                    <td>FA-${equipment.fa_number}</td>
+                    <td class='text-end'><a href="view/${equipment.id}/" type="button" class="btn btn-dark btn-sm">View</a> <button onClick="delete_equipment(${equipment.id})" type="button" class="btn btn-danger btn-sm">Delete</button></td>
                 </tr>
       </button>
     </h2>
@@ -59,3 +59,26 @@ const listProgrammers = async () => {
 window.addEventListener("load", async () => {
     await initDataTable();
 });
+function delete_equipment(id) {
+    $('#modal_user_equipment').modal('show');
+    $('#delete_id').val(id);
+};
+
+function confirm_delete_equipment() {
+    var id = $('#delete_id').val();
+    var csrf = $("[name='csrfmiddlewaretoken']").val();
+    fetch(`/equipment/delete/${id}/`, {
+    method: 'POST',
+    headers: {
+    'X-CSRFToken': csrf,  // Asegúrate de tener la variable csrftoken definida
+    },
+                })
+                .then(response => response.json())
+                .then(data => {
+                    //alert(data.mensaje);
+                    // Puedes realizar alguna acción adicional después de la eliminación
+                    // como recargar la página o actualizar la lista de registros
+                })
+                .catch(error => console.error('Error:', error));
+    $('#modal_user_equipment').modal('hide');
+};

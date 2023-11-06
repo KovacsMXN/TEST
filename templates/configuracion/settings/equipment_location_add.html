@@ -13,7 +13,20 @@
 <hr>
 <form action="{% url 'configuracion_locations_add' %}" method="POST">
   {% csrf_token %}
-  {{form.name}}
+<div class="row">
+  <div class="col-sm-9">
+    <div class="input-group mb-3">
+    <span class="input-group-text" id="basic-addon1">Name</span>
+    {{ form.name }}
+</div>
+  </div>
+  <div class="col-sm-3">
+    <div class="input-group mb-3">
+    <span class="input-group-text" id="basic-addon1">Color</span>
+    {{ form.color }}
+</div>
+  </div>
+</div>
 <br>
 {{form.add_date}}
 <br>

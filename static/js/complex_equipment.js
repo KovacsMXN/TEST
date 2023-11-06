@@ -2,15 +2,19 @@ $( document ).ready(function() {
 
 });
 $("input, select, option, textarea", "#equipment_form_edit").prop('disabled',true);
-document.getElementById("submit_b").style.visibility = "hidden";
+document.getElementById("save_b").style.visibility = "hidden";
+$('#save_b').css({"display":"none"});
 
 $("#edit_b").click(function(){
 	$("input, select, option, textarea", "#equipment_form_edit").prop('disabled',false);
 	$("#id").prop('disabled', true);
-	document.getElementById("edit_b").style.visibility = "hidden";
-	document.getElementById("submit_b").style.visibility = "visible";
+	$('#edit_b').css({"display":"none"});
+    $('#save_b').css({"display":"block"});
+    document.getElementById("save_b").style.visibility = "visible";
 });
-
+$("#save_b").click(function(){
+    $("#equipment_form_edit").submit();
+});
 function delete_image(id) {
 	$('#delete_image_Modal').modal('show');
 	$('#delete_id').val(id);
@@ -26,9 +30,6 @@ function confirm_delete_image() {
                 })
                 .then(response => response.json())
                 .then(data => {
-                    //alert(data.mensaje);
-                    // Puedes realizar alguna acción adicional después de la eliminación
-                    // como recargar la página o actualizar la lista de registros
                 })
                 .catch(error => console.error('Error:', error));
     $('#modal_user_delete').modal('hide');

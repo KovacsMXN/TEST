@@ -23,17 +23,19 @@ class CustomUserChangeForm(UserChangeForm):
 class CreateNewStorageLocation(forms.ModelForm):
     class Meta:
         model = Storage_Locations  # Especifica el modelo en el que se basará el formulario
-        fields = ['name']  # Puedes utilizar '__all__' para incluir todos los campos del modelo# Si deseas incluir solo algunos campos específicos, puedes hacerlo de esta manera:# fields = ['campo1', 'campo2', 'campo3']
+        fields = ['name','color']  # Puedes utilizar '__all__' para incluir todos los campos del modelo# Si deseas incluir solo algunos campos específicos, puedes hacerlo de esta manera:# fields = ['campo1', 'campo2', 'campo3']
         widgets={
-                   "name":forms.TextInput(attrs={'placeholder':'Name','class':'form-control'}),
+                   "name":forms.TextInput(attrs={'placeholder':'Example','class':'form-control'}),
+                   "color":forms.TextInput(attrs={'class':'form-control', 'data-jscolor="{}"': '', 'value': '#c92222'}),
         }
 #FORM TO CREATE NEW EQUIPMENT LOCATION
 class CreateNewEquipmentLocation(forms.ModelForm):
     class Meta:
         model = Equipment_Locations # Especifica el modelo en el que se basará el formulario
-        fields = ['name']  # Puedes utilizar '__all__' para incluir todos los campos del modelo# Si deseas incluir solo algunos campos específicos, puedes hacerlo de esta manera:# fields = ['campo1', 'campo2', 'campo3']
+        fields = ['name','color']  # Puedes utilizar '__all__' para incluir todos los campos del modelo# Si deseas incluir solo algunos campos específicos, puedes hacerlo de esta manera:# fields = ['campo1', 'campo2', 'campo3']
         widgets={
-                   "name":forms.TextInput(attrs={'placeholder':'Name','class':'form-control'}),
+                   "name":forms.TextInput(attrs={'placeholder':'Example','class':'form-control',}),
+                   "color":forms.TextInput(attrs={'class':'form-control', 'data-jscolor="{}"': '', 'value': '#c92222'}),
         }
 #FORM TO CREATE NEW EQUIPMENT BRANDS
 class CreateNewEquipmentBrands(forms.ModelForm):

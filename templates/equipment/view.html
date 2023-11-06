@@ -7,7 +7,6 @@
     <div class="btn-toolbar mb-2 mb-md-0">
         {% if request.user.is_superuser %}
         <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-        <a name="edit_b" id="edit_b" class="btn btn-primary">Modify</a>
         </div>
         {% else %}
         {% endif %}
@@ -16,35 +15,52 @@
 <h5>{{data_db.name}} by {{ data_db.brand}}</h5>
 <hr>
 <div class="row">
-    <div class="col-9 p-2 mb-0">
+    <div class="col-8 p-2 mb-0">
         <div class="containervieweqipment">
-            <div class="containervieweqipmenthead">Equipment's information</div>
+            <div class="containervieweqipmenthead">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-6">Equipment information</div>
+                        <div class="col-6">
+                            {% if request.user.is_superuser %}
+                            <div class="text-end">
+                                    <a name="edit_b" id="edit_b" class="nav-link"><span data-feather="edit" class="align-text-bottom"></span></a>
+                                    <a name="save_b" id="save_b" class="nav-link"><span data-feather="save" class="align-text-bottom"></span></a>
+                            </div>
+                            {% else %}
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="containervieweqipmentbody">
                         <form id="equipment_form_edit" action="" method="post">
                             {% csrf_token %}
                 <div class="container">
                 <div class="row ">
-                <div class="col-md-3">
-                    <div class="input-group mb-3">
-                    <span class="input-group-text" id="basic-addon1">SuipluMX ID #:</span>
+                <div class="col-md-6">
+                    <div class="input-group input-group-sm mb-3">
+                    <span class="input-group-text" id="basic-addon1">ID</span>
                     <input disabled type="number" value="{{ data_db.id }}" class="form-control" id="id" name="id">
                     </div>
                 </div>
-                <div class="col-md-3">
-                    <div class="input-group mb-3">
-                    <span class="input-group-text" id="basic-addon1">FA - </span>
+                <div class="col-md-6">
+                    <div class="input-group input-group-sm mb-3">
+                    <span class="input-group-text" id="basic-addon1">FA</span>
                     {{ form.fa_number}}
                     </div>
                 </div>
-                <div class="col-md-3">
-                    <div class="input-group mb-3">
-                    <span class="input-group-text" id="basic-addon1">Model: </span>
+                </div>
+                <div class="row ">
+                <div class="col-md-6">
+                    <div class="input-group input-group-sm mb-3">
+                    <span class="input-group-text" id="basic-addon1">Model</span>
                     {{ form.model }}
                     </div>
                 </div>
-                <div class="col-md-3">
-                    <div class="input-group mb-3">
-                    <span class="input-group-text" id="basic-addon1">Serial # :</span>
+                <div class="col-md-6">
+                    <div class="input-group input-group-sm mb-3">
+                    <span class="input-group-text" id="basic-addon1">Serial</span>
                     {{ form.serial }}
                     </div>
                 </div>
@@ -53,14 +69,14 @@
             <div class="container">
                 <div class="row ">
                 <div class="col-md-7">
-                    <div class="input-group mb-3">
-                    <span class="input-group-text" id="basic-addon1">Equipment's name: </span>
+                    <div class="input-group input-group-sm mb-3">
+                    <span class="input-group-text" id="basic-addon1">Name</span>
                     {{ form.name }}
                     </div>
                 </div>
                 <div class="col-md-5">
-                    <div class="input-group mb-3">
-                    <span class="input-group-text" id="basic-addon1">Equipment's brand:</span>
+                    <div class="input-group input-group-sm mb-3">
+                    <span class="input-group-text" id="basic-addon1">Brand</span>
                     {{ form.brand }}
                     </div>
                 </div>
@@ -69,8 +85,8 @@
             <div class="container">
                 <div class="row ">
                 <div class="col-md-12">
-                    <div class="input-group mb-3">
-                    <span class="input-group-text" id="basic-addon1">Equipment's location: </span>
+                    <div class="input-group input-group-sm mb-3">
+                    <span class="input-group-text" id="basic-addon1">Location</span>
                     {{ form.location }}
                     </div>
                 </div>
@@ -79,35 +95,39 @@
             <div class="container">
                 <div class="row ">
                 <div class="col-md-12">
-                    <div class="input-group">
-                        <span class="input-group-text">Description: </span>
+                    <div class="input-group input-group-sm">
+                        <span class="input-group-text">Description</span>
                         {{ form.description }}
                     </div>
                 </div>
                 </div>
-                {{ form.imagen }}
-                <div class="opt-view-equipment"><div class="opt-view-equipment"><button type="submit" id="submit_b" name="submit_b" class="btn btn-success">Update</button></div>
-            </div>
             </div>
         </form>
             </div>
         </div>
     </div>
-    <div class="col-3 p-2">
+    <div class="col-4 p-2">
         <div class="containervieweqipment">
-            <div class="containervieweqipmenthead">Image</div>
-            <div class="containervieweqipmentbody">
-        <img width="100%" src="/media/{{ data_db.imagen }}"><br><br>
-        <div class="text-center">
-            <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-                <button onclick="delete_image({{ data_db.id }})" class="btn btn-danger">
-                    <span data-feather="trash-2" class="align-text-bottom"></span> Delete
-                </button>
-                <a href="{% url 'equipment_imagen_upload_view' data_db.id %}" name="upload_image_btn" id="upload_image_btn" class="btn btn-dark">
-                    <span data-feather="upload" class="align-text-bottom"></span> Upload
-                </a>
+            <div class="containervieweqipmenthead">
+                    <div class="container">
+                    <div class="row">
+                    <div class="col-6">Image</div>
+                    <div class="col-6">
+                        <div class="text-end">
+                            {% if request.user.is_superuser %}
+                            <a class="nav-link" href="{% url 'equipment_imagen_upload_view' data_db.id %}"><span data-feather="upload" class="align-text-bottom"></span></a>
+                            {% else %}
+                            {% endif %}
+                        </div></div>
+                    </div>
+                </div>
             </div>
-        </div>
+            <div class="containervieweqipmentbody">
+        {% if data_db.imagen == "" %}
+        <img class="border rounded" width="100%"  src="/media/equipment/main/default.png">
+        {% else %}
+        <img class="border rounded" width="100%" src="/media/{{ data_db.imagen }}">
+        {% endif %}
         </div>
     </div>
 </div>

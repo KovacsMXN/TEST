@@ -12,7 +12,7 @@ from autenticacion.views import logout_view, login_view
 from .views import index
 
 #IMPORT EQUIPMENT VIEWS
-from .views import equipment_index, equipment_view, equipment_request_json, equipment_imagen_delete_view, equipment_imagen_upload_view
+from .views import equipment_index, equipment_view, equipment_request_json, equipment_imagen_upload_view, equipment_delete
 
 from django.conf import settings
 from django.conf.urls.static import static
@@ -32,12 +32,18 @@ urlpatterns = [
     #URL FOR CONFIGURACION APP
     path('configuracion/', include('configuracion.urls')),
 
+    #URL FOR forklifts APP
+    path('forklifts/', include('forklift.urls')),
+
+    #URL FOR ladders APP
+    path('ladders/', include('ladders.urls')),
+
     #URL FOR EQUIPMENT APP
     path('equipment/', equipment_index, name='equipment_index'),
     #URL VIEW EQUIPMENT
     path('equipment/view/<int:id>/', equipment_view, name='equipment_view'),
-    #URL VIEW IMAGEN EDIT
-    path('equipment/imagen/delete/<int:id>/', equipment_imagen_delete_view, name='equipment_imagen_delete_view'),
+    #URL VIEW EQUIPMENT
+    path('equipment/delete/<int:id>/', equipment_delete, name='equipment_delete'),
     #URL VIEW IMAGEN UPLOAD
     path('equipment/imagen/upload/<int:id>/', equipment_imagen_upload_view, name='equipment_imagen_upload_view'),
 

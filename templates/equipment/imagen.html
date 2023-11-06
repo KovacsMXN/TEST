@@ -1,45 +1,21 @@
 {% extends "base.html" %}
 {% load static %}
-{% block title %}SuipluMX - Equipment{% endblock %}
+{% block title %}SuipluMX - Upload Image for {{ modelo.name }} by {{ modelo.brand }}{% endblock %}
 {% block content %}
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-    <h1 class="h2">Equipment image DB</h1>
+    <h1 class="h2">Upload Image</h1>
     <div class="btn-toolbar mb-2 mb-md-0">
         <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-        <a href="{% url 'equipment_view' data_db.id %}" class="btn btn-dark">Back</a>
+        <a href="{% url 'equipment_view' modelo.id %}" class="btn btn-dark">Back</a>
         </div>
     </div>
 </div>
-<h5>{{ data_db.name }} by {{ data_db.brand }}</h5>
+<h5>{{ modelo.name }} by {{ modelo.brand }}</h5>
 <hr>
-<div class="row">
-    <div class="col-3 p-2 mb-0">
-        <div class="containervieweqipment">
-            <div class="containervieweqipmenthead">
-                Actual Image
-            </div>
-            <div class="containervieweqipmentbody">
-                <img width="100%" src="media/{{ data_db.imagen }}"><br><br>
-                <form method="post" enctype="multipart/form-data">
-                    {% csrf_token %}
-
-                    <button type="submit">Subir Imagen</button>
-                </form>
-
-                {{ form.imagen }}
-            </div>
-        </div>
-    </div>
-    <div class="col-9 p-2">
-        <div class="containervieweqipment">
-            <div class="containervieweqipmenthead">Images</div>
-            <div class="containervieweqipmentbody">
-            <div class="undr_dev">
-            NOTHING TO SHOW HERE!<br>
-            SECTION UNDER DEVELOPMENT       
-            </div>
-
-        </div>
-    </div>
-</div>
+<!-- cargar_imagen.html -->
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.imagen }}
+    <input type="submit" class="btn btn-success" value="Upload image">
+</form>
 {% endblock %}

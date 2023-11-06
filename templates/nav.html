@@ -4,13 +4,25 @@
 <!-- FIRST SECTION-->
     <ul class="nav flex-column">
         <li class="nav-item">
-            <a class="nav-link" aria-current="page" href="{% url 'index' %}"><span data-feather="home" class="align-text-bottom"></span>Dashboard</a>
+            <a class="nav-link" aria-current="page" href="{% url 'index' %}"><span class="align-text-bottom"><img src="{% static 'images/ico/house.svg' %}" /></span> Dashboard</a>
         </li>
 		<li class="nav-item">
-            <a class="nav-link" href="#"><span data-feather="archive" class="align-text-bottom"></span>Inventory</a>
+            <a class="nav-link" href="#"><span class="align-text-bottom"><img src="{% static 'images/ico/box-seam.svg' %}" /></span> Inventory</a>
         </li>
 		<li class="nav-item">
-            <a class="nav-link" href="{% url 'equipment_index' %}"><span data-feather="tool" class="align-text-bottom"></span>Equipment</a>
+            <a class="nav-link" href="{% url 'equipment_index' %}"><span class="align-text-bottom"><img src="{% static 'images/ico/cpu.svg' %}" /></span> Equipment</a>
+        </li>
+    </ul>
+<!-- SECOND SECTION ADMIN -->
+<h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted text-uppercase">
+    <span>Inspection & Control</span>
+</h6>
+    <ul class="nav flex-column mb-2">
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'forklift_index_view' %}"><span class="align-text-bottom"><img src="{% static 'images/ico/truck.svg' %}" /></span> Forklifts</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'ladders_index_view' %}"><span class="align-text-bottom"><img src="{% static 'images/ico/ladder.svg' %}" /></span> Ladders</a>
         </li>
     </ul>
 {% if request.user.is_superuser %}
@@ -20,7 +32,7 @@
 </h6>
     <ul class="nav flex-column mb-2">
 		<li class="nav-item">
-            <a class="nav-link" href="{% url 'configuracion_storage_index' %}"><span data-feather="map-pin" class="align-text-bottom"></span>Storage locations</a>
+            <a class="nav-link" href="{% url 'configuracion_storage_index' %}"><span class="align-text-bottom"><img src="{% static 'images/ico/geo.svg' %}" /></span> Storage locations</a>
 		</li>
     </ul>
 <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted text-uppercase">
@@ -28,18 +40,10 @@
 </h6>
     <ul class="nav flex-column mb-2">
 		<li class="nav-item">
-            <a class="nav-link" href="{% url 'equipment_locations_index' %}"><span data-feather="map-pin" class="align-text-bottom"></span>Equipment locations</a>
+            <a class="nav-link" href="{% url 'equipment_locations_index' %}"><span class="align-text-bottom"><img src="{% static 'images/ico/geo-alt.svg' %}" /></span> Equipment locations</a>
 		</li>
 		<li class="nav-item">
-            <a class="nav-link" href="{% url 'equipment_brands' %}"><span data-feather="package" class="align-text-bottom"></span>Equipment manufacturers</a>
-		</li>
-    </ul>
-<h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted text-uppercase">
-    <span>Platform settings</span>
-</h6>	
-    <ul class="nav flex-column mb-2">
-		<li class="nav-item">
-            <a class="nav-link" href="{% url 'configuracion_index' %}"><span data-feather="settings" class="align-text-bottom"></span>General settings</a>
+            <a class="nav-link" href="{% url 'equipment_brands' %}"><span class="align-text-bottom"><img src="{% static 'images/ico/bricks.svg' %}" /></span> Equipment manufacturers</a>
 		</li>
     </ul>
 <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted text-uppercase">

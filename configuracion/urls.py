@@ -17,14 +17,8 @@ from .views import equipment_brands, equipment_brands_edit, equipment_brands_del
 #IMPORT VIEWS FOR STAFF SECTTION
 from .views import configuracion_staff_index, configuracion_staff_json_response, configuracion_staff_delete, configuracion_staff_password_edit, configuracion_staff_edit
 
-#IMPORT VIEWS FOR INDEX
-from .views import main_general_settings_index
-
 #URLS PATTERNS START HERE
 urlpatterns = [
-#URL SECTION FOR MAIN INDEX
-        path('', main_general_settings_index, name='configuracion_index'),
-
 
 #URL SECTION FOR STORAGE LOCATIONS
     #INDEX

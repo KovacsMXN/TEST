@@ -14,10 +14,9 @@ from .forms import CustomUserChangeForm
 from .forms import CreateNewStorageLocation
 from .forms import CreateNewEquipmentLocation
 from .forms import CreateNewEquipmentBrands
+
 #IMPORT MODELS
 from .models import Storage_Locations, Equipment_Locations, Equipment_brands, Equipment
-#IMPORT GENERAL MODELS
-from .models import SupluMX
 
 #MAIN INDEX VIEW
 @user_passes_test(lambda u: u.is_superuser)
@@ -31,11 +30,6 @@ def index(request):
 
 
 #PLATFORM SETTINGS VIEWS
-#MAIN GENERAL SETTINGS VIEWS
-@user_passes_test(lambda u: u.is_superuser)
-def main_general_settings_index(request):
-	data = SupluMX.objects.get(pk=1)
-	return render(request, 'configuracion/settings/index.html', {'data':data})
 
 #MAIN STORAGE LOCATIONS VIEWS
 @user_passes_test(lambda u: u.is_superuser)
@@ -118,7 +112,7 @@ def equipment_locations_delete(request, id):
 def configuracion_locations_edit(request, id):
 	registro = get_object_or_404(Equipment_Locations, id=id)
 	if request.method == 'POST':
-		form = CreateNewStorageLocation(request.POST, instance=registro)
+		form = CreateNewEquipmentLocation(request.POST, instance=registro)
 		if form.is_valid():
 			form.save()
 		else:
@@ -126,7 +120,7 @@ def configuracion_locations_edit(request, id):
 		return redirect('../../')
 	else:
 		registro = get_object_or_404(Equipment_Locations, id=id)
-		form = CreateNewStorageLocation(instance=registro)
+		form = CreateNewEquipmentLocation(instance=registro)
 		return render(request, 'configuracion/settings/equipment_locations_edit.html',{'form': form, 'registro':registro})
 #ADD EQUIPMENT LOCATIONS VIEWS
 @user_passes_test(lambda u: u.is_superuser)
@@ -144,13 +138,23 @@ def configuracion_locations_add(request):
 				usuarios = User.objects.all()
 		return render(request, 'configuracion/settings/equipment_location_add.html', {'usuarios': usuarios, 'form': form})
 	else:
-		form = CreateNewStorageLocation(request.POST)
+		form = CreateNewEquipmentLocation(request.POST)
 		return render(request, 'configuracion/settings/equipment_location_add.html', {'form': form})
 
 @user_passes_test(lambda u: u.is_superuser)
 def equipment_locations_json_response(request):
-    db_request1 = list(Equipment_Locations.objects.values())
-    data = {'data_raw':db_request1}
+    locations = Equipment_Locations.objects.all()
+    locations_data = []
+    for location in locations:
+    	equipment_count = location.equipment_set.count()
+    	location_info = {
+            'id': location.id,
+            'name': location.name,
+            'color': location.color,
+            'equipment_count': equipment_count,
+        }
+    	locations_data.append(location_info)
+    	data = {'data_raw': locations_data}    
     return JsonResponse(data)
 
 @user_passes_test(lambda u: u.is_superuser)

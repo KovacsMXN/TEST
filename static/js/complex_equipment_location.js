@@ -25,7 +25,7 @@ let dataTableIsInitialized = false;
 
 const dataTableOptions = {
     columnDefs: [
-        { orderable: false, targets: [1] },
+        { orderable: false, targets: [2] },
         { searchable: false, targets: [1]}
     ],
     destroy: true
@@ -51,20 +51,13 @@ const listProgrammers = async () => {
         let content = ``;
         data.data_raw.forEach((data_raw, index) => {
             content += `
-<div class="accordion accordion-flush" id="accordionFlushExample">
-  <div class="accordion-item">
-    <h2 class="accordion-header">
-      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
-                        <tr>
-                    <td>${data_raw.name}</td>
-                    <td class="text-end"><a href="/configuracion/equipment/locations/edit/${data_raw.id}" class="btn btn-dark">View</a> <button onclick="equipment_location_delete(${data_raw.id});" class="btn btn-danger">Delete</button></td>
+                <tr>
+                    <td><span style="height: 18px;width: 18px;background-color: ${data_raw.color};border-radius: 0%;vertical-align: sub;display: inline-block;" class="dot"></span> ${data_raw.name}</td>
+                    <td>${data_raw.equipment_count} records</td>
+                    <td class="text-end"><a href="/configuracion/equipment/locations/edit/${data_raw.id}" class="btn btn-dark btn-sm">View</a> <button onclick="equipment_location_delete(${data_raw.id});" class="btn btn-danger btn-sm">Delete</button></td>
                 </tr>
       </button>
     </h2>
-    <div id="flush-collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
-      <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the third item's accordion body. Nothing more exciting happening here in terms of content, but just filling up the space to make it look, at least at first glance, a bit more representative of how this would look in a real-world application.</div>
-    </div>
-  </div>
 </div>`;
         });
         tableBody_programmers.innerHTML = content;
