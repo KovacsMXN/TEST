@@ -7,7 +7,8 @@ from .views import inspection_sheet_language, inspection_sheet_form_es, inspecti
 
 from .views import forklift_service_providers, forklift_brands, forklift_status, forklift_imagen_upload, forklift_add
 
-from .views import forklift_holders, forklift_holders_view
+#IMPORT VIEWS HOLDERS
+from .views import forklift_holders, forklift_holders_view, forklift_holders_edit, forklift_holders_add
 
 #URL PATTERNS
 urlpatterns = [
@@ -19,17 +20,19 @@ urlpatterns = [
     path('add/', forklift_add, name='forklift_add'),
     path('imagen/upload/<int:id>/', forklift_imagen_upload, name='forklift_imagen_upload'),
 
-#ServiceProviders
+#SERVICEPROVIDERS
     path('service/providers/', forklift_service_providers, name='forklift_service_providers'),
 
-#Holders
+#HOLDERS
     path('holders/', forklift_holders, name='forklift_holders'),
     path('holders/view/<int:id>', forklift_holders_view, name='forklift_holders_view'),
+    path('holders/edit/<int:id>', forklift_holders_edit, name='forklift_holders_edit'),
+    path('holders/add/', forklift_holders_add, name='forklift_holders_add'),
 
-#Brands
+#BRANDS
     path('brands/', forklift_brands, name='forklift_brands'),
 
-#Status
+#STATUS
     path('status/', forklift_status, name='forklift_status'),
 
 

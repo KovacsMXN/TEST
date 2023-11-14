@@ -6,9 +6,11 @@ from .models import Forklifts, ForkliftOwners, ForkliftStatus, ForkliftServicePr
 from django.db.models import Count, Value, Q
 from django.db.models.functions import Coalesce
 from django.contrib import messages
+from django.contrib.admin.views.decorators import staff_member_required
 
 from .forms import ForkliftForm, UploadImgForm, CreateForkliftForm
 
+from .forms import CreateForkliftOwnersForm
 @login_required
 def forklift_index(request):
     return render(request, 'forklifts/index.html')
@@ -81,18 +83,65 @@ def api_del_forklifts(request, id):
     else:
         return JsonResponse({'mensaje': 'Método no permitido'}, status=405)
 
-@user_passes_test(lambda u: u.is_superuser)
+
+
+#FORKLIFT HOLDERS
+#FORLKIFT HOLDERS INDEX
+@staff_member_required
 def forklift_holders(request):
     return render(request, 'forklifts/holders/index.html')
-@user_passes_test(lambda u: u.is_superuser)
+#FORKLIFT HOLDERS VIEW
+@staff_member_required
 def forklift_holders_view(request, id):
     query = get_object_or_404(ForkliftOwners, id=id)
     return render(request, 'forklifts/holders/view.html',{'data':query})
+#FORKLIFT HOLDERS EDIT
+@user_passes_test(lambda u: u.is_superuser)
+def forklift_holders_edit(request, id):
+    query = get_object_or_404(ForkliftOwners, id=id)
+    if request.method == 'POST':
+        new_frk = form = CreateForkliftOwnersForm(request.POST, request.FILES, instance=query)
+        if form.is_valid():
+            form.save()
+            return redirect('forklift_holders_view', id=query.id)
+    else:
+        query = get_object_or_404(ForkliftOwners, id=id)
+        form = CreateForkliftOwnersForm(instance=query)
+    return render(request, 'forklifts/holders/edit.html', {'form': form,'data':query})
+#FORKLIFT HOLDERS ADD
+@user_passes_test(lambda u: u.is_superuser)
+def forklift_holders_add(request):
+    if request.method == 'POST':
+        form = CreateForkliftOwnersForm(request.POST, request.FILES)
+        if form.is_valid():
+            new_frk = form.save()
+            return redirect('forklift_holders_view', id=new_frk.id)
+    else:
+        form = CreateForkliftOwnersForm()
+    return render(request, 'forklifts/holders/edit.html', {'form': form})
+@user_passes_test(lambda u: u.is_superuser)
+def api_del_forkliftowners(request, id):
+    if request.method == 'POST':
+        try:
+            registro = get_object_or_404(ForkliftOwners, id=id)
+            ruta = registro.imagen
+            import os
+            from django.conf import settings
+            os.remove(os.path.join(settings.MEDIA_ROOT,str(ruta)))
+            registro.delete()
+            response_data = {'mensaje': 'Registro eliminado exitosamente.'}
+        except User.DoesNotExist:
+            response_data = {'mensaje': 'El registro no existe.'}
+        return JsonResponse(response_data)
+    else:
+        return JsonResponse({'mensaje': 'Método no permitido'}, status=405)
 
+
+
+#FO    
 @login_required
 def forklift_service_providers(request):
     return render(request, 'forklifts/service_providers/index.html')
-
 @login_required
 def forklift_brands(request):
     return render(request, 'forklifts/brands/index.html')

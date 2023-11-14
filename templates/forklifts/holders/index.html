@@ -10,7 +10,15 @@
           </div>
         </div>
       </div>
-<h5>Holders</h5>
+<div class="row pb-2 px-1">
+  <div class="col-6"><h5>Holders</h5></div>
+  <div class="col-6">
+      {% if request.user.is_superuser %}
+          <div class="text-end"><a href="{% url 'forklift_holders_add' %}" class="btn btn-dark"><img class="filter-white" src="{% static 'images/ico/person-bounding-box.svg' %}" /> Add holder</a></div>
+      {% else %}
+      {% endif %}
+  </div>
+</div>
 <div class="table table-sm table-striped table-hover">
 <table id="datatable-contenido" class="table table-striped table-hover">
     <thead>
@@ -40,5 +48,27 @@
     </div>
   </div>
 </div>
+<!-- MODAL DELETE -->
+<div class="modal fade" id="modal_delete" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="staticBackdropLabel">Are you sure you want to delete this holder?</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+        <div class="modal-body">All related items will be deleted. You can't undo this action.
+        <form class="eliminar-formulario" method="post">
+          {% csrf_token %}
+          <input type="hidden" name="delete_id" id="delete_id" value="">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Cancel</button>
+        <button onclick="confirm_delete_forkliftowner(id);" class="btn btn-danger">Delete</button>
+      </div>
+        </form>
+    </div>
+  </div>
+</div>
+<script src="{% static 'js/forklifts/holders.js' %}"></script>
 <script src="{% static 'js/forklifts/complex_holders.js' %}"></script>
 {% endblock %}

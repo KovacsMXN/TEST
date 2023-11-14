@@ -33,3 +33,17 @@ class UploadImgForm(forms.ModelForm):
     class Meta:
         model = Forklifts
         fields = ['imagen']
+
+class CreateForkliftOwnersForm(forms.ModelForm):
+    class Meta:
+        model = ForkliftOwners
+        fields = '__all__'
+        widgets={
+            "name":forms.TextInput(attrs={'class':'form-control form-control-sm'}),
+            "phone_number":forms.TextInput(attrs={'class':'form-control form-control-sm'}),
+            "contact_person":forms.TextInput(attrs={'class':'form-control form-control-sm'}),
+            "website":forms.TextInput(attrs={'class':'form-control form-control-sm'}),
+            "email":forms.TextInput(attrs={'class':'form-control form-control-sm'}),
+            "address":forms.TextInput(attrs={'class':'form-control form-control-sm'}),
+            "service_description":forms.Textarea(attrs={'rows':'8','class':'form-control form-control-sm'}),
+        }

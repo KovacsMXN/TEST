@@ -9,7 +9,7 @@ def login_view(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            return redirect('configuracion_storage_index')
+            return redirect('index')
         else:
             return render(request, 'autentificacion/sign-in.html', {'error': 'Invalid login credentials'})
     return render(request, 'autentificacion/sign-in.html')

@@ -1,10 +1,13 @@
 {% load static %}
-<a href="{% url 'forklift_add' %}" class="btn btn-dark">
+    {% if request.user.is_superuser %}
+    <a href="{% url 'forklift_add' %}" class="btn btn-dark">
     <span class="align-text-bottom">
         <img class="filter-white" src="{% static 'images/ico/plus-square.svg' %}" />
     </span> 
-    Add
+    Add forklift
 </a>
+    {% else %}
+    {% endif %}
 <a href="{% url 'forklift_index_view' %}" class="btn btn-dark">
     <span class="align-text-bottom">
         <img class="filter-white" src="{% static 'images/ico/truck.svg' %}" />

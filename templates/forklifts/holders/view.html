@@ -15,7 +15,7 @@
         </div>
     </div>
 
-    <h5>Forklift holder</h5>
+    <h5>Forklift holder</h5><div class="text-end"></div>
     <script src="{% static 'js/functions_forklifts.js' %}"></script>
     <div class="row">
         <div class="col-4 p-2 mb-0">
@@ -29,8 +29,8 @@
                             </div>
                         </div>
                 </div>
-                <div class="text-center containervieweqipmentbody">
-                    <img src="/media/{{data.imagen}}">
+                <div class="align-middle text-center containervieweqipmentbody">
+                    <img class="img_holder" src="/media/{{data.imagen}}">
                 </div>
             </div>
         </div>
@@ -42,44 +42,60 @@
                             <div class="col-6">Contact information</div>
                             <div class="col-6">
                                 <div class="text-end">
-                                    <!-- Potential content here -->
+                                    {% if request.user.is_superuser %}
+                                    <div class="text-end">
+                                        <a href="{% url 'forklift_holders_edit' data.id %}" name="edit_b" id="edit_b" class="nav-link"><span class="align-text-bottom"><img class="filter-white" src="{% static 'images/ico/pencil-square.svg' %}"></span></a>
+                                    </div>
+                                    {% else %}
+                                    {% endif %}
                                 </div>
                             </div>
                         </div>
                 </div>
                 <div class="containervieweqipmentbody">
-                    class ServiceProvider(models.Model):<br>
-    name = models.CharField(max_length=100)<br>
-    email = models.EmailField()<br>
-    phone_number = models.CharField(max_length=15)<br>
-    address = models.TextField()<br>
-    service_description = models.TextField()<br>
-    contact_person = models.CharField(max_length=100)<br>
-    website = models.URLField(blank=True, null=True)<br>
-<br>
-    def __str__(self):<br>
-        return self.name<br>
+<div class="row">
+    <div class="col-3 fw-bolder">Company's name:</div>
+    <div class="col-9 fw-medium">{{ data.name}}</div>
+</div>
+<div class="row">
+    <div class="col-3 fw-bolder">Contact person: </div>
+    <div class="col-9 fw-medium">{{ data.contact_person }}</div>
+</div>
+<div class="row">
+    <div class="col-3 fw-bolder">Phone number:</div>
+    <div class="col-9 fw-medium">{{ data.phone_number }}</div>
+</div>
+<div class="row">
+    <div class="col-3 fw-bolder">Address:</div>
+    <div class="col-9 fw-medium">{{ data.address }}</div>
+</div>
+<div class="row">
+    <div class="col-3 fw-bolder">Website: </div>
+    <div class="col-9 fw-medium">{{ data.website }}</div>
+</div>
+<div class="row">
+    <div class="col-3 fw-bolder">Email</div>
+    <div class="col-9 fw-medium">{{ data.email }}</div>
+</div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="row p-2 mb-0">
+        <div class="row p-2 mb-0">
                   <div class="containervieweqipment">
                 <div class="containervieweqipmenthead">
                         <div class="row">
-                            <div class="col-6">Information</div>
+                            <div class="col-6">Description</div>
                             <div class="col-6">
                                 <div class="text-end">
-                                    <!-- Potential content here -->
                                 </div>
                             </div>
                     </div>
                 </div>
-                <div class="containervieweqipmentbody">
-                    <p></p>
+                <div class="d-flex containervieweqipmentbody">
+                    {{ data.service_description }}
                 </div>
             </div>
     </div>
-
     <script src="{% static 'js/forklifts/forklifts.js' %}"></script>
 {% endblock %}

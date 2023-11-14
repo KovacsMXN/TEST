@@ -33,7 +33,7 @@ const listForklifts = async () => {
                     <td class="align-middle"><img height="50px" src="/media/${owner.imagen}"></td>
                     <td class="align-middle">${owner.name}</td>
                     <td class="align-middle"><button type="button" onclick="loadContentStatus(${owner.id})" class="btn btn-sm btn-primary">${owner.num_forklifts} Forklifts</button><br></button></td>
-                    <td class='text-end align-middle'><a href="view/${owner.id}" class="btn btn-dark btn-sm">View</a> <button type="button" class="btn btn-danger btn-sm">Delete</button></td>
+                    <td class='text-end align-middle'><a href="view/${owner.id}" class="btn btn-dark btn-sm">View</a> <button type="button" onClick="delete_forkliftowner(${owner.id})" class="btn btn-danger btn-sm">Delete</button></td>
                 </tr>`;
         });
         $("#tableContenido_results").html(content);

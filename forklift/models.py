@@ -5,6 +5,12 @@ from django.utils import timezone
 class ForkliftOwners(models.Model):
 	id = models.AutoField(primary_key=True)
 	name = models.CharField(max_length=255)
+	phone_number = models.CharField(max_length=25)
+	service_description = models.TextField()
+	contact_person = models.CharField(max_length=100)
+	address = models.TextField()
+	website = models.URLField(blank=True, null=True)
+	email = models.EmailField()
 	imagen = models.ImageField(upload_to='forklifts/holders/banners/', null=True)
 	def __str__(self):
 		return self.name

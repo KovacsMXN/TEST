@@ -13,6 +13,7 @@ h5{
     border: 1px solid #c7c8c9;
     padding: 0px;
     margin: 0px;
+    display: block;
     border-radius: 5px;
     height: 100%;
 }
@@ -20,6 +21,7 @@ h5{
     background-color: #212529;
     padding: 10px;
     color: white;
+    display: block;
     margin: 0px;
 }
 .containervieweqipmentbody {
@@ -27,13 +29,6 @@ h5{
     padding: 10px;
     margin-bottom: 5px;
 }
-.opt-view-equipment {
-    margin-top: 20px;
-    text-align: end;
-}
-.undr_dev {
-    background-color: yellow;
-    padding: 10px;
-    font-size: 25px;
-    color: black;
+.img_holder{
+    margin-top: 5%;
 }
