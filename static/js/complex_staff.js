@@ -78,9 +78,6 @@ function confirm_delete_user() {
                 })
                 .then(response => response.json())
                 .then(data => {
-                    //alert(data.mensaje);
-                    // Puedes realizar alguna acción adicional después de la eliminación
-                    // como recargar la página o actualizar la lista de registros
                 })
                 .catch(error => console.error('Error:', error));
     $('#modal_user_delete').modal('hide');

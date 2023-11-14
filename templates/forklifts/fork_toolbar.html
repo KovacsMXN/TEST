@@ -1,0 +1,37 @@
+{% load static %}
+<a href="{% url 'forklift_add' %}" class="btn btn-dark">
+    <span class="align-text-bottom">
+        <img class="filter-white" src="{% static 'images/ico/plus-square.svg' %}" />
+    </span> 
+    Add
+</a>
+<a href="{% url 'forklift_index_view' %}" class="btn btn-dark">
+    <span class="align-text-bottom">
+        <img class="filter-white" src="{% static 'images/ico/truck.svg' %}" />
+    </span> 
+    Forklifts
+</a>
+<a href="{% url 'forklift_holders' %}" class="btn btn-dark">
+    <span class="align-text-bottom">
+        <img class="filter-white" src="{% static 'images/ico/person-bounding-box.svg' %}" />
+    </span> 
+    Holders
+</a>
+<a href="{% url 'forklift_service_providers' %}" class="btn btn-dark">
+    <span class="align-text-bottom">
+        <img class="filter-white" src="{% static 'images/ico/person-gear.svg' %}" />
+    </span> 
+    Service providers
+</a>
+<a href="{% url 'forklift_brands' %}" class="btn btn-dark">
+    <span class="align-text-bottom">
+        <img class="filter-white" src="{% static 'images/ico/card-heading.svg' %}" />
+    </span> 
+    Brands
+</a>
+<a href="{% url 'forklift_status' %}" class="btn btn-dark">
+    <span class="align-text-bottom">
+        <img class="filter-white" src="{% static 'images/ico/hdd-stack.svg' %}" />
+    </span> 
+    Status
+</a>

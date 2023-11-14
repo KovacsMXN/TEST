@@ -34,6 +34,7 @@ LOGIN_URL = '/login/'
 
 INSTALLED_APPS = [
     'autenticacion.apps.AutenticacionConfig',
+    'forklift.apps.ForkliftConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

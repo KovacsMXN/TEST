@@ -1,8 +1,7 @@
-from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 
-#VISTA PARA LOG-IN
+#LOG-IN VIEW
 def login_view(request):
     if request.method == 'POST':
         username = request.POST.get('floatingInput')
@@ -10,12 +9,12 @@ def login_view(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            return redirect('../')
+            return redirect('configuracion_storage_index')
         else:
             return render(request, 'autentificacion/sign-in.html', {'error': 'Invalid login credentials'})
     return render(request, 'autentificacion/sign-in.html')
 
-#VISTA PARA LOG-OUT
+#LOG-OUT VIEW
 def logout_view(request):
     logout(request)
     return render(request, 'autentificacion/logout.html')

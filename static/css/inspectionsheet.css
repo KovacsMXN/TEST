@@ -1,0 +1,68 @@
+html,
+body {
+  height: 100%;
+}
+
+body {
+  display: flex;
+  align-items: center;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  background-color: #f0f0f0;
+}
+
+.form-signin {
+  max-width: 330px;
+  padding: 15px;
+}
+
+.form-signin .form-floating:focus-within {
+  z-index: 2;
+}
+
+.form-signin input[type="email"] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.form-signin input[type="password"] {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+.x-space {
+  margin-top: 7%;
+  margin-bottom: 7%;
+}
+.language_img {
+  border: 0px solid #d6d6d6;
+}
+.bloque {
+  background: #d6d6d6;
+}
+.cabeza {
+  text-align: justify;
+  background: #1f1f1f;
+  color: white;
+  padding-top: 1%;
+  padding-bottom: 1%;
+  padding-left: 2%;
+  -webkit-border-radius: 5px 5px 0px 0px;
+  -moz-border-radius: 5px 5px 0px 0px;
+  border-radius: 5px 5px 0px 0px;
+
+}
+.encabezado{
+  font-size: 20px;
+  color: white;
+  text-decoration: none;
+}
+.sub_encabezado{
+  font-size: 15px;
+  color: white;
+  text-decoration: none;
+}
+.cuerpo {
+  padding: 10px;
+}

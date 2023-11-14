@@ -38,6 +38,9 @@ urlpatterns = [
     #URL FOR ladders APP
     path('ladders/', include('ladders.urls')),
 
+    #URL FOR ladders APP
+    path('inventory/', include('inventory.urls')),
+
     #URL FOR EQUIPMENT APP
     path('equipment/', equipment_index, name='equipment_index'),
     #URL VIEW EQUIPMENT
@@ -49,5 +52,8 @@ urlpatterns = [
 
     #URLS TO HANDLE EQUIPMENT APP REQUEST
     path('equipment/json/request/', equipment_request_json, name='equipment_request_json'),
+
+    #URL FOR INDEX
     path('', index, name='index'),
+
 ]  + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

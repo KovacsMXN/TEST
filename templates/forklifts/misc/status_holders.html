@@ -1,0 +1,17 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Status</th>
+      <th scope="col">Count</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for status, count in status_counts.items %}
+    <td>
+    <span style="height: 18px;width: 18px;background-color: {{ status.1 }};border-radius: 50%;vertical-align: sub;display: inline-block;" class="dot"></span> {{ status.0 }}
+    </td>
+    <td>{{ count }} Forklifts</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>

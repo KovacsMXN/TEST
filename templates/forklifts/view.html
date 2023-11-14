@@ -1,0 +1,112 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}SuipluMX - {{ db_response.brand }} {{ db_response.brand.serial }}{% endblock %}
+{% block content %}
+      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">{{ db_response.clave }}</h1>
+        <div class="btn-toolbar mb-2 mb-md-0">
+          <div class="btn-group me-2">
+                        {% include "forklifts/fork_toolbar.html" %}
+          </div>
+        </div>
+      </div>
+<h5>{{ db_response.modelo }} by {{ db_response.brand }}</h5>
+<script src="{% static 'js/functions_forklifts.js' %}"></script>
+<div class="row">
+    <div class="col-8 p-2 mb-0">
+        <div class="containervieweqipment">
+            <div class="containervieweqipmenthead">
+                    <div class="row">
+                        <div class="col-6">Forklift's data</div>
+                        <div class="col-6">
+                            {% if request.user.is_superuser %}
+                            <div class="text-end">
+                                    <a name="edit_b" id="edit_b" class="nav-link"><span class="align-text-bottom"><img class="filter-white" src="{% static 'images/ico/pencil-square.svg' %}"></span></a>
+                                    <a name="save_b" id="save_b" class="nav-link"><span data-feather="save" class="align-text-bottom"><img class="filter-white" src="{% static 'images/ico/floppy.svg' %}"></span></a>
+                            </div>
+                            {% else %}
+                            {% endif %}
+                        </div>
+                    </div>
+            </div>
+            <div class="containervieweqipmentbody">
+            <form id="forklift_form_edit" action="" method="post">
+              {% csrf_token %}
+              <div class="row">
+                <div class="col-6">
+                <div class="input-group mb-3">
+                  <span class="input-group-text" id="basic-addon1">ID</span>
+                  {{ form.clave }}
+                </div>
+                </div>
+                <div class="col-6">
+                <div class="input-group mb-3">
+                  <span class="input-group-text" id="basic-addon1">Status</span>
+                  {{ form.status }}
+                </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-6">
+                <div class="input-group mb-3">
+                  <span class="input-group-text" id="basic-addon1">Brand</span>
+                  {{ form.brand }}
+                </div>
+                </div>
+                <div class="col-6">
+                <div class="input-group mb-3">
+                  <span class="input-group-text" id="basic-addon1">Model</span>
+                  {{ form.modelo }}
+                </div>
+                </div>
+              </div>
+              <div class="row">
+                  <div class="col-6">
+                  <div class="input-group mb-3">
+                  <span class="input-group-text" id="basic-addon1">Serial</span>
+                  {{ form.serial }}
+                </div>
+                </div>
+                <div class="col-6">
+                <div class="input-group mb-3">
+                  <span class="input-group-text" id="basic-addon1">Holder</span>
+                  {{ form.owner }}
+                </div></div>
+                </div>
+              <div class="row">
+                <div class="col-12">                  <div class="input-group mb-3">
+                  <span class="input-group-text" id="basic-addon1">Service providers</span>
+                  {{ form.service_provider }}
+                </div>
+              </div>
+              </div>
+            </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-4 p-2">
+        <div class="containervieweqipment">
+            <div class="containervieweqipmenthead">
+                    <div class="row">
+                    <div class="col-6">Forklift's image</div>
+                    <div class="col-6">
+                        <div class="text-end">
+                            {% if request.user.is_superuser %}
+                            <a class="nav-link" href="/forklifts/imagen/upload/{{ db_response.id }}"><span class="align-text-bottom"><img class="filter-white" src="{% static 'images/ico/upload.svg' %}"></span></a>
+                            {% else %}
+                            {% endif %}
+                        </div></div>
+                    </div>
+            </div>
+            <div class="containervieweqipmentbody">
+        {% if db_response.imagen == "" %}
+        <img class="border rounded" width="100%"  src="/media/equipment/main/default.png">
+        {% else %}
+        <img class="border rounded" width="100%" src="/media/{{ db_response.imagen }}">
+        {% endif %}
+        </div>
+    </div>
+</div>
+</div>
+<script src="{% static 'js/forklifts/forklifts.js' %}"></script>
+{% endblock %}

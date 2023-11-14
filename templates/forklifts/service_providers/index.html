@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}SuipluMX - Forklift service providers{% endblock %}
+{% block content %}
+      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">Forklifts</h1>
+        <div class="btn-toolbar mb-2 mb-md-0">
+          <div class="btn-group me-2">
+            {% include "forklifts/fork_toolbar.html" %}
+          </div>
+        </div>
+      </div>
+<h5>Service providers</h5>
+<div class="table table-sm table-striped table-hover">
+<table id="datatable-contenido" class="table table-striped table-hover">
+    <thead>
+        <tr>
+            <th>Banner</th>
+            <th>Service providers</th>
+            <th class="text-end">Operations</th>
+        </tr>
+    </thead>
+    <tbody id="tableContenido_results"></tbody>
+</table>
+</div>
+<script src="{% static 'js/forklifts/complex_service_providers.js' %}"></script>
+{% endblock %}

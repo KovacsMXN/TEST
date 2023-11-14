@@ -38,7 +38,7 @@ const listProgrammers = async () => {
                     <td>${equipment.brand__name}</td>
                     <td>${equipment.model}</td>
                     <td>${equipment.serial}</td>
-                    <td><span style="height: 18px;width: 18px;background-color: ${equipment.location__color};border-radius: 0%;vertical-align: sub;display: inline-block;" class="dot"></span> ${equipment.location__name}</td>
+                    <td><span style="height: 18px;width: 18px;background-color: ${equipment.location__color};border-radius: 8%;vertical-align: sub;display: inline-block;" class="dot"></span> ${equipment.location__name}</td>
                     <td>FA-${equipment.fa_number}</td>
                     <td class='text-end'><a href="view/${equipment.id}/" type="button" class="btn btn-dark btn-sm">View</a> <button onClick="delete_equipment(${equipment.id})" type="button" class="btn btn-danger btn-sm">Delete</button></td>
                 </tr>

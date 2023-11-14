@@ -24,8 +24,8 @@
                         <div class="col-6">
                             {% if request.user.is_superuser %}
                             <div class="text-end">
-                                    <a name="edit_b" id="edit_b" class="nav-link"><span data-feather="edit" class="align-text-bottom"></span></a>
-                                    <a name="save_b" id="save_b" class="nav-link"><span data-feather="save" class="align-text-bottom"></span></a>
+                                    <a name="edit_b" id="edit_b" class="nav-link"><span class="align-text-bottom"><img class="filter-white" src="{% static 'images/ico/pencil-square.svg' %}"></span></a>
+                                    <a name="save_b" id="save_b" class="nav-link"><span class="align-text-bottom"><img class="filter-white" src="{% static 'images/ico/floppy' %}"></span></a>
                             </div>
                             {% else %}
                             {% endif %}
@@ -115,7 +115,7 @@
                     <div class="col-6">
                         <div class="text-end">
                             {% if request.user.is_superuser %}
-                            <a class="nav-link" href="{% url 'equipment_imagen_upload_view' data_db.id %}"><span data-feather="upload" class="align-text-bottom"></span></a>
+                            <a class="nav-link" href="{% url 'equipment_imagen_upload_view' data_db.id %}"><span class="align-text-bottom"><img class="filter-white" src="{% static 'images/ico/upload.svg' %}"></span></a>
                             {% else %}
                             {% endif %}
                         </div></div>

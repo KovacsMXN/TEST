@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <title>SuipluMX · Logout</title>
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/css/inspectionsheet.css" rel="stylesheet">
+  </head>
+  <body class="text-center">
+    <main class="form-signin w-100 m-auto">
+      <form>
+            <div class="alert alert-light" role="alert">
+              <hr>
+              <img width="60%" src="/static/images/logo.png" >
+              <br>
+              <h4 class="alert-heading"></h4>
+              <hr>
+                <div class="x-space">
+                <div class="row">
+                <div class="col-6">
+                  <a href="{% url 'inspection_sheet_form_es' %}"><img class="language_img" width="70%" src="/static/images/mx.png" /></a>
+                </div>
+                <div class="col-6">
+                  <a href="{% url 'inspection_sheet_form_en' %}"><img class="language_img" width="70%" src="/static/images/us.png" /></a>
+                </div>
+              </div>
+              </div>
+            </div>
+      </form>
+    </main>
+  </body>
+</html>

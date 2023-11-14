@@ -4,7 +4,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
+    <meta name="description" content="SuipluMX log-out landing page.">
     <title>SuipluMX · Logout</title>
     <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
     <link href="{% static 'css/sign-in.css' %}" rel="stylesheet">
@@ -15,15 +15,12 @@
       <form>
             <div class="alert alert-light" role="alert">
               <hr>
-              <img width="90%" src="{% static 'images/logo.png' %}" >
-              <br>
-              <h4 class="alert-heading"></h4>
+              <img class="log-in-logo" src="{% static 'images/logo.png' %}" >
               <hr>
             </div>
             <p>
-                <button type="button" class="btn btn-warning">You are now successfully logged out.</button>
+              <a href="../login" class="w-100 btn btn-lg btn-primary" type="submit">Sign in</a>
             </p>
-            <a href="../login" class="w-100 btn btn-lg btn-primary" type="submit">Sign in</a>
       </form>
     </main>
   </body>

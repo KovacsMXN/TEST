@@ -1,0 +1,210 @@
+{% extends "forklifts/sheet/base.html" %}
+{% load static %}
+{% block title %}Hoja de inspección para monta cargas{% endblock %}
+{% block content %}
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">Seguirdad para monta cargas</h2>
+    <div class="btn-toolbar mb-2 mb-md-0">
+    </div>
+</div>
+<h5>Lista diaria de choferes: Formulario de inspección pre-turno para montacargas eléctricos y de propano.</h5>
+<h4>La inspección de la maquinaria se requiere previo al uso de ella. Este formulario debes ser rellenado una hora antes del comienzo del turno (Conforme al reglamento establecido por OHSA).</h4>
+<hr>
+          <div class="row">
+            <div class="col-6">
+                <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1">Nombre del conductor</span>
+                <input type="text" class="form-control" placeholder="Lebni Perez Maro" aria-label="Username" aria-describedby="basic-addon1">
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1"># Empleado</span>
+                <input type="text" class="form-control" placeholder="2390" aria-label="Username" aria-describedby="basic-addon1">
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1"># Unidad</span>
+                <input type="text" class="form-control" placeholder="SID-1017" aria-label="Username" aria-describedby="basic-addon1">
+                </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-6">
+                <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1">Turno</span>
+                <input type="text" class="form-control" placeholder="Matutino" aria-label="Username" aria-describedby="basic-addon1">
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1">Contador de horas</span>
+                <input type="text" class="form-control" placeholder="615" aria-label="Username" aria-describedby="basic-addon1">
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1">Fecha</span>
+                <input type="text" class="form-control" placeholder="11/06/2023" aria-label="Username" aria-describedby="basic-addon1">
+                </div>
+            </div>
+          </div>
+<table class="table table-bordered table-hover table-striped-columns" >
+    <tr>
+        <th width="50%"></th>
+        <th width="50%"></th>
+    </tr>
+    <tr>
+        <td><a class="in-put"></a>1. Forks, respaldo, pasadores de cierre, mangueras, controles hidraulicos.</a></td>
+        <td align="center">
+            <div class="input-group mb-3">
+                <div class="input-group-text">
+                    <input class="form-check-input mt-0" type="checkbox" value="" aria-label="Checkbox for following text input">
+                </div>
+                    <textarea class="form-control" placeholder="Observaciones" aria-label="Observaciones"></textarea>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td><a class="in-put"></a>2. Neumaticos, tuercas del estiron, cubrimiento del techo.</a></td>
+        <td align="center">
+            <div class="input-group mb-3">
+                <div class="input-group-text">
+                    <input class="form-check-input mt-0" type="checkbox" value="" aria-label="Checkbox for following text input">
+                </div>
+                    <textarea class="form-control" placeholder="Observaciones" aria-label="Observaciones"></textarea>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td><a class="in-put"></a>3. Todas la luces, bocinas, placa de capacidad medidores, el panel de vizualizacion.</a></td>
+        <td align="center">
+            <div class="input-group mb-3">
+                <div class="input-group-text">
+                    <input class="form-check-input mt-0" type="checkbox" value="" aria-label="Checkbox for following text input">
+                </div>
+                    <textarea class="form-control" placeholder="Observaciones" aria-label="Observaciones"></textarea>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td><a class="in-put"></a>4. Propano: El nivel de comvbustible, abrasadera de manguera, de fuga.Electrico: Nivel de agua en bateria, conectores, tapones de ventilzacion y Post cubre en su lugar.</a></td>
+        <td align="center">
+            <div class="input-group mb-3">
+                <div class="input-group-text">
+                    <input class="form-check-input mt-0" type="checkbox" value="" aria-label="Checkbox for following text input">
+                </div>
+                    <textarea class="form-control" placeholder="Observaciones" aria-label="Observaciones"></textarea>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td><a class="in-put"></a>5. Cinturon de seguirdad operacion.</a></td>
+        <td align="center">
+            <div class="input-group mb-3">
+                <div class="input-group-text">
+                    <input class="form-check-input mt-0" type="checkbox" value="" aria-label="Checkbox for following text input">
+                </div>
+                    <textarea class="form-control" placeholder="Observaciones" aria-label="Observaciones"></textarea>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td><a class="in-put"></a>6. Funciones de elevacion de inclinacion, elevacion, desplazamiento lateral.</a></td>
+        <td align="center">
+            <div class="input-group mb-3">
+                <div class="input-group-text">
+                    <input class="form-check-input mt-0" type="checkbox" value="" aria-label="Checkbox for following text input">
+                </div>
+                    <textarea class="form-control" placeholder="Observaciones" aria-label="Observaciones"></textarea>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td><a class="in-put"></a>7. Freno de estacionamiento - Hold en adelante y marcha atras.</a></td>
+        <td align="center">
+            <div class="input-group mb-3">
+                <div class="input-group-text">
+                    <input class="form-check-input mt-0" type="checkbox" value="" aria-label="Checkbox for following text input">
+                </div>
+                    <textarea class="form-control" placeholder="Observaciones" aria-label="Observaciones"></textarea>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td><a class="in-put"></a>8. Frenos - Comprobar freno de servicio en avance y retroceso.</a></td>
+        <td align="center">
+            <div class="input-group mb-3">
+                <div class="input-group-text">
+                    <input class="form-check-input mt-0" type="checkbox" value="" aria-label="Checkbox for following text input">
+                </div>
+                    <textarea class="form-control" placeholder="Observaciones" aria-label="Observaciones"></textarea>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td><a class="in-put"></a>9. Asiento de freno- Levante, mantiene la carretilla elevadora.</a></td>
+        <td align="center">
+            <div class="input-group mb-3">
+                <div class="input-group-text">
+                    <input class="form-check-input mt-0" type="checkbox" value="" aria-label="Checkbox for following text input">
+                </div>
+                    <textarea class="form-control" placeholder="Observaciones" aria-label="Observaciones"></textarea>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td><a class="in-put"></a>10. Direccion - El pleno derecho y gire a la izquierda.</a></td>
+        <td align="center">
+            <div class="input-group mb-3">
+                <div class="input-group-text">
+                    <input class="form-check-input mt-0" type="checkbox" value="" aria-label="Checkbox for following text input">
+                </div>
+                    <textarea class="form-control" placeholder="Observaciones" aria-label="Observaciones"></textarea>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td><a class="in-put"></a>11. El tapar - Verificar enchufar directa e inversa.</a></td>
+        <td align="center">
+            <div class="input-group mb-3">
+                <div class="input-group-text">
+                    <input class="form-check-input mt-0" type="checkbox" value="" aria-label="Checkbox for following text input">
+                </div>
+                    <textarea class="form-control" placeholder="Observaciones" aria-label="Observaciones"></textarea>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td><a class="in-put"></a>12 .Luz estroboscopica funciona correctamente.</a></td>
+        <td align="center">
+            <div class="input-group mb-3">
+                <div class="input-group-text">
+                    <input class="form-check-input mt-0" type="checkbox" value="" aria-label="Checkbox for following text input">
+                </div>
+                    <textarea class="form-control" placeholder="Observaciones" aria-label="Observaciones"></textarea>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td><a class="in-put"></a>13. Extintor de incendios montado y cargado.</a></td>
+        <td align="center">
+            <div class="input-group mb-3">
+                <div class="input-group-text">
+                    <input class="form-check-input mt-0" type="checkbox" value="" aria-label="Checkbox for following text input">
+                </div>
+                    <textarea class="form-control" placeholder="Observaciones" aria-label="Observaciones"></textarea>
+            </div>
+        </td>
+    </tr>
+</table>
+<div class="input-group mb-3">
+<span class="input-group-text" id="basic-addon1">Otras observaciones</span>
+<textarea class="form-control" aria-label="Observaciones"></textarea>
+</div>
+<br>
+<a class="btn btn-primary">Guardar</a><br>
+<hr>
+© 2023 Lebni Pérez Maro<br><br>
+{% endblock %}
