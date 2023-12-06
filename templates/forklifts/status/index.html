@@ -1,16 +1,27 @@
 {% extends "base.html" %}
 {% load static %}
-{% block title %}SuipluMX - Forklift status{% endblock %}
+{% block title %}SuipluMX - Registrated status for forklifts{% endblock %}
 {% block content %}
       <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h1 class="h2">Forklifts</h1>
         <div class="btn-toolbar mb-2 mb-md-0">
-          <div class="btn-group me-2">
             {% include "forklifts/fork_toolbar.html" %}
-          </div>
         </div>
       </div>
-<h5>Status</h5>
+  <div class="row pb-2 px-1">
+    <div class="col-6">
+      <h5>Registrated forklifts status</h5>
+    </div>
+    <div class="col-6">
+      {% if request.user.is_superuser %}
+        <div class="text-end">
+          <a href="{% url 'forklift_status_add' %}" class="btn btn-dark">
+            <img class="filter-white" src="{% static 'images/ico/hdd-stack.svg' %}" /> Add status
+          </a>
+        </div>
+      {% endif %}
+    </div>
+  </div>
 <table class="table">
   <thead>
     <tr>
@@ -35,19 +46,23 @@
     </h2>
     <div id="panelsStayOpen-collapseThree{{status.id}}" class="accordion-collapse collapse">
       <div class="accordion-body">
+        {% if status.count %}
         {% for forklift in status.forklifts.all %}
-        <button type="button" class="btn btn-sm btn-dark"><div class="pb-1"><img  class="filter-white" src="{% static 'images/ico/truck.svg' %}" /> {{ forklift.clave }}</div></button>
+        <a href="{% url 'forklift_view' forklift.id %}" type="button" class="btn btn-sm btn-dark"><div class="pb-1"><img  class="filter-white" src="{% static 'images/ico/truck.svg' %}" /> {{ forklift.clave }}</div></a>
         {% endfor %}
+        {% else %}
+            <a type="button" class="btn btn-sm btn-secondary"><div class="pb-1">Nothing to show</div></a>
+        {% endif %}
       </div>
     </div>
   </div>
 </div>
             </td>
-            <td class='text-end align-middle'><a href="view/{{status.id}}" class="btn btn-dark btn-sm">View</a> <button type="button" class="btn btn-danger btn-sm">Delete</button></td>
+            <td class='text-end align-middle'><a href="view/{{status.id}}" class="btn btn-dark btn-sm">View</a></td>
         </tr>
         {% empty %}
             <td>No status available</td>
         {% endfor %}
 </table>
-<script src="{% static 'js/complex_forklifts.js' %}"></script>
+<script src="{% static 'js/forklifts/status.js' %}"></script>
 {% endblock %}

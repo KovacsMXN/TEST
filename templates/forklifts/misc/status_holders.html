@@ -6,12 +6,17 @@
     </tr>
   </thead>
   <tbody>
+    {% if status_counts.items %}
     {% for status, count in status_counts.items %}
-    <td>
-    <span style="height: 18px;width: 18px;background-color: {{ status.1 }};border-radius: 50%;vertical-align: sub;display: inline-block;" class="dot"></span> {{ status.0 }}
-    </td>
-    <td>{{ count }} Forklifts</td>
+    <tr>
+      <td>
+        <span style="height: 18px; width: 18px; background-color: {{ status.1 }}; border-radius: 50%; vertical-align: sub; display: inline-block;" class="dot"></span> {{ status.0 }}
+      </td>
+      <td>{{ count }} Forklifts</td>
     </tr>
     {% endfor %}
+    {% else %}
+        <a type="button" class="btn btn-sm btn-secondary"><div class="pb-1">Nothing to show</div></a>
+    {% endif %}
   </tbody>
 </table>

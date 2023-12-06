@@ -2,32 +2,30 @@
 {% load static %}
 
 {% block title %}
-    SuipluMX - {{ data.name }}
+    SuipluMX - Editing {{data.name}}
 {% endblock %}
 
 {% block content %}
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h2">Forklifts: {{ data.name }}</h1>
+        <h1 class="h2">Forklifts</h1>
         <div class="btn-toolbar mb-2 mb-md-0">
-            <div class="btn-group me-2">
-                {% include "forklifts/fork_toolbar.html" %}
-            </div>
+            {% include "forklifts/fork_toolbar.html" %}
         </div>
     </div>
 
-    <h5>Forklift holder</h5>
-        <div class="row p-2 mb-0">
-                  <div class="containervieweqipment">
-                <div class="containervieweqipmenthead">
-                        <div class="row">
-                            <div class="col-6">Company's information:</div>
-                            <div class="col-6">
-                                <div class="text-end">
-                                </div>
-                            </div>
+    <h5>Editing forklift holder: {{data.name}}</h5>
+    <div class="row p-2 mb-0">
+        <div class="containervieweqipment">
+            <div class="containervieweqipmenthead">
+                <div class="row">
+                    <div class="col-6">General inforamtion</div>
+                    <div class="col-6">
+                        <div class="text-end">
+                        </div>
                     </div>
                 </div>
-                <div class="containervieweqipmentbody">
+            </div>
+            <div class="containervieweqipmentbody">
                 <form action="" method="post" enctype="multipart/form-data">
                     {% csrf_token %}
                     <div class="row pb-2">
@@ -62,12 +60,12 @@
                         <div class="col-2 fw-medium">Banner:</div>
                         <div class="col-10">{{ form.imagen }}</div>
                     </div>
-            <div class="pb-2 text-end">
-                <button type="submit" class="btn btn-success">Update</button>
+                    <div class="pb-2 text-end">
+                        <button type="submit" class="btn btn-success">Update</button>
+                    </div>
+                </form>
             </div>
-        </form>
-                </div>
-            </div>
+        </div>
     </div>
     <script src="{% static 'js/forklifts/forklifts.js' %}"></script>
 {% endblock %}

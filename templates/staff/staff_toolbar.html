@@ -1,0 +1,15 @@
+{% load static %}
+<div class="btn-group me-2">
+<a href="{% url 'staff_index' %}" class="btn btn-dark">
+    <span class="align-text-bottom">
+        <img class="filter-white" src="{% static 'images/ico/people.svg' %}" />
+    </span>
+    Accounts
+</a>
+<a href="{% url 'staff_add' %}" class="btn btn-dark">
+    <span class="align-text-bottom">
+        <img class="filter-white" src="{% static 'images/ico/person-add.svg' %}" />
+    </span>
+    Create an account
+</a>
+</div>

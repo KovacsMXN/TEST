@@ -1,0 +1,133 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}SuipluMX - Lockout / Tagout procedures for forklift log{% endblock %}
+{% block content %}
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">Lockout / Tagout procedures for forklifts</h1>
+    <div class="btn-toolbar mb-2 mb-md-0">
+        {% include "forklifts/fork_toolbar.html" %}
+    </div>
+</div>
+<div class="row pb-2 px-1">
+    <div class="col-6">
+        <h5>Past Lockout / Tagout procedures for forklifts </h5>
+    </div>
+    <div class="col-6 text-end">
+        <a href="{% url 'forklift_loto' %}" class="btn btn-dark">
+            <span class="align-text-bottom">
+                <img class="filter-white" src="{% static 'images/ico/key.svg' %}" />
+            </span>
+            Show active
+        </a>
+                <a href="{% url 'forklift_loto_log' %}" class="btn btn-dark">
+            <span class="align-text-bottom">
+                <img class="filter-white" src="{% static 'images/ico/book.svg' %}" />
+            </span>
+            Show records
+        </a>
+    </div>
+</div>
+<div class="col-12">
+    <div class="containervieweqipment">
+        <div class="containervieweqipmenthead">
+            <div class="row">
+                <div class="col-6">Past Lockout / Tagout Log procedures</div>
+                <div class="col-6">
+                    <div class="text-end">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="containervieweqipmentbody">
+<form action="" method="post">
+    {% csrf_token %}
+    <div class="row mt-1">
+        <div class="col-9"><a class="fw-medium text-reset text-decoration-none" >Search</a>{{search.q}}</div>
+        <div class="col-3"><a class="fw-medium text-reset text-decoration-none" >Forklift tag</a>{{search.q_clave}}</div>
+    </div>
+<div class="row mt-1">
+    <div class="col-6"><a class="fw-medium text-reset text-decoration-none" >Started date min: </a>{{search.sdate_min}}</div>
+    <div class="col-6"><a class="fw-medium text-reset text-decoration-none" >Started date max: </a>{{search.sdate_max}}</div>
+</div>
+<div class="row mt-1">
+    <div class="col-6"><a class="fw-medium text-reset text-decoration-none" >Ended date min: </a>{{search.edate_min}}</div>
+    <div class="col-6"><a class="fw-medium text-reset text-decoration-none" >Ended date max: </a>{{search.edate_max}}</div>
+</div>
+<div class="row mt-1">
+    <div class="col-6"><a class="fw-medium text-reset text-decoration-none" >Created by: </a>{{search.formstartusuario}}</div>
+    <div class="col-6"><a class="fw-medium text-reset text-decoration-none" >Realesed by: </a>{{search.formendusuario}}</div>
+</div>
+    <div class="row mt-3">
+        <div class="col-11"></div>
+        <div class="col-1 text-end"><button class="btn btn-dark btn-sm" type="submit">Search</button></div>
+    </div>
+</form>
+            </div>
+{% if page %}
+            <hr>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">Tag</th>
+                        <th scope="col">Reason</th>
+                        <th scope="col">Started on</th>
+                        <th scope="col">Ended on</th>
+                        <th scope="col">Started by</th>
+                        <th scope="col">Ended by</th>
+                        <th class="text-end" scope="col">Options</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in page %}
+                    <tr>
+                        <td class="align-middle"><a class="btn btn-danger btn-sm" href="{% url 'forklift_view' item.forklift.id %}"><img class="filter-white" src="/static/images/ico/truck.svg"> {{ item.forklift.clave }}</a></td>
+                        <td class="align-middle">{{ item.reason }}</td>
+                        <td class="align-middle">{{ item.start }}</td>
+                        <td class="align-middle">{{ item.end  }}</td>
+                        <td class="align-middle">{{ item.startusuario }}</td>
+                        <td class="align-middle">{{ item.endusuario  }}</td>
+                        <td class="align-middle text-end"><a href="{% url 'forklift_loto_log_view' item.id %}" class="btn btn-dark btn-sm">View</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+<div class="container text-center">
+  <div class="row align-items-start">
+    <div class="col">
+    </div>
+    <div class="col">
+<nav class="pt-3">
+  <ul class="pagination text-center">
+        {% if page.has_previous %}
+    <li class="page-item"><a class="page-link" href="?page=1">First</a></li>
+    <li class="page-item"><a class="page-link" href="?page={{ page.previous_page_number }}">Previous</a></li>
+        {% else %}
+    <li class="page-item disabled"><a class="page-link" href="">First</a></li>
+    <li class="page-item disabled"><a class="page-link" href="">Previous</a></li>
+        {% endif %}
+    <li class="page-item"><a class="page-link" href="#">{{ page.number }}</a></li>
+    {% if page.has_next %}
+    <li class="page-item"><a class="page-link" href="?page={{ page.next_page_number }}">Next</a></li>
+    <li class="page-item"><a class="page-link" href="?page={{ page.paginator.num_pages }}">Last</a></li>
+        {% else %}
+    <li class="page-item disabled"><a class="page-link" href="">Next</a></li>
+    <li class="page-item disabled"><a class="page-link" href="">Last</a></li>
+        {% endif %}
+        
+  </ul>
+</nav>
+    </div>
+    <div class="col">
+    </div>
+  </div>
+</div>
+{% else %}
+        <div class="containervieweqipmentbody">
+<p class="fw-normal">Looks like everything is running smooth.</p>
+<p class="fw-lighter">Nothing to show here. No records were found on database request.</p>
+        </div>
+{% endif %}
+    </div>
+</div>
+{% endblock %}

@@ -1,11 +1,9 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http.response import JsonResponse
 from django.contrib.auth.decorators import login_required
-from configuracion.models import Equipment_Locations, Equipment
 from django.core import serializers
 from django.contrib.auth.decorators import user_passes_test
 
-from .forms import EditEquipment, UploadImgForm
 
 #CREATE VIEW FOR MAIN INDEX DOMAIN
 @login_required

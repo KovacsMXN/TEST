@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}SuipluMX - Create account{% endblock %}
+{% block content %}
+      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">Staff accounts </h1>
+        <!-- Button trigger modal -->
+    <div class="btn-toolbar mb-2 mb-md-0">
+        {% include "staff/staff_toolbar.html" %}
+    </div>
+      </div>
+<h5>Create an account</h5>
+<hr>
+<h6>First, enter a username and password. Then, you’ll be able to edit more user options.</h6>
+<div class="row p-2 mb-0">
+        <div class="containervieweqipment">
+            <div class="containervieweqipmenthead">
+                <div class="row">
+                    <div class="col-6">Acoount's information</div>
+                    <div class="col-6">
+                        <div class="text-end">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="containervieweqipmentbody">
+        <form action="{% url 'staff_add' %}" method="post">
+          {% csrf_token %}
+          <div class="container pt-4">
+            <div class="row">
+              <div class="col">
+                Username:
+              </div>
+              <div class="col">
+                {{ form.username }}
+                <p class="pt-3">Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.</p>
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col">
+                Password:
+              </div>
+              <div class="col">
+                {{ form.password1 }}
+                <ol type="A" class="pt-3">
+                  <li>Your password can't be too similar to your other personal information.</li>
+                  <li>Your password must contain at least 8 characters.</li>
+                  <li>Your password can't be a commonly used password.</li>
+                  <li>Your password can't be entirely numeric.</li>
+                </ol>
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col">
+                Password confirmation:
+              </div>
+              <div class="col">
+                {{ form.password2 }}
+                <p class="pt-3">Enter the same password as before, for verification.</p>
+              </div>
+            </div>
+          </div>
+          <div class="text-end">
+            <button class="btn btn-success" type="submit">Create account</button>
+          </div>
+        </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

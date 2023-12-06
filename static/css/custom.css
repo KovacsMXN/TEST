@@ -9,6 +9,15 @@ h5{
 .filter-white{
     filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(7deg) brightness(104%) contrast(102%);
 }
+.filter-yellow{
+    filter: invert(30%) sepia(73%) saturate(7141%) hue-rotate(347deg) brightness(92%) contrast(103%);
+}
+.filter-green{
+    filter: invert(25%) sepia(77%) saturate(1580%) hue-rotate(74deg) brightness(91%) contrast(98%);
+}
+.filter-red{
+    filter: invert(7%) sepia(82%) saturate(7346%) hue-rotate(353deg) brightness(94%) contrast(104%);
+}
 .containervieweqipment {
     border: 1px solid #c7c8c9;
     padding: 0px;
@@ -31,4 +40,31 @@ h5{
 }
 .img_holder{
     margin-top: 5%;
+}
+.containerdanger{
+    border: 1px solid #c7c8c9;
+    padding: 0px;
+    margin: 0px;
+    display: block;
+    border-radius: 5px;
+    height: 100%;
+}
+.containerdangerhead{
+    background-color: #d10808;
+    padding: 10px;
+    color: white;
+    display: block;
+    margin: 0px;
+}
+.containerdangerbody{
+    background-color: white;
+    padding: 10px;
+    margin-bottom: 5px;
+}
+.containersucceshead{
+    background-color: #198754;
+    padding: 10px;
+    color: white;
+    display: block;
+    margin: 0px;
 }

@@ -1,40 +1,45 @@
 {% load static %}
-    {% if request.user.is_superuser %}
-    <a href="{% url 'forklift_add' %}" class="btn btn-dark">
-    <span class="align-text-bottom">
-        <img class="filter-white" src="{% static 'images/ico/plus-square.svg' %}" />
-    </span> 
-    Add forklift
-</a>
-    {% else %}
-    {% endif %}
+<div class="btn-group me-2">
 <a href="{% url 'forklift_index_view' %}" class="btn btn-dark">
     <span class="align-text-bottom">
         <img class="filter-white" src="{% static 'images/ico/truck.svg' %}" />
-    </span> 
+    </span>
     Forklifts
 </a>
+
 <a href="{% url 'forklift_holders' %}" class="btn btn-dark">
     <span class="align-text-bottom">
         <img class="filter-white" src="{% static 'images/ico/person-bounding-box.svg' %}" />
-    </span> 
+    </span>
     Holders
 </a>
+
 <a href="{% url 'forklift_service_providers' %}" class="btn btn-dark">
     <span class="align-text-bottom">
         <img class="filter-white" src="{% static 'images/ico/person-gear.svg' %}" />
-    </span> 
+    </span>
     Service providers
 </a>
+
 <a href="{% url 'forklift_brands' %}" class="btn btn-dark">
     <span class="align-text-bottom">
         <img class="filter-white" src="{% static 'images/ico/card-heading.svg' %}" />
-    </span> 
+    </span>
     Brands
 </a>
+
 <a href="{% url 'forklift_status' %}" class="btn btn-dark">
     <span class="align-text-bottom">
         <img class="filter-white" src="{% static 'images/ico/hdd-stack.svg' %}" />
-    </span> 
+    </span>
     Status
 </a>
+</div>
+<div class="btn-group me-2">
+<a href="{% url 'forklift_loto' %}" class="btn btn-primary">
+    <span class="align-text-bottom">
+        <img class="filter-white" src="{% static 'images/ico/key.svg' %}" />
+    </span>
+    Lockout/Tagout
+</a>
+</div>

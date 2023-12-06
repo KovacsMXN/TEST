@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+    SuipluMX - Editing {{data.name}} forklift status
+{% endblock %}
+
+{% block content %}
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">Forklifts</h1>
+        <div class="btn-toolbar mb-2 mb-md-0">
+            {% include "forklifts/fork_toolbar.html" %}
+        </div>
+    </div>
+
+    <h5>Editing forklift status: {{data.name}}</h5>
+{{form.errors}}
+    <div class="row p-2 mb-0">
+        <div class="containervieweqipment">
+            <div class="containervieweqipmenthead">
+                <div class="row">
+                    <div class="col-6">General information:</div>
+                    <div class="col-6">
+                        <div class="text-end">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="containervieweqipmentbody">
+                <form action="" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="row pb-2">
+                        <div class="col-2 fw-medium">Name</div>
+                        <div class="col-10">{{ form.name }}</div>
+                    </div>
+                    <div class="row pb-2">
+                        <div class="col-2 fw-medium">Color</div>
+                        <div class="col-10">{{ form.color }}</div>
+                    </div>
+                    <div class="row p-2">
+                        {{ form.imagen }}
+                    </div>
+                    <div class="pb-2 text-end">
+                        <button type="submit" class="btn btn-success">Update</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="{% static 'js/forklifts/forklifts.js' %}"></script>
+{% endblock %}

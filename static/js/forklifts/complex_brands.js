@@ -32,7 +32,7 @@ const listFrokslifts = async () => {
                 <tr>
                     <td class="align-middle"><img height="50px"" src="/media/${val.imagen}"></td>
                     <td class="align-middle"><span style="height: 18px;width: 18px;background-color:${val.color};border-radius: 50%;vertical-align: sub;display: inline-block;" class="dot"></span> ${val.name}</td>
-                    <td class='text-end align-middle'><a href="view/${val}.id}" class="btn btn-dark btn-sm">View</a> <button type="button" class="btn btn-danger btn-sm">Delete</button></td>
+                    <td class='text-end align-middle'><a href="view/${val.id}/" class="btn btn-dark btn-sm">View</a></td>
                 </tr>`;
         });
         tableContenido_results.innerHTML = content;

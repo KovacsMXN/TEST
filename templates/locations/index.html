@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}SuipluMX - Locations{% endblock %}
+{% block content %}
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">Locations</h1>
+        <div class="btn-toolbar mb-2 mb-md-0">
+            {% include "locations/locations_toolbar.html" %}
+        </div>
+    </div>
+<h5>Registrated locations</h5>
+    <div class="row pb-2 px-1">
+<div class="col-6">
+</div>
+
+        <div class="col-6 text-end">
+        </div>
+    </div>
+  <div class="row">
+    <div class="col-12 p-2 mb-0">
+      <div class="containervieweqipment">
+        <div class="containervieweqipmenthead">
+          <div class="row">
+            <div class="col-6">Locations</div>
+            <div class="col-6">
+            </div>
+          </div>
+        </div>
+        <div class="containervieweqipmentbody">
+{% if data %}          
+<table class="table table-striped">
+ <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <th class="text-end" scope="col">Operations</th>
+    </tr>
+  </thead>
+    
+  <tbody>
+    {% for data in data %}
+    <tr>
+      <td><span style="height: 18px;width: 18px;background-color: {{ data.color }};border-radius: 10%;vertical-align: sub;display: inline-block;" class="dot"></span> {{ data.name }}</td>
+      <td class="text-end"><a class="btn btn-dark btn-sm" href="{% url 'locations_view' data.id %}">View</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% else %}
+No results found
+{% endif %}
+        </div>
+      </div>
+    </div>
+
+  </div>
+{% endblock %}

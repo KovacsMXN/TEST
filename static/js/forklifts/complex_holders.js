@@ -3,8 +3,8 @@ let dataTableIsInitialized = false;
 
 const dataTableOptions = {
     columnDefs: [
-        { orderable: false, targets: [0,2,3] },
-        { searchable: false, targets: [0,2,3]}
+        { orderable: false, targets: [0, 2, 3] },
+        { searchable: false, targets: [0, 2, 3] }
     ],
     destroy: true
 };
@@ -33,7 +33,7 @@ const listForklifts = async () => {
                     <td class="align-middle"><img height="50px" src="/media/${owner.imagen}"></td>
                     <td class="align-middle">${owner.name}</td>
                     <td class="align-middle"><button type="button" onclick="loadContentStatus(${owner.id})" class="btn btn-sm btn-primary">${owner.num_forklifts} Forklifts</button><br></button></td>
-                    <td class='text-end align-middle'><a href="view/${owner.id}" class="btn btn-dark btn-sm">View</a> <button type="button" onClick="delete_forkliftowner(${owner.id})" class="btn btn-danger btn-sm">Delete</button></td>
+                    <td class='text-end align-middle'><a href="view/${owner.id}" class="btn btn-dark btn-sm">View</a></td>
                 </tr>`;
         });
         $("#tableContenido_results").html(content);
@@ -54,9 +54,8 @@ window.addEventListener("load", async () => {
     await initDataTable();
 });
 
-
 function loadContentStatus(id) {
-    url = '/forklifts/json/pull/experimental/' + id;
+    url = '/forklifts/json/pull/status/' + id;
     divId = '#frk_status_count'; 
     $(divId).load(url);
     $('#StatusModal').modal('show');

@@ -3,8 +3,8 @@ let dataTableIsInitialized = false;
 
 const dataTableOptions = {
     columnDefs: [
-        { orderable: false, targets: [0,2] },
-        { searchable: false, targets: [0,2]}
+        { orderable: false, targets: [0, 2] },
+        { searchable: false, targets: [0, 2] }
     ],
     destroy: true
 };
@@ -32,7 +32,9 @@ const listFrokslifts = async () => {
                 <tr>
                     <td class="align-middle"><img height="50px" src="/media/${val.imagen}"</td>
                     <td class="align-middle">${val.name}</td>
-                    <td class='text-end align-middle'><a href="view/${val}.id}" class="btn btn-dark btn-sm">View</a> <button type="button" class="btn btn-danger btn-sm">Delete</button></td>
+                    <td class='text-end align-middle'>
+                        <a href="view/${val.id}/" class="btn btn-dark btn-sm">View</a>
+                    </td>
                 </tr>`;
         });
         tableContenido_results.innerHTML = content;

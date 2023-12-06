@@ -9,14 +9,7 @@ from django.contrib.auth.decorators import user_passes_test
 
 from django.utils import timezone
 
-#IMPORT CUSTOM FORMS
-from .forms import CustomUserChangeForm
-from .forms import CreateNewStorageLocation
-from .forms import CreateNewEquipmentLocation
-from .forms import CreateNewEquipmentBrands
 
-#IMPORT MODELS
-from .models import Storage_Locations, Equipment_Locations, Equipment_brands, Equipment
 
 #MAIN INDEX VIEW
 @user_passes_test(lambda u: u.is_superuser)
@@ -203,93 +196,6 @@ def equipment_brands_delete(request, id):
     if request.method == 'POST':
         try:
             registro = get_object_or_404(Equipment_brands, id=id)
-            registro.delete()
-            response_data = {'mensaje': 'Registro eliminado exitosamente.'}
-        except User.DoesNotExist:
-            response_data = {'mensaje': 'El registro no existe.'}
-        return JsonResponse(response_data)
-    else:
-        return JsonResponse({'mensaje': 'Método no permitido'}, status=405)
-
-# VIEWS FOR STAFF SECTIONS
-
-#VIEW FOR JSON RESPONSE TO STAFF VIEW
-@user_passes_test(lambda u: u.is_superuser)
-def configuracion_staff_json_response(request):
-    db_request1 = list(User.objects.values('id','first_name', 'last_name', 'username', 'is_active', 'is_staff', 'is_superuser', 'last_login'))
-    data = {'usuarios':db_request1}
-    return JsonResponse(data)
-
-#VIEW FOR STAFF INDEX
-@user_passes_test(lambda u: u.is_superuser)
-def configuracion_staff_index(request):
-	if request.method == 'POST':
-		form = UserCreationForm(request.POST)
-		if form.is_valid():
-				user = form.save()
-				return redirect('configuracion_staff_usuarios')
-		else:
-				form = UserCreationForm()
-				for field, errors in form.errors.items():
-						for error in errors:
-							messages.error(request, f"{field}: {error}")
-				usuarios = User.objects.all()
-		return render(request, 'configuracion/staff/index.html', {'usuarios': usuarios, 'form': form})
-	else:
-		form = UserCreationForm(request.POST)
-		#CUSTOM ATTRS CLASS
-		form.fields['username'].widget.attrs['class'] = 'form-control'
-		form.fields['password1'].widget.attrs['class'] = 'form-control'
-		form.fields['password2'].widget.attrs['class'] = 'form-control'
-		return render(request, 'configuracion/staff/index.html', {'form': form})
-
-#VIEW FOR STAFF EDIT
-@user_passes_test(lambda u: u.is_superuser)
-def configuracion_staff_edit(request, id):
-	registro = get_object_or_404(User, id=id)
-	if request.method == 'POST':
-		form = CustomUserChangeForm(request.POST, instance=registro)
-		form.fields['is_active'].widget.attrs['class'] = 'form-check-input'
-		form.fields['is_staff'].widget.attrs['class'] = 'form-check-input'
-		form.fields['is_superuser'].widget.attrs['class'] = 'form-check-input'
-		if form.is_valid():
-			form.save()
-		else:
-			return render(request, 'configuracion/staff/edit.html',{'form': form, 'registro':registro})
-		return redirect('../../')
-	else:
-		registro = get_object_or_404(User, id=id)
-		form = CustomUserChangeForm(instance=registro)
-		form.fields['is_active'].widget.attrs['class'] = 'form-check-input'
-		form.fields['is_staff'].widget.attrs['class'] = 'form-check-input'
-		form.fields['is_superuser'].widget.attrs['class'] = 'form-check-input'
-		return render(request, 'configuracion/staff/edit.html',{'form': form, 'registro':registro})
-
-#VIEW FOR STAFF PASSWORD EDIT
-@user_passes_test(lambda u: u.is_superuser)
-def configuracion_staff_password_edit(request, id):
-	if request.method == 'POST':
-		registro = get_object_or_404(User, id=id)
-		form = SetPasswordForm(registro, request.POST)
-		if form.is_valid():
-			user = form.save()
-			return redirect('../../../')
-		else:
-			messages.error(request, 'Please correct the error below.')
-			return redirect('../../../../../')
-	else:
-		registro = get_object_or_404(User, id=id)
-		form = SetPasswordForm(request.user)
-		form.fields['new_password1'].widget.attrs['class'] = 'form-control'
-		form.fields['new_password2'].widget.attrs['class'] = 'form-control'
-		return render(request, 'configuracion/staff/updatepassword.html', {'form': form, 'registro':registro})
-
-#VIEW FOR STAFF DELETE
-@user_passes_test(lambda u: u.is_superuser)
-def configuracion_staff_delete(request, id):
-    if request.method == 'POST':
-        try:
-            registro = get_object_or_404(User, id=id)
             registro.delete()
             response_data = {'mensaje': 'Registro eliminado exitosamente.'}
         except User.DoesNotExist:

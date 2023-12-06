@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}SuipluMX - Add location{% endblock %}
+{% block content %}
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">Locations</h1>
+        <div class="btn-toolbar mb-2 mb-md-0">
+            {% include "locations/locations_toolbar.html" %}
+        </div>
+    </div>
+<h5>Adding new location</h5>
+    <div class="row pb-2 px-1">
+<div class="col-6">
+</div>
+    </div>
+  <div class="row">
+    <div class="col-12 p-2 mb-0">
+      <div class="containervieweqipment">
+        <div class="containervieweqipmenthead">
+          <div class="row">
+            <div class="col-6">General information</div>
+            <div class="col-6">
+              {% if request.user.is_superuser %}
+              <div class="text-end">
+              </div>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+        <div class="containervieweqipmentbody">
+          <table class="table table-striped">
+<form method="post">
+  {% csrf_token %}
+<table class="table table-striped">
+ <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Color</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>{{ form.name }}</td>
+      <td>{{ form.color }}</td>
+    </tr>
+  </tbody>
+</table>
+<div class="text-end"><button type="submit" class="btn btn-success">Save</button></div>
+</form>
+        </div>
+      </div>
+    </div>
+
+  </div>
+{% endblock %}

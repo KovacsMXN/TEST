@@ -2,6 +2,7 @@
 {% load static %}
 {% block title %}Hoja de inspección para monta cargas{% endblock %}
 {% block content %}
+<div class="ms-5 me-5">
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
     <h1 class="h2">Seguirdad para monta cargas</h2>
     <div class="btn-toolbar mb-2 mb-md-0">
@@ -10,6 +11,7 @@
 <h5>Lista diaria de choferes: Formulario de inspección pre-turno para montacargas eléctricos y de propano.</h5>
 <h4>La inspección de la maquinaria se requiere previo al uso de ella. Este formulario debes ser rellenado una hora antes del comienzo del turno (Conforme al reglamento establecido por OHSA).</h4>
 <hr>
+    <div class="ms-5 me-5">
           <div class="row">
             <div class="col-6">
                 <div class="input-group mb-3">
@@ -49,14 +51,27 @@
                 <input type="text" class="form-control" placeholder="11/06/2023" aria-label="Username" aria-describedby="basic-addon1">
                 </div>
             </div>
-          </div>
-<table class="table table-bordered table-hover table-striped-columns" >
+          </div>    
+</div>
+</div>
+<div class="ms-5 me-5">
+<div class="ms-5 me-5">
+<div class="ms-5 me-5">
+<table class="mt-3 table table-bordered table-striped-columns">
     <tr>
         <th width="50%"></th>
         <th width="50%"></th>
     </tr>
     <tr>
-        <td><a class="in-put"></a>1. Forks, respaldo, pasadores de cierre, mangueras, controles hidraulicos.</a></td>
+        <td><a class="in-put"></a>
+<h5 class="ms-3 fs-6">1. Tenedores, respaldo, pasadores de cierre, mangueras, controles hidráulicos:</h5>
+   <ul>
+      <li>Inspeccionar los tenedores en busca de deformaciones, fisuras o desgaste excesivo.</li>
+      <li>Verificar que el respaldo esté firmemente asegurado y sin daños.</li>
+      <li>Comprobar que los pasadores de cierre estén en su lugar y funcionen correctamente.</li>
+      <li>Examinar las mangueras hidráulicas en busca de fugas, desgaste o daños.</li>
+      <li>Probar los controles hidráulicos para asegurar un funcionamiento suave y sin interrupciones.</li>
+   </ul>
         <td align="center">
             <div class="input-group mb-3">
                 <div class="input-group-text">
@@ -67,7 +82,14 @@
         </td>
     </tr>
     <tr>
-        <td><a class="in-put"></a>2. Neumaticos, tuercas del estiron, cubrimiento del techo.</a></td>
+        <td><a class="in-put"></a>
+<h5 class="ms-3 fs-6">2. Neumáticos, tuercas del estirón, cubrimiento del techo:</h5>
+   <ul>
+      <li>Evaluar los neumáticos para verificar desgaste, cortes y presión adecuada.</li>
+      <li>Comprobar que todas las tuercas del estirón estén apretadas y en buen estado.</li>
+      <li>Inspeccionar el cubrimiento del techo para detectar daños o inseguridades.</li>
+   </ul>
+
         <td align="center">
             <div class="input-group mb-3">
                 <div class="input-group-text">
@@ -78,7 +100,18 @@
         </td>
     </tr>
     <tr>
-        <td><a class="in-put"></a>3. Todas la luces, bocinas, placa de capacidad medidores, el panel de vizualizacion.</a></td>
+        <td><a class="in-put"></a>
+<h5 class="ms-3 fs-6">3. Todas las luces, bocina, placa de capacidad, medidores, panel de visualización:</h5>
+   <ul>
+      <li>Comprobar el funcionamiento de todas las luces, incluyendo las de advertencia.</li>
+      <li>Probar la bocina para asegurarse de que sea audible y funcione correctamente.</li>
+      <li>Verificar que la placa de capacidad esté presente, legible y actualizada.</li>
+      <li>Revisar todos los medidores para asegurar que muestren lecturas precisas.</li>
+      <li>Evaluar el panel de visualización para confirmar que todas las indicaciones sean claras y funcionales.</li>
+   </ul>
+
+
+</td>
         <td align="center">
             <div class="input-group mb-3">
                 <div class="input-group-text">
@@ -89,7 +122,14 @@
         </td>
     </tr>
     <tr>
-        <td><a class="in-put"></a>4. Propano: El nivel de comvbustible, abrasadera de manguera, de fuga.Electrico: Nivel de agua en bateria, conectores, tapones de ventilzacion y Post cubre en su lugar.</a></td>
+        <td><a class="in-put"></a>
+<h5 class="ms-3 fs-6">4. Fuente de energía en optimas condiciones:</h5>
+   <ul>
+      <li>Inspeccionar la batería (en el caso de montacargas eléctricos) para asegurarse de que esté limpia, cargada y sin daños.</li>
+      <li>En el caso de montacargas de combustible, verificar los niveles y la calidad del combustible.</li>
+   </ul>
+
+</td>
         <td align="center">
             <div class="input-group mb-3">
                 <div class="input-group-text">
@@ -100,7 +140,13 @@
         </td>
     </tr>
     <tr>
-        <td><a class="in-put"></a>5. Cinturon de seguirdad operacion.</a></td>
+        <td><a class="in-put"></a>
+<h5 class="ms-3 fs-6">5. Sensor en asiento</h5>
+   <ul>
+      <li>Comprobar que el sensor en el asiento funcione correctamente.</li>
+   </ul>
+
+</td>
         <td align="center">
             <div class="input-group mb-3">
                 <div class="input-group-text">
@@ -111,7 +157,15 @@
         </td>
     </tr>
     <tr>
-        <td><a class="in-put"></a>6. Funciones de elevacion de inclinacion, elevacion, desplazamiento lateral.</a></td>
+        <td><a class="in-put"></a>
+<h5 class="ms-3 fs-6">6. Funciones de elevación de inclinación, elevación, desplazamiento lateral:</h5>
+   <ul>
+      <li>Probar la capacidad de inclinación para asegurarse de que sea suave y consistente.</li>
+      <li>Verificar la función de elevación para detectar cualquier irregularidad o dificultad.</li>
+      <li>Comprobar el desplazamiento lateral para asegurar un movimiento correcto y fluido.</li>
+   </ul>
+
+</td>
         <td align="center">
             <div class="input-group mb-3">
                 <div class="input-group-text">
@@ -122,7 +176,11 @@
         </td>
     </tr>
     <tr>
-        <td><a class="in-put"></a>7. Freno de estacionamiento - Hold en adelante y marcha atras.</a></td>
+        <td><a class="in-put"></a><h5 class="ms-3 fs-6">7. Freno de estacionamiento:</h5>
+   <ul>
+      <li>Probar el freno de estacionamiento para asegurarse de que se active y libere adecuadamente.</li>
+   </ul>
+</td>
         <td align="center">
             <div class="input-group mb-3">
                 <div class="input-group-text">
@@ -133,7 +191,11 @@
         </td>
     </tr>
     <tr>
-        <td><a class="in-put"></a>8. Frenos - Comprobar freno de servicio en avance y retroceso.</a></td>
+        <td><a class="in-put"></a><h5 class="ms-3 fs-6">8. Frenos:</h5>
+   <ul>
+      <li>Evaluar los frenos durante el movimiento para confirmar su eficacia y respuesta.</li>
+   </ul>
+</td>
         <td align="center">
             <div class="input-group mb-3">
                 <div class="input-group-text">
@@ -144,7 +206,12 @@
         </td>
     </tr>
     <tr>
-        <td><a class="in-put"></a>9. Asiento de freno- Levante, mantiene la carretilla elevadora.</a></td>
+        <td><a class="in-put"></a><h5 class="ms-3 fs-6">9. Asiento y cinturón de seguridad:</h5>
+   <ul>
+      <li>Inspeccionar el asiento para asegurar que esté en buen estado y firmemente anclado.</li>
+      <li>Comprobar el cinturón de seguridad para garantizar su correcto funcionamiento y ausencia de desgaste.</li>
+   </ul>
+</td>
         <td align="center">
             <div class="input-group mb-3">
                 <div class="input-group-text">
@@ -155,7 +222,11 @@
         </td>
     </tr>
     <tr>
-        <td><a class="in-put"></a>10. Direccion - El pleno derecho y gire a la izquierda.</a></td>
+        <td><a class="in-put"></a><h5 class="ms-3 fs-6">10. Direccional:</h5>
+    <ul>
+      <li>Probar las señales direccionales para confirmar que funcionen correctamente y sean visibles.</li>
+    </ul>
+</a></td>
         <td align="center">
             <div class="input-group mb-3">
                 <div class="input-group-text">
@@ -166,7 +237,11 @@
         </td>
     </tr>
     <tr>
-        <td><a class="in-put"></a>11. El tapar - Verificar enchufar directa e inversa.</a></td>
+        <td><a class="in-put"></a><h5 class="ms-3 fs-6">11. Luz estroboscópica:</h5>
+    <ul>
+      <li>Comprobar la luz estroboscópica para asegurarse de que funcione y sea visible desde todas las direcciones.</li>
+    </ul>
+</td>
         <td align="center">
             <div class="input-group mb-3">
                 <div class="input-group-text">
@@ -177,7 +252,11 @@
         </td>
     </tr>
     <tr>
-        <td><a class="in-put"></a>12 .Luz estroboscopica funciona correctamente.</a></td>
+        <td><a class="in-put"></a><h5 class="ms-3 fs-6">12. Extintor de incendios:</h5>
+    <ul>
+      <li>Verificar la presencia del extintor de incendios, asegurarse de que esté dentro de la fecha de vencimiento y que esté accesible para el uso inmediato.</li>
+    </ul>
+</td>
         <td align="center">
             <div class="input-group mb-3">
                 <div class="input-group-text">
@@ -187,24 +266,19 @@
             </div>
         </td>
     </tr>
-    <tr>
-        <td><a class="in-put"></a>13. Extintor de incendios montado y cargado.</a></td>
-        <td align="center">
-            <div class="input-group mb-3">
-                <div class="input-group-text">
-                    <input class="form-check-input mt-0" type="checkbox" value="" aria-label="Checkbox for following text input">
-                </div>
-                    <textarea class="form-control" placeholder="Observaciones" aria-label="Observaciones"></textarea>
-            </div>
-        </td>
-    </tr>
+
 </table>
+<div class="text-center">
 <div class="input-group mb-3">
 <span class="input-group-text" id="basic-addon1">Otras observaciones</span>
 <textarea class="form-control" aria-label="Observaciones"></textarea>
 </div>
 <br>
-<a class="btn btn-primary">Guardar</a><br>
+<a class="btn btn-success">Guardar</a><br>
 <hr>
-© 2023 Lebni Pérez Maro<br><br>
+© 2023 Lebni Pérez Maro<br><br>    
+</div>
 {% endblock %}
+</div>
+</div>
+</div>

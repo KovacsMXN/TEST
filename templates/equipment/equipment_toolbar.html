@@ -1,0 +1,18 @@
+{% load static %}
+<div class="btn-group me-2">
+<a href="{% url 'equipment_index' %}" class="btn btn-dark">
+    <span class="align-text-bottom">
+        <img class="filter-white" src="{% static 'images/ico/geo.svg' %}" />
+    </span>
+    Equipment
+</a>
+            {% if request.user.is_superuser %}
+            <a href="{% url 'equipment_manufacturers' %}" class="btn btn-dark">
+            <span class="align-text-bottom">
+            <img class="filter-white" src="{% static 'images/ico/bricks.svg' %}" />
+            </span>
+            Manufacturers
+            </a>
+            {% else %}
+            {% endif %}
+</div>

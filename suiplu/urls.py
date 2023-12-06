@@ -1,7 +1,6 @@
+#IMPORT GENERIC 
 from django.conf import settings
 from django.conf.urls.static import static
-
-#IMPORT DJANGO FUNCTIONS
 from django.urls import path, include
 from django.contrib import admin
 
@@ -30,28 +29,22 @@ urlpatterns = [
     path('administracion/', admin.site.urls),
 
     #URL FOR CONFIGURACION APP
-    path('configuracion/', include('configuracion.urls')),
+    path('equipment/', include('equipment.urls')),
 
-    #URL FOR forklifts APP
+    #URL FOR FORKLIFTS APP
     path('forklifts/', include('forklift.urls')),
 
-    #URL FOR ladders APP
+    #URL FOR LADDERS APP
     path('ladders/', include('ladders.urls')),
 
-    #URL FOR ladders APP
+    #URL FOR INVENTORY APP
     path('inventory/', include('inventory.urls')),
 
-    #URL FOR EQUIPMENT APP
-    path('equipment/', equipment_index, name='equipment_index'),
-    #URL VIEW EQUIPMENT
-    path('equipment/view/<int:id>/', equipment_view, name='equipment_view'),
-    #URL VIEW EQUIPMENT
-    path('equipment/delete/<int:id>/', equipment_delete, name='equipment_delete'),
-    #URL VIEW IMAGEN UPLOAD
-    path('equipment/imagen/upload/<int:id>/', equipment_imagen_upload_view, name='equipment_imagen_upload_view'),
+    #URL FOR STORAGE APP
+    path('storage/', include('storage.urls')),
 
-    #URLS TO HANDLE EQUIPMENT APP REQUEST
-    path('equipment/json/request/', equipment_request_json, name='equipment_request_json'),
+    #URL FOR STAFF APP
+    path('staff/', include('staff.urls')),
 
     #URL FOR INDEX
     path('', index, name='index'),

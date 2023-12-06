@@ -3,8 +3,8 @@ let dataTableIsInitialized = false;
 
 const dataTableOptions = {
     columnDefs: [
-        { orderable: false, targets: [] },
-        { searchable: false, targets: []}
+        { orderable: false, targets: [6] },
+        { searchable: false, targets: [] }
     ],
     destroy: true
 };
@@ -36,7 +36,9 @@ const listFrokslifts = async () => {
                     <td>${forkslifts.serial}</td>
                     <td><span style="height: 18px;width: 18px;background-color: ${forkslifts.status__color};border-radius: 100%;vertical-align: sub;display: inline-block;" class="dot"></span> ${forkslifts.status__name}</td>
                     <td>${forkslifts.owner__name}</td>
-                    <td class='text-end'><a href="view/${forkslifts.id}" class="btn btn-dark btn-sm">View</a> <button type="button" onClick="delete_forklift(${forkslifts.id})" class="btn btn-danger btn-sm">Delete</button></td>
+                    <td class='text-end'>
+                        <a href="view/${forkslifts.id}" class="btn btn-dark btn-sm">View</a>
+                    </td>
                 </tr>`;
         });
         tableForklifts_results.innerHTML = content;

@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+  SuipluMX - Viewing Lockout / Tagout procedure for {{forklift.clave}}
+{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">Viewing LOTO procedure for {{forklift.clave}}</h1>
+        <div class="btn-toolbar mb-2 mb-md-0">
+            {% include "forklifts/fork_toolbar.html" %}
+        </div>
+  </div>
+  <h5>Viewing Lockout / Tagout procedure for {{forklift.clave}} {{ forklift.modelo }} by {{ forklift.brand }}</h5>
+  <div class="row">
+    <div class="col-4 p-2">
+      <div class="containervieweqipment">
+        <div class="containervieweqipmenthead">
+          <div class="row">
+            <div class="col-6">Forklift's image</div>
+            <div class="col-6">
+              <div class="text-end" >
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="containervieweqipmentbody">
+          {% if db_response.imagen == "" %}
+          <img class="border rounded" width="100%"  src="/media/equipment/main/default.png">
+          {% else %}
+          <img class="border rounded" width="100%" src="/media/{{ forklift.imagen }}">
+          {% endif %}
+        </div>
+      </div>
+    </div>
+    <div class="col-8 p-2 mb-0">
+      <div class="containervieweqipment">
+        <div class="containervieweqipmenthead">
+          <div class="row">
+            <div class="col-6">Lockout / Tagout procedure</div>
+            <div class="col-6">
+              {% if request.user.is_superuser %}
+              <div class="text-end">
+              </div>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+        <div class="containervieweqipmentbody">
+          <table class="table table-striped">
+  <tbody>
+    <tr>
+      <th scope="row">Tag</th>
+      <td>{{forklift.clave}}</td>
+    </tr>
+    <tr>
+      <th scope="row">Actual status</th>
+      <td><span style="height: 18px;width: 18px;background-color:{{ status_color  }};border-radius: 50%;vertical-align: sub;display: inline-block;" class="dot"></span> {{forklift.status}}</td>
+    </tr>
+    <tr>
+      <th scope="row">Started on</th>
+      <td>{{query.start}}</td>
+    </tr>
+    <tr>
+      <th scope="row">Ended on </th>
+      <td>{{query.end}}</td>
+    </tr>
+    <tr>
+      <th scope="row">Started by</th>
+      <td>{{query.startusuario.first_name}} {{query.startusuario.last_name}}</td>
+    </tr>
+    <tr>
+      <th scope="row">Ended by</th>
+      <td>{{query.endusuario.first_name}} {{query.endusuario.last_name}}</td>
+    </tr>
+    <tr>
+      <th scope="row">Reason</th>
+      <td>{{query.reason}}</td>
+    </tr>
+    <tr>
+      <th scope="row">Descripcion</th>
+      <td>{{query.description}}</td>
+    </tr>
+  </tbody>
+</table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="{% static 'js/forklifts/release.js' %}"></script>
+{% endblock %}

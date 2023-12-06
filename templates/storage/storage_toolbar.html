@@ -1,0 +1,18 @@
+{% load static %}
+<div class="btn-group me-2">
+<a href="{% url 'storage_index' %}" class="btn btn-dark">
+    <span class="align-text-bottom">
+        <img class="filter-white" src="{% static 'images/ico/archive.svg' %}" />
+    </span>
+    Storage
+</a>
+            {% if request.user.is_superuser %}
+            <a href="{% url 'storage_add' %}" class="btn btn-dark">
+            <span class="align-text-bottom">
+            <img class="filter-white" src="{% static 'images/ico/plus-square.svg' %}" />
+            </span>
+            Add storage
+            </a>
+            {% else %}
+            {% endif %}
+</div>

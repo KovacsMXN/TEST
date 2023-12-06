@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}SuipluMX - Equipment manufacturers{% endblock %}
+{% block content %}
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">Equipment manufacturers</h1>
+        <div class="btn-toolbar mb-2 mb-md-0">
+            {% include "equipment/equipment_toolbar.html" %}
+        </div>
+    </div>
+<div class="row pb-2 px-1">
+  <div class="col-6"><h5>Manufacturers</h5></div>
+  <div class="col-6">
+      {% if request.user.is_superuser %}
+          <div class="text-end"><a href="{% url 'equipment_manufacturers_add' %}" class="btn btn-dark"><img class="filter-white" src="{% static 'images/ico/plus-square.svg' %}" /> Add manufacturer</a></div>
+      {% else %}
+      {% endif %}
+  </div>
+</div>
+<table id="datatable-contenido" class="pt-2 table table-striped table-hover">
+    <thead>
+        <tr>
+            <th>Manufacturer</th>
+            <th class="text-end">Operations</th>
+        </tr>
+    </thead>
+    <tbody id="tableContenido_results"></tbody>
+</table>
+<script src="{% static 'js/equipment/complex_manufacturers.js' %}"></script>
+{% endblock %}

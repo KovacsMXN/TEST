@@ -19,28 +19,20 @@
             <li class="nav-item">
                 <a class="nav-link" href="{% url 'forklift_index_view' %}"><span class="align-text-bottom"><img src="{% static 'images/ico/truck.svg' %}" /></span> Forklifts</a>
             </li>
-            <li class="nav-item">
+            <!--<li class="nav-item">
                 <a class="nav-link" href="{% url 'ladders_index_view' %}"><span class="align-text-bottom"><img src="{% static 'images/ico/ladder.svg' %}" /></span> Ladders</a>
-            </li>
+            </li>-->
         </ul>
     {% if request.user.is_superuser %}
     <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted text-uppercase">
-        <span>Storage settings</span>
+        <span>Locations</span>
     </h6>
         <ul class="nav flex-column mb-2">
 		    <li class="nav-item">
-                <a class="nav-link" href="{% url 'configuracion_storage_index' %}"><span class="align-text-bottom"><img src="{% static 'images/ico/geo.svg' %}" /></span> Storage locations</a>
-		    </li>
-        </ul>
-    <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted text-uppercase">
-        <span>Equipment settings</span>
-    </h6>
-        <ul class="nav flex-column mb-2">
-		    <li class="nav-item">
-                <a class="nav-link" href="{% url 'equipment_locations_index' %}"><span class="align-text-bottom"><img src="{% static 'images/ico/geo-alt.svg' %}" /></span> Equipment locations</a>
-		    </li>
-		    <li class="nav-item">
-                <a class="nav-link" href="{% url 'equipment_brands' %}"><span class="align-text-bottom"><img src="{% static 'images/ico/bricks.svg' %}" /></span> Equipment manufacturers</a>
+                <a class="nav-link" href="{% url 'storage_index' %}"><span class="align-text-bottom"><img src="{% static 'images/ico/archive.svg' %}" /></span> Storage</a>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'locations_index' %}"><span class="align-text-bottom"><img src="{% static 'images/ico/geo-alt.svg' %}" /></span> Locations</a>
+            </li>
 		    </li>
         </ul>
     <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted text-uppercase">
@@ -48,12 +40,9 @@
     </h6>
 	    <ul class="nav flex-column mb-2">
             <li class="nav-item">
-			    <a class="nav-link" href="{% url 'configuracion_staff_usuarios' %}"><span class="align-text-bottom"><img src="{% static 'images/ico/people.svg' %}" /></span> Accounts</a>
+			    <a class="nav-link" href="{% url 'staff_index' %}"><span class="align-text-bottom"><img src="{% static 'images/ico/people.svg' %}" /></span> Accounts</a>
 		    </li>
 	    </ul>
-        <div class="text-center">
-            <img width="10%" src="{% static 'images/mx.png' %}"> © {% now "Y" %} Lebni Perez Maro
-        </div>
     {% else %}
     {% endif %}
     </div>

@@ -1,0 +1,133 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+  SuipluMX - Viewing Lockout / Tagout procedure for {{forklift.clave}}
+{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">Viewing LOTO procedure for {{forklift.clave}}</h1>
+        <div class="btn-toolbar mb-2 mb-md-0">
+            {% include "forklifts/fork_toolbar.html" %}
+        </div>
+  </div>
+  <h5>Viewing Lockout / Tagout procedure for {{forklift.clave}} {{ forklift.modelo }} by {{ forklift.brand }}</h5>
+  <div class="row">
+    <div class="col-4 p-2">
+      <div class="containervieweqipment">
+        <div class="containervieweqipmenthead">
+          <div class="row">
+            <div class="col-6">Forklift's image</div>
+            <div class="col-6">
+              <div class="text-end" >
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="containervieweqipmentbody">
+          {% if db_response.imagen == "" %}
+          <img class="border rounded" width="100%"  src="/media/equipment/main/default.png">
+          {% else %}
+          <img class="border rounded" width="100%" src="/media/{{ forklift.imagen }}">
+          {% endif %}
+        </div>
+      </div>
+    </div>
+    <div class="col-8 p-2 mb-0">
+      <div class="containervieweqipment">
+        <div class="containervieweqipmenthead">
+          <div class="row">
+            <div class="col-6">Lockout / Tagout procedure</div>
+            <div class="col-6">
+              {% if request.user.is_superuser %}
+              <div class="text-end">
+              </div>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+        <div class="containervieweqipmentbody">
+          <table class="table table-striped">
+  <tbody>
+    <tr>
+      <th scope="row">Tag</th>
+      <td>{{forklift.clave}}</td>
+    </tr>
+    <tr>
+      <th scope="row">Status</th>
+      <td><span style="height: 18px;width: 18px;background-color:{{ status_color  }};border-radius: 50%;vertical-align: sub;display: inline-block;" class="dot"></span> {{forklift.status}}</td>
+    </tr>
+    <tr>
+      <th scope="row">Created on</th>
+      <td>{{query.start}}</td>
+    </tr>
+    <tr>
+      <th scope="row">Created by</th>
+      <td>{{query.startusuario.first_name}} {{query.startusuario.last_name}}</td>
+    </tr>
+    <tr>
+      <th scope="row">Reason</th>
+      <td>{{query.reason}}</td>
+    </tr>
+    <tr>
+      <th scope="row">Descripcion</th>
+      <td>{{query.description}}</td>
+    </tr>
+  </tbody>
+</table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12 p-2 mb-0">
+            <div class="row p-2 mb-0">
+            <div class="containerdanger">
+                <div class="containersucceshead">
+                    <div class="row">
+                        <div class="col-6"><a class="fw-bolder text-reset text-decoration-none">Release from Lockout / Tagout procedure</a></div>
+                        <div class="col-6">
+                            <div class="text-end">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="containerdangerbody">
+                    <hr>
+                    <div class="row">
+                        <div class="col-9 align-middle">
+                            <a  class="fw-bolder text-reset text-decoration-none">Release this forklift</a><br>
+                            <a class="fw-medium text-reset text-decoration-none">Make sure the forklift is in optimal condition for operation and the lock and tag have been removed.</a>
+                        </div>
+                        <div class="col-3 text-end"> <button type="button" onClick='delete_content({{query.id}})' class="btn btn-success">Release forklift</button></div>
+                    </div>
+                    <hr>
+                </div>
+            </div>
+            </div>
+    </div>
+  </div>
+</div>
+<script src="{% static 'js/forklifts/release.js' %}"></script>
+    <!-- MODAL DELETE -->
+  <div class="modal fade" id="modal_delete" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="staticBackdropLabel">Are you sure you want to release this forklift?</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">You can't undo this action.
+          <form class="eliminar-formulario" method="post" action="{% url 'forklift_loto_log_add' query.id %}">
+            {% csrf_token %}
+            <input type="hidden" name="delete_id" id="delete_id" value="{{query.id}}">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Cancel</button>
+          <button type="submit" class="btn btn-success">Release</button>
+        </div>
+          </form>
+      </div>
+    </div>
+  </div>
+{% endblock %}

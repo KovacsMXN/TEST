@@ -1,27 +1,43 @@
 {% extends "base.html" %}
 {% load static %}
-{% block title %}SuipluMX - Forklift service providers{% endblock %}
+
+{% block title %}
+  SuipluMX - Registrated service providers for forklifts
+{% endblock %}
+
 {% block content %}
-      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h2">Forklifts</h1>
+  <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">Forklifts</h1>
         <div class="btn-toolbar mb-2 mb-md-0">
-          <div class="btn-group me-2">
             {% include "forklifts/fork_toolbar.html" %}
-          </div>
         </div>
-      </div>
-<h5>Service providers</h5>
-<div class="table table-sm table-striped table-hover">
-<table id="datatable-contenido" class="table table-striped table-hover">
-    <thead>
+  </div>
+  <div class="row pb-2 px-1">
+    <div class="col-6">
+      <h5>Registrated forklift service providers</h5>
+    </div>
+    <div class="col-6">
+      {% if request.user.is_superuser %}
+        <div class="text-end">
+          <a href="{% url 'forklift_service_providers_add' %}" class="btn btn-dark">
+            <img class="filter-white" src="{% static 'images/ico/person-gear.svg' %}" /> Add service provider
+          </a>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+  <div class="table table-sm table-striped table-hover">
+    <table id="datatable-contenido" class="table table-striped table-hover">
+      <thead>
         <tr>
-            <th>Banner</th>
-            <th>Service providers</th>
-            <th class="text-end">Operations</th>
+          <th>Banner</th>
+          <th>Service provider</th>
+          <th class="text-end">Operations</th>
         </tr>
-    </thead>
-    <tbody id="tableContenido_results"></tbody>
-</table>
-</div>
-<script src="{% static 'js/forklifts/complex_service_providers.js' %}"></script>
+      </thead>
+      <tbody id="tableContenido_results"></tbody>
+    </table>
+  </div>
+  <script src="{% static 'js/forklifts/service_providers.js' %}"></script>
+  <script src="{% static 'js/forklifts/complex_service_providers.js' %}"></script>
 {% endblock %}

@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+    SuipluMX - Editing {{ data.first_name }} {{ data.last_name }}
+{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">Staff accounts</h1>
+    <div class="btn-toolbar mb-2 mb-md-0">
+        {% include "staff/staff_toolbar.html" %}
+    </div>
+</div>
+
+<h5>Editing {{ data.username }}'s account</h5>
+<div class="row p-2 mb-0">
+    <div class="containervieweqipment">
+        <div class="containervieweqipmenthead">
+            <div class="row">
+                <div class="col-6">User's information</div>
+                <div class="col-6">
+                    <div class="text-end">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="containervieweqipmentbody">
+          <form method="post">
+            {{form.errors}}
+             {% csrf_token %}
+            <table class="table table-striped">
+                <tbody>
+                    <tr>
+                        <td class="align-middle">Username</td>
+                        <td class="align-middle">{{ form.username }}</td>
+                    </tr>
+                    <tr>
+                        <td class="align-middle">First name</td>
+                        <td class="align-middle">{{ form.first_name }}</td>
+                    </tr>
+                    <tr>
+                        <td class="align-middle">Last name</td>
+                        <td class="align-middle">{{ form.last_name }}</td>
+                    </tr>
+                    <tr>
+                        <td class="align-middle">Email</td>
+                        <td class="align-middle">{{ form.email }}</td>
+                    </tr>
+                    <tr>
+                        <td class="align-middle">Active</td>
+                        <td class="align-middle">
+                          <div class="form-check form-switch">
+                          {{ form.is_active }}
+                          </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="align-middle">Staff</td>
+                        <td class="align-middle">
+                          <div class="form-check form-switch">
+                          {{ form.is_staff }}
+                          </div> 
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="align-middle">Superuser</td>
+                        <td class="align-middle">
+                          <div class="form-check form-switch">
+                          {{ form.is_superuser }}
+                          </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="text-end">
+              <button class="btn btn-success" type="submit">Save</button>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

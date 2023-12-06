@@ -26,7 +26,7 @@
     <input class="form-control form-control-dark w-100 rounded-0 border-0" type="text" placeholder="Search" aria-label="Search">
   <div class="navbar-nav">
     <div class="nav-item text-nowrap">
-      <a class="nav-link px-3" href="{% url 'logout_view' %}">Sign out</a>
+      <a class="nav-link px-3" href="{% url 'logout_view' %}">Sign out as {{request.user.username}}</a>
     </div>
   </div>
 </header>
@@ -39,7 +39,6 @@
   </div>
 </div>
       <!-- JS -->
-      <script src="{% static 'js/Chart.min.js'%}" ></script>
       <script src="{% static 'js/jscolor.js' %}"></script>
       <script src="{% static 'js/cdn.datatables.net_1.13.6_js_jquery.dataTables.min.js' %}"></script>
   </body>

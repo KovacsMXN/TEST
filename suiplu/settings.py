@@ -34,6 +34,8 @@ LOGIN_URL = '/login/'
 
 INSTALLED_APPS = [
     'autenticacion.apps.AutenticacionConfig',
+    'storage.apps.StorageConfig',
+    'staff.apps.StaffConfig',
     'forklift.apps.ForkliftConfig',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -41,7 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'configuracion.apps.ConfiguracionConfig'
+    'equipment.apps.EquipmentConfig'
 ]
 
 MIDDLEWARE = [
@@ -110,7 +112,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'America/Los_Angeles'
 
 USE_I18N = True
 
