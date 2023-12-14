@@ -8,6 +8,9 @@ from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.admin.views.decorators import staff_member_required
 
+from datetime import date, datetime, timedelta
+import calendar
+
 from django.http import JsonResponse, HttpResponse
 
 from django.db.models import Count, Value, Q
@@ -24,15 +27,105 @@ from .forms import CreateForkliftBrands
 from .forms import CreateForkliftStatus
 from .forms import CreateForkliftLOTO
 from .forms import SearchForm
+from .forms import WaterTrackForm
 
 from .models import Loto
 from .models import Forklifts, ForkliftOwners, ForkliftStatus, ForkliftServiceProviders, ForkliftBrands, InitialLoto
+
+from .models import WaterEntry
 def is_valid_queryparam(param):
     return param != '' and param is not None
 
 @staff_member_required
 def forklift_index(request):
     return render(request, 'forklifts/index.html')
+
+def generate_water_track():
+    forklifts = Forklifts.objects.filter(powered='E')
+    water_entries = WaterEntry.objects.values('forklift_id', 'fecha')
+
+    # Convertir los resultados en un diccionario para un acceso más rápido
+    water_entry_dict = {entry['forklift_id']: entry['fecha'].date() for entry in water_entries if entry['fecha']}
+
+    lista = []
+    todaysdate = date.today()
+    for forklift in forklifts:
+        fecha_registro = water_entry_dict.get(forklift.id)
+
+        if fecha_registro:
+            days_diff = (todaysdate - fecha_registro).days
+            if days_diff == 0:
+                color = "#3ad353"  # Azul para el mismo día
+            elif days_diff == 1:
+                color = "#26a641"  # Rojo para 1 día de diferencia
+            elif days_diff == 2:
+                color = "#016d31"  # Verde para 2 días de diferencia
+            elif days_diff == 3:
+                color = "#0d4429"  # Verde oscuro para 3 días de diferencia
+            else:
+                color = "#161b22"  # Gris para más de 3 días
+        else:
+            color = "#212529"  # Gris por defecto si no hay registro
+
+        lista.append((forklift, fecha_registro, color))
+
+    return lista
+
+
+@staff_member_required
+def water_track(request):
+    lista = generate_water_track()
+    return render(request, 'forklifts/watertrack/index.html',{'forklifts':lista})
+
+@staff_member_required
+def water_track_add(request, id):
+    forklift = get_object_or_404(Forklifts, id=id)
+    usuario = get_object_or_404(User, id=request.user.id)
+    if request.method == 'POST':
+        form = WaterTrackForm(request.POST, forklift=forklift, usuario=usuario)
+        if form.is_valid():
+            new_frk = form.save(commit=False)
+            new_frk.usuario = request.user
+            new_frk.save()
+            return redirect('forklift_view', id=forklift.id)
+    else:
+        form = WaterTrackForm(forklift=forklift,usuario=usuario)
+    
+    return render(request, 'forklifts/watertrack/add.html', {'form': form, 'forklift': forklift})
+
+def generate_dates(year, id):
+    start_date = date(year, 1, 1)
+    end_date = date(year, 12, 31)
+    todaysdate = date.today()
+    delta = timedelta(days=1)
+    delta1 = timedelta(days=2)
+    delta2 = timedelta(days=3)
+    delta3 = timedelta(days=4)
+    all_dates = []
+    forklift = get_object_or_404(Forklifts, id=id)
+    water_entry_dates = set(WaterEntry.objects.filter(fecha__year=year).filter(forklift=forklift).values_list('fecha__date', flat=True))
+
+    current_date = start_date
+    while current_date <= end_date:
+        if current_date == todaysdate:
+            color = "#0366d6"
+        elif current_date in water_entry_dates:
+            color = "#3ad353"  
+        elif (current_date - delta) in water_entry_dates:
+            color = "#26a641"
+        elif (current_date - delta1) in water_entry_dates:
+            color = "#016d31"
+        elif (current_date - delta2) in water_entry_dates:
+            color = "#0d4429"
+        elif (current_date - delta3) in water_entry_dates:
+            color = "#082e1b"
+        else:
+            color = "#04120b"
+
+        all_dates.append((current_date, color))
+        current_date += delta
+
+    return all_dates
 
 @staff_member_required
 def forklift_view(request, id):
@@ -42,17 +135,26 @@ def forklift_view(request, id):
         lotoid = get_object_or_404(InitialLoto, forklift=forklifts)
         query2 = ForkliftServiceProviders.objects.filter(forklifts=id)
         status_color = forklifts.status.color if forklifts.status else None
-        return render(request, 'forklifts/view.html', {'db_response':forklifts, 'db_response2': query2, 'status_color':status_color,'lotoid':lotoid})
+        year = 2023  # Replace with the desired year
+        all_dates = generate_dates(year, id)
+        var = type(all_dates)
+        return render(request, 'forklifts/view.html', {'db_response':forklifts, 'db_response2': query2, 'status_color':status_color,'lotoid':lotoid,'year':year,'dates':all_dates,'var':var})
     #CONDICIONAL STATUS SERVICE
     elif forklifts.status.id == 2:
         query2 = ForkliftServiceProviders.objects.filter(forklifts=id)
         status_color = forklifts.status.color if forklifts.status else None
-        return render(request, 'forklifts/view.html', {'db_response':forklifts, 'db_response2': query2, 'status_color':status_color,})
+        year = 2023  # Replace with the desired year
+        all_dates = generate_dates(year, id)
+        var = type(all_dates)
+        return render(request, 'forklifts/view.html', {'db_response':forklifts, 'db_response2': query2, 'status_color':status_color,'year':year,'dates':all_dates,'var':var})
     #CONDICIONAL STATUS AVAILABLE
     elif forklifts.status.id == 1:
         query2 = ForkliftServiceProviders.objects.filter(forklifts=id)
         status_color = forklifts.status.color if forklifts.status else None
-        return render(request, 'forklifts/view.html', {'db_response':forklifts, 'db_response2': query2, 'status_color':status_color,})
+        year = 2023  # Replace with the desired year
+        all_dates = generate_dates(year, id)
+        var = type(all_dates)
+        return render(request, 'forklifts/view.html', {'db_response':forklifts, 'db_response2': query2, 'status_color':status_color,'year':year,'dates':all_dates,'var':var})
 
 def forklift_edit(request, id):
     forklift_instance = get_object_or_404(Forklifts, id=id)

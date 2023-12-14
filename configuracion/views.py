@@ -14,11 +14,7 @@ from django.utils import timezone
 #MAIN INDEX VIEW
 @user_passes_test(lambda u: u.is_superuser)
 def index(request):
-	db_request_sl = Storage_Locations.objects.all()
-	db_request_el = Equipment_Locations.objects.all()
-	db_request_eb = Equipment_brands.objects.all()
-	db_request_b = Equipment.objects.all()
-	return render(request, 'configuracion/settings/index.html', {'db_r1':db_request_sl, 'db_r2':db_request_el,'db_r3':db_request_eb,'db_r4':db_request_b})
+	return render(request, 'configuracion/settings/index.html')
 
 
 

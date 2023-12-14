@@ -1,0 +1,118 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}SuipluMX - Water traycing for electric forklifts{% endblock %}
+{% block content %}
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+  <h1 class="h2">Monitoring water checks for electric forklifts</h1>
+    <div class="btn-toolbar mb-2 mb-md-0">
+        {% include "forklifts/fork_toolbar.html" %}
+    </div>
+</div>
+<h5>Water traycing for electric forklifts</h5>
+    <div class="row pb-2 px-1">
+<div class="col-6">
+</div>
+
+        <div class="col-6 text-end">
+        </div>
+    </div>
+  <div class="row">
+    <div class="col-10 p-2 mb-0">
+      <div class="containervieweqipment">
+        <div class="containervieweqipmenthead">
+          <div class="row">
+            <div class="col-6">Electric forklifts</div>
+            <div class="col-6">
+            </div>
+          </div>
+        </div>
+        <div class="containervieweqipmentbody">   
+<table class="table table-striped">
+ <thead>
+    <tr>
+      <th scope="col">Tag</th>
+      <th scope="col">Last entry</th>
+      <th scope="col">Actual rank</th>
+      <th class="text-end" scope="col">Operations</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for forklift in forklifts %}
+    <tr>
+      <td><a class="btn btn-primary btn-sm" href="{% url 'forklift_view' forklift.0.id %}"><img class="filter-white" src="/static/images/ico/truck.svg"> {{ forklift.0.clave }}</a></td>
+      <td class="align-middle">{{forklift.1}}</td>
+      <td><a href="#" data-bs-toggle="tooltip" data-bs-title="{{date.0}}"><div style="background-color: {{ forklift.2 }};" class="commit-node-traycing"></div></a></td>
+      <td class="text-end"><a class="btn btn-dark btn-sm" href="{% url 'forklift_view' forklift.0.id %}">    <span class="align-text-bottom">
+        <img class="filter-white" src="{% static 'images/ico/eye.svg' %}" />
+    </span></a> <a class="btn btn-primary btn-sm" href="{% url 'water_track_add' forklift.0.id %}">    <span class="align-text-bottom">
+        <img class="filter-white" src="{% static 'images/ico/droplet.svg' %}" />
+    </span></a></td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-2 p-2 mb-0">
+      <div class="containervieweqipment">
+        <div class="containervieweqipmenthead">
+          <div class="row">
+            <div class="col-6">Legend</div>
+            <div class="col-6">
+            </div>
+          </div>
+        </div>
+        <div class="containervieweqipmentbody">   
+<table class="table table-striped">
+ <thead>
+    <tr>
+      <th scope="col">Rank</th>
+      <th scope="col">Days</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="text-end">
+      <div style="background-color: #3ad353;" class="commit-node-traycing"></div>
+      </td>
+      <td>0 days ago</td>
+    </tr>
+    <tr>
+      <td class="text-end">
+      <div style="background-color: #26a641;" class="commit-node-traycing"></div>
+      </td>
+      <td>1 day ago</td>
+    </tr>
+    <tr>
+      <td class="text-end">
+      <div style="background-color: #016d31;" class="commit-node-traycing"></div>
+      </td>
+      <td>2 days ago</td>
+    </tr>
+    <tr>
+      <td class="text-end">
+      <div style="background-color: #0d4429" class="commit-node-traycing"></div>
+      </td>
+      <td>3 days ago</td>
+    </tr>
+    <tr>
+      <td class="text-end">
+      <div style="background-color: #082e1b" class="commit-node-traycing"></div>
+      </td>
+      <td>4 days ago</td>
+    </tr>
+    <tr>
+      <td class="text-end">
+      <div style="background-color: #04120b" class="commit-node-traycing"></div>
+      </td>
+      <td>5+ days ago</td>
+    </tr>
+  </tbody>
+</table>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

@@ -10,6 +10,8 @@ from .models import ForkliftStatus
 from .models import ForkliftOwners
 from .models import InitialLoto
 
+from .models import WaterEntry
+
 #DEF COLOR GEN FUNCTION
 def color():
     color = "%03x" % random.randint(0, 0xFFF)
@@ -19,6 +21,24 @@ def color():
 def tag():
     tag = random.randint(0, 0xFFF)
     return tag
+
+class WaterTrackForm(forms.ModelForm):
+    class Meta:
+        model = WaterEntry
+        fields = ['usuario','forklift']
+        widgets={
+            "forklift":forms.Select(attrs={'class':'form-control form-control-sm'}),
+            "usuario":forms.Select(attrs={'class':'form-control form-control-sm'}),
+        }
+    def __init__(self, *args, **kwargs):
+        forklift_predefined1 = kwargs.pop('forklift', None)
+        forklift_predefined2 = kwargs.pop('usuario', None)
+        super(WaterTrackForm, self).__init__(*args, **kwargs)
+        if forklift_predefined1:
+            self.fields['forklift'].initial = forklift_predefined1
+            self.fields['forklift'].disabled = True  # Hace el campo deshabilitado
+            self.fields['usuario'].initial = forklift_predefined2
+            self.fields['usuario'].disabled = True  # Hace el campo deshabilitado
 
 class ForkliftForm(forms.ModelForm):
     class Meta:

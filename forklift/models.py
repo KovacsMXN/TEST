@@ -73,6 +73,14 @@ class Forklifts(models.Model):
 
 
 #FORKLIFT LOTO
+class WaterEntry(models.Model):
+	id = models.AutoField(primary_key=True)
+	forklift = models.ForeignKey(Forklifts, on_delete=models.CASCADE)
+	fecha = models.DateTimeField(default=timezone.now)
+	usuario = models.ForeignKey(User, on_delete=models.SET_DEFAULT, default="1")
+
+
+#FORKLIFT LOTO
 class InitialLoto(models.Model):
 	id = models.AutoField(primary_key=True)
 	forklift = models.ForeignKey(Forklifts, on_delete=models.CASCADE)

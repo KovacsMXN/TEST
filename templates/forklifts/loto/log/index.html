@@ -86,7 +86,9 @@
                         <td class="align-middle">{{ item.end  }}</td>
                         <td class="align-middle">{{ item.startusuario }}</td>
                         <td class="align-middle">{{ item.endusuario  }}</td>
-                        <td class="align-middle text-end"><a href="{% url 'forklift_loto_log_view' item.id %}" class="btn btn-dark btn-sm">View</td>
+                        <td class="align-middle text-end"><a href="{% url 'forklift_loto_log_view' item.id %}" class="btn btn-dark btn-sm">    <span class="align-text-bottom">
+        <img class="filter-white" src="{% static 'images/ico/eye.svg' %}" />
+    </span>View</td>
                     </tr>
                     {% endfor %}
                 </tbody>

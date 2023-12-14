@@ -25,6 +25,9 @@ from .views import forklift_loto_log, forklift_loto_log_view, forklift_loto_log_
 #IMPORT VIEWS INSPECTION SHEET
 from .views import inspection_sheet_language, inspection_sheet_form_es, inspection_sheet_form_en
 
+#IMPORT VIEWS WATER TRAYCING
+from .views import water_track_add, water_track
+
 urlpatterns = [
 
 #URL EXTRA (JSON) PATTERNS
@@ -35,6 +38,10 @@ urlpatterns = [
     path('view/<int:id>/', forklift_view, name='forklift_view'),
     path('edit/<int:id>/', forklift_edit, name='forklift_edit'),
     path('add/', forklift_add, name='forklift_add'),
+
+#WATER TRAYCING
+    path('water/', water_track, name='water_track'),
+    path('water/add/<int:id>/', water_track_add, name='water_track_add'),
 
 #SERVICEPROVIDERS
     path('service/providers/', forklift_service_providers, name='forklift_service_providers'),
