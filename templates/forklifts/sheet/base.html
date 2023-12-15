@@ -13,6 +13,7 @@
     <link href="{% static 'css/loginextra.css' %}" rel="stylesheet">
     <link href="{% static 'css/dashboard.css' %}" rel="stylesheet">
     <link href="{% static 'css/complex.css' %}" rel="stylesheet">
+    <link href="{% static 'css/custom.css' %}" rel="stylesheet">
     <link href="{% static 'css/cdn.datatables.net_1.13.6_css_jquery.dataTables.min.css' %}" rel="stylesheet">
     <style type="text/css">
       .subtitle {
@@ -46,7 +47,8 @@
   <body>
     
 <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-2 shadow">
-<img class=" p-1 ms-5" width="10%"  src="{% static 'images/logo_wh.png' %}" >
+  <div class="col-10"><img class=" p-1 ms-5" width="12%"  src="{% static 'images/logo_wh.png' %}" ></div>
+  <div class="col-2 text-end"><a href="{% url 'ins_logout_view' %}" class="btn btn-primary btn-sm">Sign out as {{ usuario.first_name }} {{ usuario.last_name }}</a></div>
 </header>
 
 <div class="container-fluid">

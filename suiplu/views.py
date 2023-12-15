@@ -5,9 +5,10 @@ from django.core import serializers
 from django.contrib.auth.decorators import user_passes_test
 from datetime import date, datetime, timedelta
 import calendar
+from django.contrib.admin.views.decorators import staff_member_required
 
 #CREATE VIEW FOR MAIN INDEX DOMAIN
-@login_required
+@staff_member_required
 def index(request):
     return render(request, 'index.html')
 

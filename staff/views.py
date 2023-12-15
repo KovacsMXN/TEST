@@ -5,7 +5,10 @@ from django.http import HttpResponse, JsonResponse
 from django.contrib.auth.forms import UserChangeForm, SetPasswordForm
 from django.urls import reverse
 
+from .models import UsersExtension
+
 from .forms import CustomUserCreationForm, CustomUserChangeForm
+from .forms import CustomUsersExtension
 
 ####GENERIC VIEWS FOR STAFF####
 #VIEW FOR STAFF INDEX
@@ -16,8 +19,14 @@ def staff_index(request):
 #VIEW FOR VIEW STAFF
 @user_passes_test(lambda u: u.is_superuser)
 def staff_view(request, id):
-	query = get_object_or_404(User, id=id)
-	return render(request, 'staff/view.html',{'data':query})
+    query = get_object_or_404(User, id=id)
+    extension_values = {
+    'numeroempleado': '9999',  
+    'language': 'ES',           
+    }
+    user_extension, created = UsersExtension.objects.get_or_create(user=query, defaults=extension_values)
+    return render(request, 'staff/view.html', {'data': query, 'user_extension': user_extension})
+
 
 #VIEW FOR STAFF EDIT
 @user_passes_test(lambda u: u.is_superuser)
@@ -36,18 +45,25 @@ def staff_add(request):
 
     return render(request, 'staff/create.html', {'form': form})
 
+@user_passes_test(lambda u: u.is_superuser)
 def staff_edit(request, id):
+    user = get_object_or_404(User, id=id)
+    users_extension_instance, created = UsersExtension.objects.get_or_create(user=user)
+
     if request.method == 'POST':
-    	query = get_object_or_404(User, id=id)
-    	form = CustomUserChangeForm(request.POST, instance=query)
-    	if form.is_valid():
+        form = CustomUserChangeForm(request.POST, instance=user)
+        user_extension_form = CustomUsersExtension(request.POST, instance=users_extension_instance)
+
+        if form.is_valid() and user_extension_form.is_valid():
             user = form.save()
+            user_extension = user_extension_form.save()
             return redirect('staff_view', id=user.id)
     else:
-    	query = get_object_or_404(User, id=id)
-    	form = CustomUserChangeForm(instance=query)
+        form = CustomUserChangeForm(instance=user)
+        user_extension_form = CustomUsersExtension(instance=users_extension_instance)
 
-    return render(request, 'staff/edit.html', {'form': form,'data':query})
+    return render(request, 'staff/edit.html', {'form': form, 'data': user, 'user_extension_form': user_extension_form})
+
 
 #VIEW FOR STAFF PASSWORD EDIT
 @user_passes_test(lambda u: u.is_superuser)

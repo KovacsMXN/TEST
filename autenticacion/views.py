@@ -18,3 +18,21 @@ def login_view(request):
 def logout_view(request):
     logout(request)
     return render(request, 'autentificacion/logout.html')
+
+#LOG-IN VIEW INSPECTION 
+def ins_login_view(request):
+    if request.method == 'POST':
+        username = request.POST.get('floatingInput')
+        password = request.POST.get('floatingPassword')
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect('inspection_sheet_language')
+        else:
+            return render(request, 'autentificacion/sign-in.html', {'error': 'Invalid login credentials'})
+    return render(request, 'autentificacion/sign-in.html')
+
+#LOG-OUT VIEW INSPECTION
+def ins_logout_view(request):
+    logout(request)
+    return render(request, 'autentificacion/logout.html')

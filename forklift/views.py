@@ -29,10 +29,14 @@ from .forms import CreateForkliftLOTO
 from .forms import SearchForm
 from .forms import WaterTrackForm
 
+from .forms import EsInspectionForm
+
 from .models import Loto
 from .models import Forklifts, ForkliftOwners, ForkliftStatus, ForkliftServiceProviders, ForkliftBrands, InitialLoto
 
 from .models import WaterEntry
+from staff.models import UsersExtension
+from .models import ForkliftInspection
 def is_valid_queryparam(param):
     return param != '' and param is not None
 
@@ -668,14 +672,50 @@ def api_pull_status(request, id):
     return render(request, 'forklifts/misc/status_holders.html', {'status_counts': status_counts})
 
 
+@staff_member_required
+def inspection(request):
+    query = ForkliftInspection.objects.all().filter(valid=0)
+    return render(request, 'forklifts/inspection/index.html',{'query':query})
+
 @login_required
 def inspection_sheet_language(request):
-    return render(request, 'forklifts/sheet/index.html')
+    usuario = get_object_or_404(User, id=request.user.id)
+    query = get_object_or_404(UsersExtension, user=usuario)
+    if query.language == "ES":
+        return redirect('inspection_sheet_form_es')
+    elif query.language == "EN":
+        return redirect('inspection_sheet_form_en')
+    else:
+        return render(request, 'forklifts/sheet/index.html')
 
 @login_required
 def inspection_sheet_form_es(request):
-    return render(request, 'forklifts/sheet/sheet_es.html')
+    usuario = get_object_or_404(User, id=request.user.id)
+    query = get_object_or_404(UsersExtension, user=usuario)
 
+    if request.method == 'POST':
+        form = EsInspectionForm(request.POST)
+        if form.is_valid():
+            instance = form.save(commit=False)
+            instance.usuario = usuario
+                
+            if all(getattr(instance, f'check{i}') == False for i in range(1, 12)):
+                instance.valid = 0
+            else:
+                instance.valid = 1
+            instance.save()
+            return redirect('ins_logout_view')  # Redirecciona a una nueva URL
+        else:
+            messages.error(request, 'Hubo errores en el formulario. Por favor, corrígelos.')
+
+    else:
+        form = EsInspectionForm()
+
+    return render(request, 'forklifts/sheet/sheet_es.html', {
+        'usuario': usuario,
+        'query': query,
+        'form': form
+    })
 @login_required
 def inspection_sheet_form_en(request):
     return render(request, 'forklifts/sheet/sheet_en.html')

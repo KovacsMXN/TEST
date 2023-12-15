@@ -69,6 +69,14 @@
                         <td class="fw-bold align-middle">Superuser</td>
                         <td class="align-middle">{% if data.is_superuser == 1%}<img src="{% static '/images/ico/check-circle.svg' %}">{% else %}<img src="{% static '/images/ico/x-circle.svg' %}">{% endif %}</td>
                     </tr>
+                    <tr>
+                        <td class="fw-bold align-middle">Employee ID</td>
+                        <td class="align-middle">{{ user_extension.numeroempleado}}</td>
+                    </tr>
+                    <tr>
+                        <td class="fw-bold align-middle">Preferred language</td>
+                        <td class="align-middle">{{ user_extension.get_language_display}}</td>
+                    </tr>
                 </tbody>
             </table>
         </div>

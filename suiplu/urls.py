@@ -7,6 +7,9 @@ from django.contrib import admin
 #IMPORT LOGIN AND LOGOUT VIEW
 from autenticacion.views import logout_view, login_view
 
+#IMPORT LOGIN AND LOGOUT VIEW
+from autenticacion.views import ins_logout_view, ins_login_view
+
 #IMPORT INDEX VIEWS
 from .views import index
 
@@ -24,6 +27,10 @@ urlpatterns = [
     #URLS FOR LOGIN AND LOGOUT
     path('logout/', logout_view, name='logout_view'),
     path('login/', login_view, name='login_view'),
+
+    #URLS FOR LOGIN AND LOGOUT ( FORKLIFT DRIVERS)
+    path('drivers/logout/', ins_logout_view, name='ins_logout_view'),
+    path('drivers/login/', ins_login_view, name='ins_login_view'),
 
     #URL FOR DJANGO ADMIN
     path('administracion/', admin.site.urls),

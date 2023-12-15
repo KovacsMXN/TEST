@@ -12,6 +12,8 @@ from .models import InitialLoto
 
 from .models import WaterEntry
 
+from .models import ForkliftInspection
+
 #DEF COLOR GEN FUNCTION
 def color():
     color = "%03x" % random.randint(0, 0xFFF)
@@ -143,3 +145,35 @@ class SearchForm(forms.Form):
     sdate_max = forms.DateField(required=False,widget=forms.DateInput(attrs={'type': 'datetime-local','class': 'form-control form-control-sm'}))
     edate_min = forms.DateField(required=False,widget=forms.DateInput(attrs={'type': 'datetime-local','class': 'form-control form-control-sm'}))
     edate_max = forms.DateField(required=False,widget=forms.DateInput(attrs={'type': 'datetime-local','class': 'form-control form-control-sm'}))
+
+class EsInspectionForm(forms.ModelForm):
+    class Meta:
+        model = ForkliftInspection
+        fields = ['forklift','check1','check2','check3','check4','check5','check6','check7','check8','check9','check10','check11','check12','des1','des2','des3','des4','des5','des6','des7','des8','des9','des10','des11','des12']
+        widgets={
+            "forklift":forms.Select(attrs={'class':'form-control form-control-sm'}),
+            "check1":forms.CheckboxInput(attrs={'class': 'form-check-input'}),
+            "check2":forms.CheckboxInput(attrs={'class': 'form-check-input'}),
+            "check3":forms.CheckboxInput(attrs={'class': 'form-check-input'}),
+            "check4":forms.CheckboxInput(attrs={'class': 'form-check-input'}),
+            "check5":forms.CheckboxInput(attrs={'class': 'form-check-input'}),
+            "check6":forms.CheckboxInput(attrs={'class': 'form-check-input'}),
+            "check7":forms.CheckboxInput(attrs={'class': 'form-check-input'}),
+            "check8":forms.CheckboxInput(attrs={'class': 'form-check-input'}),
+            "check9":forms.CheckboxInput(attrs={'class': 'form-check-input'}),
+            "check10":forms.CheckboxInput(attrs={'class': 'form-check-input'}),
+            "check11":forms.CheckboxInput(attrs={'class': 'form-check-input'}),
+            "check12":forms.CheckboxInput(attrs={'class': 'form-check-input'}),
+            "des1": forms.Textarea(attrs={'rows':'4','class':'form-control form-control-sm','placeholder':'Observaciones e informacion adicional'}),
+            "des2": forms.Textarea(attrs={'rows':'4','class':'form-control form-control-sm','placeholder':'Observaciones e informacion adicional'}),
+            "des3": forms.Textarea(attrs={'rows':'4','class':'form-control form-control-sm','placeholder':'Observaciones e informacion adicional'}),
+            "des4": forms.Textarea(attrs={'rows':'4','class':'form-control form-control-sm','placeholder':'Observaciones e informacion adicional'}),
+            "des5": forms.Textarea(attrs={'rows':'4','class':'form-control form-control-sm','placeholder':'Observaciones e informacion adicional'}),
+            "des6": forms.Textarea(attrs={'rows':'4','class':'form-control form-control-sm','placeholder':'Observaciones e informacion adicional'}),
+            "des7": forms.Textarea(attrs={'rows':'4','class':'form-control form-control-sm','placeholder':'Observaciones e informacion adicional'}),
+            "des8": forms.Textarea(attrs={'rows':'4','class':'form-control form-control-sm','placeholder':'Observaciones e informacion adicional'}),
+            "des9": forms.Textarea(attrs={'rows':'4','class':'form-control form-control-sm','placeholder':'Observaciones e informacion adicional'}),
+            "des10": forms.Textarea(attrs={'rows':'4','class':'form-control form-control-sm','placeholder':'Observaciones e informacion adicional'}),
+            "des11": forms.Textarea(attrs={'rows':'4','class':'form-control form-control-sm','placeholder':'Observaciones e informacion adicional'}),
+            "des12": forms.Textarea(attrs={'rows':'4','class':'form-control form-control-sm','placeholder':'Observaciones e informacion adicional'}),
+        }
