@@ -3,12 +3,12 @@ from django.http.response import JsonResponse
 from django.contrib.auth.decorators import login_required
 from django.core import serializers
 from django.contrib.auth.decorators import user_passes_test
-from datetime import date, datetime, timedelta
+from datetime import date, datetime, timedelta, timezone
 import calendar
 from django.contrib.admin.views.decorators import staff_member_required
 
 #CREATE VIEW FOR MAIN INDEX DOMAIN
-@staff_member_required
+@staff_member_required(login_url='/login/')
 def index(request):
     return render(request, 'index.html')
 

@@ -8,7 +8,7 @@ from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.admin.views.decorators import staff_member_required
 
-from datetime import date, datetime, timedelta
+from datetime import date, datetime, timedelta, timezone
 import calendar
 
 from django.http import JsonResponse, HttpResponse
@@ -164,7 +164,7 @@ def forklift_view(request, id):
     elif forklifts.status.id == 1:
         query2 = ForkliftServiceProviders.objects.filter(forklifts=id)
         status_color = forklifts.status.color if forklifts.status else None
-        today = datetime.now()
+        today = datetime.now(timezone.utc)
         year = today.year
         all_dates = generate_dates(year, id)
         var = type(all_dates)
