@@ -2,6 +2,20 @@ h5{
     color: #356835;
     font-size: 15px;
 }
+.sub-cat-img{
+    text-decoration: none;
+}
+.cat-img{
+    background-color: whitesmoke;
+    width: 100%;
+    border: 1px solid #eeeeee;
+    border-radius: 4px 4px 4px 4px;
+    -webkit-border-radius: 4px 4px 4px 4px;
+    -moz-border-radius: 4px 4px 4px 4px;
+}
+.cat-img:hover{
+    background-color: #ffffb0;
+}
 .header_fkl_count{
     padding: 5px;
     font-size: 14px;

@@ -19,10 +19,11 @@
             <li class="nav-item">
                 <a class="nav-link" href="{% url 'forklift_index_view' %}"><span class="align-text-bottom"><img src="{% static 'images/ico/truck.svg' %}" /></span> Forklifts</a>
             </li>
-            <!--<li class="nav-item">
+            <li class="nav-item">
                 <a class="nav-link" href="{% url 'ladders_index_view' %}"><span class="align-text-bottom"><img src="{% static 'images/ico/ladder.svg' %}" /></span> Ladders</a>
-            </li>-->
+            </li>
         </ul>
+
     {% if request.user.is_superuser %}
     <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted text-uppercase">
         <span>Locations</span>

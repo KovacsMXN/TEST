@@ -77,6 +77,31 @@
       <td><img src="/static/images/ico/{{ db_response.powered}}.svg"> {{db_response.get_powered_display }}</td>
     </tr>
     <tr>
+    <tr>
+      <th scope="row align-middle" >Last battery replacement</th>
+      <td class="align-middle m-0 p-0">
+<div class="progress m-2">
+  <div class="progress-bar
+    {% if batery_procentaje >= 80 %}bg-danger
+    {% elif batery_procentaje >= 60 %}bg-warning
+    {% else %}bg-success
+    {% endif %}" role="progressbar"
+    style="width: {{batery_procentaje}}%;"
+    aria-valuenow="{{batery_procentaje}}"
+    aria-valuemin="0"
+    aria-valuemax="100"
+    data-toggle="tooltip"
+    data-placement="top"
+    title="{{db_response.last_batery }} ({{days_ago}} days ago)">
+    {{batery_procentaje}}%
+  </div>
+</div>
+
+
+      </td>
+    </tr>
+    </tr>
+    <tr>
       <th scope="row">Holder</th>
       <td>{{db_response.owner}}</td>
     </tr>
@@ -221,4 +246,10 @@
 const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
 const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
     </script>
+<script>
+$(document).ready(function(){
+    $('[data-toggle="tooltip"]').tooltip();
+});
+</script>
+
 {% endblock %}

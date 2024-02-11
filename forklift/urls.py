@@ -23,7 +23,7 @@ from .views import forklift_loto, forklift_loto_view, forklift_loto_add, forklif
 from .views import forklift_loto_log, forklift_loto_log_view, forklift_loto_log_add
 
 #IMPORT VIEWS INSPECTION SHEET
-from .views import inspection_sheet_language, inspection_sheet_form_es, inspection_sheet_form_en, inspection
+from .views import inspection_sheet_language, inspection_sheet_form_es, inspection_sheet_form_en, inspection, inspection_log, inspection_view, inspection_release
 
 #IMPORT VIEWS WATER TRAYCING
 from .views import water_track_add, water_track
@@ -79,6 +79,9 @@ urlpatterns = [
 
 #INSPECTION SHEET
     path('inspection/', inspection, name='inspection'),
+    path('inspection/log/', inspection_log, name='inspection_log'),
+    path('inspection/view/<int:id>/', inspection_view, name='inspection_view'),
+    path('inspection/release/<int:id>/', inspection_release, name='inspection_release'),
     path('drivers/', inspection_sheet_language, name='inspection_sheet_language'),
     path('drivers/es/', inspection_sheet_form_es, name='inspection_sheet_form_es'),
     path('drivers/en/', inspection_sheet_form_en, name='inspection_sheet_form_en'),

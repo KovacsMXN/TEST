@@ -68,6 +68,8 @@ class Forklifts(models.Model):
         ("E", "Electric"),
     ]
 	powered = models.CharField(max_length=1, choices=powered_opt)
+	last_batery = models.DateTimeField(default=timezone.now)
+	batery_target= models.IntegerField()
 	def __str__(self):
 		return str(self.clave) +  str(" / ") + self.brand.name + str(" / ") + self.modelo + str(" / ") + self.serial
 

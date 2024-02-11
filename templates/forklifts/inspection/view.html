@@ -1,0 +1,257 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Forklift inspection sheet{% endblock %}
+{% block content %}
+<div class="ms-5 me-5">
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">Forklift safety</h2>
+    <div class="btn-toolbar mb-2 mb-md-0">
+    </div>
+</div>
+<h5>Daily driver list: Pre-shift inspection form for electric and propane forklifts.</h5>
+
+<hr><form method="post">
+{% csrf_token %}
+    <div class="ms-5 me-5">
+          <div class="row">
+            <div class="col-12">
+                <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1">Forklift ID</span>
+                {{ form.forklift }}
+                </div>
+            </div>
+          </div>
+</div>
+</div>
+<div class="ms-5 me-5">
+<div class="ms-5 me-5">
+<div class="ms-5 me-5">
+    {{form.errors}}
+    {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+<table class="mt-3 table table-bordered table-striped-columns">
+    <tr>
+        <th width="50%"></th>
+        <th width="50%"></th>
+    </tr>
+    <tr>
+        <td><a class="in-put"></a>
+<h5 class="ms-3 fs-6">1. Forks, backrest, locking pins, hoses, hydraulic controls:</h5>
+   <ul>
+        <li>Inspect forks for warping, cracks or excessive wear.</li>
+        <li>Check that the backrest is securely secured and undamaged.</li>
+        <li>Check that the locking pins are in place and working properly.</li>
+        <li>Examine hydraulic hoses for leaks, wear or damage.</li>
+        <li>Test hydraulic controls to ensure smooth, uninterrupted operation.</li>
+   </ul>
+        <td align="center">
+            <div class="input-group mb-3">
+                <div class="input-group-text">
+                    <div class="form-check form-switch">{{ form.check1 }}</div>
+                </div>
+                    {{ form.des1 }}
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td><a class="in-put"></a>
+<h5 class="ms-3 fs-6">2. Tires, lug nuts, roof covering:</h5>
+   <ul>
+        <li>Evaluate tires for wear, cuts, and proper pressure.</li>
+        <li>Check that all lug nuts are tight and in good condition.</li>
+        <li>Inspect the roof covering for damage or insecurities.</li>
+   </ul>
+
+        <td align="center">
+            <div class="input-group mb-3">
+                <div class="input-group-text">
+                    <div class="form-check form-switch">{{ form.check2 }}</div>
+                </div>
+                    {{ form.des2 }}
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td><a class="in-put"></a>
+<h5 class="ms-3 fs-6">3. Lights, horn, capacity plate, gauges, display panel:</h5>
+   <ul>
+        <li>Check the operation of all lights, including warning lights.</li>
+        <li>Test the horn to make sure it is audible and works properly.</li>
+        <li>Verify that the capacity plate is present, legible and up to date.</li>
+        <li>Check all gauges to ensure they show accurate readings.</li>
+        <li>Evaluate the display panel to confirm that all indications are clear and functional.</li>
+   </ul>
+
+
+</td>
+        <td align="center">
+            <div class="input-group mb-3">
+                <div class="input-group-text">
+                    <div class="form-check form-switch">{{ form.check3 }}</div>
+                </div>
+                    {{ form.des3 }}
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td><a class="in-put"></a>
+<h5 class="ms-3 fs-6">4. Energy source in optimal conditions:</h5>
+   <ul>
+        <li>Inspect the battery (for electric forklifts) to ensure it is clean, charged and undamaged.</li>
+        <li>In the case of fuel forklifts, check fuel levels and quality.</li>
+   </ul>
+
+</td>
+        <td align="center">
+            <div class="input-group mb-3">
+                <div class="input-group-text">
+                    <div class="form-check form-switch">{{ form.check4 }}</div>
+                </div>
+                    {{ form.des4 }}
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td><a class="in-put"></a>
+<h5 class="ms-3 fs-6">5. Seat sensor:</h5>
+   <ul>
+      <li>Check that the sensor in the seat works correctly.</li>
+   </ul>
+
+</td>
+        <td align="center">
+            <div class="input-group mb-3">
+                <div class="input-group-text">
+                    <div class="form-check form-switch">{{ form.check5 }}</div>
+                </div>
+                    {{ form.des5 }}
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td><a class="in-put"></a>
+<h5 class="ms-3 fs-6">6. Tilt, Hoist, Sideshift Lift Functions:</h5>
+   <ul>
+        <li>Test the tilt ability to make sure it is smooth and consistent.</li>
+        <li>Check the lifting function to detect any irregularities or difficulties.</li>
+        <li>Check lateral displacement to ensure correct and fluid movement.</li>
+   </ul>
+
+</td>
+        <td align="center">
+            <div class="input-group mb-3">
+                <div class="input-group-text">
+                    <div class="form-check form-switch">{{ form.check6 }}</div>
+                </div>
+                    {{ form.des6 }}
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td><a class="in-put"></a><h5 class="ms-3 fs-6">7. Parking break:</h5>
+   <ul>
+      <li>Test the parking brake to ensure that it engages and releases properly.</li>
+   </ul>
+</td>
+        <td align="center">
+            <div class="input-group mb-3">
+                <div class="input-group-text">
+                    <div class="form-check form-switch">{{ form.check7 }}</div>
+                </div>
+                    {{ form.des7 }}
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td><a class="in-put"></a><h5 class="ms-3 fs-6">8. Brakes:</h5>
+   <ul>
+      <li>Evaluate the brakes during movement to confirm their effectiveness and response.</li>
+   </ul>
+</td>
+        <td align="center">
+            <div class="input-group mb-3">
+                <div class="input-group-text">
+                    <div class="form-check form-switch">{{ form.check8 }}</div>
+                </div>
+                    {{ form.des8 }}
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td><a class="in-put"></a><h5 class="ms-3 fs-6">9. Seat and safety belt:</h5>
+   <ul>
+        <li>Inspect the seat to ensure that it is in good condition and securely anchored.</li>
+        <li>Check the seat belt to ensure its correct operation and absence of wear.</li>
+   </ul>
+</td>
+        <td align="center">
+            <div class="input-group mb-3">
+                <div class="input-group-text">
+                    <div class="form-check form-switch">{{ form.check9 }}</div>
+                </div>
+                    {{ form.des9 }}
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td><a class="in-put"></a><h5 class="ms-3 fs-6">10. Directional:</h5>
+    <ul>
+      <li>Test turn signals to confirm that they function properly and are visible.</li>
+    </ul>
+</a></td>
+        <td align="center">
+            <div class="input-group mb-3">
+                <div class="input-group-text">
+                    <div class="form-check form-switch">{{ form.check10 }}</div>
+                </div>
+                    {{ form.des10 }}
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td><a class="in-put"></a><h5 class="ms-3 fs-6">11. Strobe light::</h5>
+    <ul>
+      <li>Check the strobe light to make sure it works and is visible from all directions.</li>
+    </ul>
+</td>
+        <td align="center">
+            <div class="input-group mb-3">
+                <div class="input-group-text">
+                    <div class="form-check form-switch">{{ form.check11 }}</div>
+                </div>
+                    {{ form.des11 }}
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td><a class="in-put"></a><h5 class="ms-3 fs-6">12. Fire extinguisher:</h5>
+    <ul>
+      <li>Check for the presence of the fire extinguisher, ensure it is within its expiration date and is accessible for immediate use.</li>
+    </ul>
+</td>
+        <td align="center">
+            <div class="input-group mb-3">
+                <div class="input-group-text">
+                    <div class="form-check form-switch">{{ form.check12 }}</div>
+                </div>
+                    {{ form.des12 }}
+            </div>
+        </td>
+    </tr>
+
+</table>
+<div class="text-center">
+<br>
+<a href="{% url 'inspection' %}" class="btn btn-dark btn-sm"><img class="filter-white" src="/static/images/ico/arrow-return-left.svg"> Return </a> <a href="{% url 'inspection_release' i.id %}" class="btn btn-success btn-sm"><img class="filter-white" src="/static/images/ico/clipboard-check.svg"> Release</a>
+</form>
+<hr>
+</div>
+{% endblock %}
+</div>
+</div>
+</div>

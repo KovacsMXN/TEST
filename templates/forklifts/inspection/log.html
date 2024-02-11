@@ -1,0 +1,174 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}SuipluMX - Forklift inspection forms logs{% endblock %}
+{% block content %}
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">Forklift inspection forms logs</h1>
+    <div class="btn-toolbar mb-2 mb-md-0">
+        {% include "forklifts/fork_toolbar.html" %}
+    </div>
+</div>
+<div class="row pb-2 px-1">
+    <div class="col-6">
+        <h5>Forklift inspection forms logs</h5>
+    </div>
+    <div class="col-6 text-end">
+        <a href="{% url 'inspection' %}" class="btn btn-dark">
+            <span class="align-text-bottom">
+                <img class="filter-white" src="{% static 'images/ico/key.svg' %}" />
+            </span>
+            Show active
+        </a>
+                <a href="{% url 'inspection_log' %}" class="btn btn-dark">
+            <span class="align-text-bottom">
+                <img class="filter-white" src="{% static 'images/ico/book.svg' %}" />
+            </span>
+            Show records
+        </a>
+    </div>
+</div>
+<div class="col-12">
+    <div class="containervieweqipment">
+        <div class="containervieweqipmenthead">
+            <div class="row">
+                <div class="col-6">Inspection forms </div>
+                <div class="col-6">
+                    <div class="text-end">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="containervieweqipmentbody">
+<form action="" method="post">
+    {% csrf_token %}
+    <div class="row mt-1">
+        <div class="col-12"><a class="fw-medium text-reset text-decoration-none" >Forklift tag</a>{{search.q_clave}}</div>
+    </div>
+<div class="row mt-1">
+    <div class="col-6"><a class="fw-medium text-reset text-decoration-none" >Started date min: </a>{{search.sdate_min}}</div>
+    <div class="col-6"><a class="fw-medium text-reset text-decoration-none" >Started date max: </a>{{search.sdate_max}}</div>
+</div>
+<div class="row mt-1">
+    <div class="col-6"><a class="fw-medium text-reset text-decoration-none" >Inspected by: </a>{{search.formstartusuario}}</div>
+</div>
+    <div class="row mt-3">
+        <div class="col-11"></div>
+        <div class="col-1 text-end"><button class="btn btn-dark btn-sm" type="submit">Search</button></div>
+    </div>
+</form>
+            </div>
+{% if page %}
+            <hr>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">Tag</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">Inspected by</th>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
+                        <th class="text-end" scope="col">Options</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in page %}
+                    <tr>
+                        <td class="align-middle"><a class="btn btn-primary btn-sm" href="{% url 'forklift_view' item.forklift.id %}"><img class="filter-white" src="/static/images/ico/truck.svg"> {{ item.forklift.clave }}</a></td>
+                        <td class="align-middle">{{ item.fecha }}</td>
+                        <td class="align-middle">{{ item.usuario }}</td>
+<td class="align-middle">
+<a href="#" data-bs-toggle="tooltip" data-bs-title="Forks, backrest, locking pins, hoses, hydraulic controls">{%if item.check1 == 0 %}<img class="filter-green" src="/static/images/ico/check-circle.svg">{% else %}<img class="filter-red" src="/static/images/ico/x-circle.svg">{% endif %}</a></td>
+
+<td class="align-middle">
+<a href="#" data-bs-toggle="tooltip" data-bs-title="Tires, lug nuts, roof covering">{%if item.check2 == 0 %}<img class="filter-green" src="/static/images/ico/check-circle.svg">{% else %}<img class="filter-red" src="/static/images/ico/x-circle.svg">{% endif %}</a></td>
+
+<td class="align-middle">
+<a href="#" data-bs-toggle="tooltip" data-bs-title="All lights, horn, capacity plate, gauges, display panel">{%if item.check3 == 0 %}<img class="filter-green" src="/static/images/ico/check-circle.svg">{% else %}<img class="filter-red" src="/static/images/ico/x-circle.svg">{% endif %}</a></td>
+
+<td class="align-middle">
+<a href="#" data-bs-toggle="tooltip" data-bs-title="Energy source in optimal conditions">{%if item.check4 == 0 %}<img class="filter-green" src="/static/images/ico/check-circle.svg">{% else %}<img class="filter-red" src="/static/images/ico/x-circle.svg">{% endif %}</a></td>
+
+<td class="align-middle">
+<a href="#" data-bs-toggle="tooltip" data-bs-title="Sensor in seat">{%if item.check5 == 0 %}<img class="filter-green" src="/static/images/ico/check-circle.svg">{% else %}<img class="filter-red" src="/static/images/ico/x-circle.svg">{% endif %}</a></td>
+
+<td class="align-middle">
+<a href="#" data-bs-toggle="tooltip" data-bs-title="Tilt, lift, sideshift lifting functions">{%if item.check6 == 0 %}<img class="filter-green" src="/static/images/ico/check-circle.svg">{% else %}<img class="filter-red" src="/static/images/ico/x-circle.svg">{% endif %}</a></td>
+
+<td class="align-middle">
+<a href="#" data-bs-toggle="tooltip" data-bs-title="Parking brake">{%if item.check7 == 0 %}<img class="filter-green" src="/static/images/ico/check-circle.svg">{% else %}<img class="filter-red" src="/static/images/ico/x-circle.svg">{% endif %}</a></td>
+
+<td class="align-middle">
+<a href="#" data-bs-toggle="tooltip" data-bs-title="Brakes">{%if item.check8 == 0 %}<img class="filter-green" src="/static/images/ico/check-circle.svg">{% else %}<img class="filter-red" src="/static/images/ico/x-circle.svg">{% endif %}</a></td>
+
+<td class="align-middle">
+<a href="#" data-bs-toggle="tooltip" data-bs-title="Seat and safety belt">{%if item.check9 == 0 %}<img class="filter-green" src="/static/images/ico/check-circle.svg">{% else %}<img class="filter-red" src="/static/images/ico/x-circle.svg">{% endif %}</a></td>
+
+<td class="align-middle">
+<a href="#" data-bs-toggle="tooltip" data-bs-title="Directional">{%if item.check10 == 0 %}<img class="filter-green" src="/static/images/ico/check-circle.svg">{% else %}<img class="filter-red" src="/static/images/ico/x-circle.svg">{% endif %}</a></td>
+
+<td class="align-middle">
+<a href="#" data-bs-toggle="tooltip" data-bs-title="Strobe">{%if item.check11 == 0 %}<img class="filter-green" src="/static/images/ico/check-circle.svg">{% else %}<img class="filter-red" src="/static/images/ico/x-circle.svg">{% endif %}</a></td>
+
+<td class="align-middle">
+<a href="#" data-bs-toggle="tooltip" data-bs-title="Fire extinguisher">{%if item.check12 == 0 %}<img class="filter-green" src="/static/images/ico/check-circle.svg">{% else %}<img class="filter-red" src="/static/images/ico/x-circle.svg">{% endif %}</a></td>
+                        <td class="align-middle text-end"><a href="{% url 'inspection_view' item.id %}" class="btn btn-dark btn-sm">    <span class="align-text-bottom">
+        <img class="filter-white" src="{% static 'images/ico/eye.svg' %}" />
+    </span>View</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+<div class="container text-center">
+  <div class="row align-items-start">
+    <div class="col">
+    </div>
+    <div class="col">
+<nav class="pt-3">
+  <ul class="pagination text-center">
+        {% if page.has_previous %}
+    <li class="page-item"><a class="page-link" href="?page=1">First</a></li>
+    <li class="page-item"><a class="page-link" href="?page={{ page.previous_page_number }}">Previous</a></li>
+        {% else %}
+    <li class="page-item disabled"><a class="page-link" href="">First</a></li>
+    <li class="page-item disabled"><a class="page-link" href="">Previous</a></li>
+        {% endif %}
+    <li class="page-item"><a class="page-link" href="#">{{ page.number }}</a></li>
+    {% if page.has_next %}
+    <li class="page-item"><a class="page-link" href="?page={{ page.next_page_number }}">Next</a></li>
+    <li class="page-item"><a class="page-link" href="?page={{ page.paginator.num_pages }}">Last</a></li>
+        {% else %}
+    <li class="page-item disabled"><a class="page-link" href="">Next</a></li>
+    <li class="page-item disabled"><a class="page-link" href="">Last</a></li>
+        {% endif %}
+        
+  </ul>
+</nav>
+    </div>
+    <div class="col">
+    </div>
+  </div>
+</div>
+{% else %}
+        <div class="containervieweqipmentbody">
+<p class="fw-normal">Looks like everything is running smooth.</p>
+<p class="fw-lighter">Nothing to show here. No records were found on database request.</p>
+        </div>
+{% endif %}
+    </div>
+</div>
+<script type="text/javascript">
+  const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+</script>
+{% endblock %}

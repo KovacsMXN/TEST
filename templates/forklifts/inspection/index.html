@@ -8,13 +8,24 @@
         {% include "forklifts/fork_toolbar.html" %}
     </div>
 </div>
-<h5>Inspection forms that needs attention</h5>
     <div class="row pb-2 px-1">
 <div class="col-6">
+<h5>Inspection forms that needs attention</h5>
 </div>
-
-        <div class="col-6 text-end">
-        </div>
+    <div class="col-6 text-end">
+        <a href="{% url 'inspection' %}" class="btn btn-dark">
+            <span class="align-text-bottom">
+                <img class="filter-white" src="{% static 'images/ico/key.svg' %}" />
+            </span>
+            Show active
+        </a>
+                <a href="{% url 'inspection_log' %}" class="btn btn-dark">
+            <span class="align-text-bottom">
+                <img class="filter-white" src="{% static 'images/ico/book.svg' %}" />
+            </span>
+            Show records
+        </a>
+    </div>
     </div>
   <div class="row">
     <div class="col-10 p-2 mb-0">
@@ -26,13 +37,15 @@
             </div>
           </div>
         </div>
+{% if query %}
+
         <div class="containervieweqipmentbody">   
 <table class="table table-striped">
  <thead>
     <tr>
       <th scope="col">Tag</th>
       <th scope="col">Date</th>
-      <th class="text-center" scope="col">Inspected</th>
+      <th  scope="col">Inspected</th>
       <th scope="col"></th>
       <th scope="col"></th>
       <th scope="col"></th>
@@ -51,9 +64,9 @@
   <tbody>
     {% for form in query %}
     <tr>
-      <td><a class="btn btn-primary btn-sm" href=""><img class="filter-white" src="/static/images/ico/truck.svg"> {{ form.forklift.clave }}</a></td>
+      <td><a class="btn btn-primary btn-sm" href="{% url 'forklift_view' form.forklift.id %}"><img class="filter-white" src="/static/images/ico/truck.svg"> {{ form.forklift.clave }}</a></td>
       <td class="align-middle">{{form.fecha}}</td>
-      <td class="align-middle text-center"><a href="{% url 'staff_view' form.usuario.id %}" class="btn btn-dark btn-sm"><img class="filter-white" src="{% static 'images/ico/person.svg' %}" /></a> {{form.usuario.first_name}} {{form.usuario.last_name}}</td>
+      <td class="align-middle"><a href="{% url 'staff_view' form.usuario.id %}" class="btn btn-dark btn-sm"><img class="filter-white" src="{% static 'images/ico/person.svg' %}" /></a> {{form.usuario.first_name}} {{form.usuario.last_name}}</td>
       <td class="align-middle">
         <a href="#" data-bs-toggle="tooltip" data-bs-title="Forks, backrest, locking pins, hoses, hydraulic controls">{%if form.check1 == 0 %}<img class="filter-green" src="/static/images/ico/check-circle.svg">{% else %}<img class="filter-red" src="/static/images/ico/x-circle.svg">{% endif %}</a></td>
       <td class="align-middle">
@@ -78,9 +91,9 @@
         <a href="#" data-bs-toggle="tooltip" data-bs-title="Strobe">{%if form.check11 == 0 %}<img class="filter-green" src="/static/images/ico/check-circle.svg">{% else %}<img class="filter-red" src="/static/images/ico/x-circle.svg">{% endif %}</a></td>
       <td class="align-middle">
         <a href="#" data-bs-toggle="tooltip" data-bs-title="Fire extinguisher">{%if form.check12 == 0 %}<img class="filter-green" src="/static/images/ico/check-circle.svg">{% else %}<img class="filter-red" src="/static/images/ico/x-circle.svg">{% endif %}</a></td>
-      <td class="text-end"><a class="btn btn-dark btn-sm" href="">    <span class="align-text-bottom">
+      <td class="text-end"><a class="btn btn-dark btn-sm" href="{% url 'inspection_view' form.id %}">    <span class="align-text-bottom">
         <img class="filter-white" src="{% static 'images/ico/eye.svg' %}" />
-    </span></a> <a class="btn btn-success btn-sm" href="">    <span class="align-text-bottom">
+    </span></a> <a class="btn btn-success btn-sm" href="{% url 'inspection_release' form.id %}">    <span class="align-text-bottom">
         <img class="filter-white" src="{% static 'images/ico/clipboard-check.svg' %}" />
     </span></a></td>
     </tr>
@@ -88,6 +101,12 @@
   </tbody>
 </table>
         </div>
+    {%else%}
+<div class="containervieweqipmentbody">
+<p class="fw-normal">Looks like everything is running smooth.</p>
+<p class="fw-lighter">Nothing to show here. No records were found on database request.</p>
+        </div>
+    {% endif %}
       </div>
     </div>
 
@@ -100,50 +119,22 @@
             </div>
           </div>
         </div>
-        <div class="containervieweqipmentbody">   
-<table class="table table-striped">
- <thead>
+        <div class="containervieweqipmentbody">
+<table class="table table table-striped">
+  <thead>
     <tr>
-      <th scope="col">Rank</th>
-      <th scope="col">Days</th>
+      <th scope="col">Icon</th>
+      <th scope="col">Legend</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td class="text-end">
-      <div style="background-color: #3ad353;" class="commit-node-traycing"></div>
-      </td>
-      <td>0 days ago</td>
+      <th scope="row"><img class="filter-green" src="/static/images/ico/check-circle.svg"></th>
+      <td>Passed</td>
     </tr>
     <tr>
-      <td class="text-end">
-      <div style="background-color: #26a641;" class="commit-node-traycing"></div>
-      </td>
-      <td>1 day ago</td>
-    </tr>
-    <tr>
-      <td class="text-end">
-      <div style="background-color: #016d31;" class="commit-node-traycing"></div>
-      </td>
-      <td>2 days ago</td>
-    </tr>
-    <tr>
-      <td class="text-end">
-      <div style="background-color: #0d4429" class="commit-node-traycing"></div>
-      </td>
-      <td>3 days ago</td>
-    </tr>
-    <tr>
-      <td class="text-end">
-      <div style="background-color: #082e1b" class="commit-node-traycing"></div>
-      </td>
-      <td>4 days ago</td>
-    </tr>
-    <tr>
-      <td class="text-end">
-      <div style="background-color: #04120b" class="commit-node-traycing"></div>
-      </td>
-      <td>5+ days ago</td>
+      <th scope="row"><img class="filter-red" src="/static/images/ico/x-circle.svg"></th>
+      <td>Failed</td>
     </tr>
   </tbody>
 </table>

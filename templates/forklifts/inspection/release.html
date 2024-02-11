@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}SuipluMX - Release forklift inspection sheet {{inspection.forklift.clave}}{% endblock %}
+{% block content %}
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+  <h1 class="h2">Release forklift inspection {{inspection.forklift.clave}}</h1>
+  <div class="btn-toolbar mb-2 mb-md-0">
+  </div>
+</div>
+  <h5>{{inspection.forklift.clave}} / {{inspection.forklift.serial}} by {{inspection.forklift.brand}}</h5>
+<p class="fw-bolder">Inspected by: {{inspection.usuario}} on {{inspection.fecha}}</p>
+    <form method="post">
+        {% csrf_token %}
+        <button class="btn btn-success" type="submit">Release</button>
+    </form>
+    
+{% endblock %}

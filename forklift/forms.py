@@ -45,7 +45,7 @@ class WaterTrackForm(forms.ModelForm):
 class ForkliftForm(forms.ModelForm):
     class Meta:
         model = Forklifts
-        fields = ['service_provider', 'clave', 'brand', 'powered' ,'modelo', 'serial', 'owner', 'imagen']
+        fields = ['service_provider', 'clave', 'brand', 'powered' ,'modelo', 'serial', 'owner', 'imagen','batery_target','last_batery']
         widgets={
             "clave":forms.TextInput(attrs={'class':'form-control form-control-sm'}),
             "modelo":forms.TextInput(attrs={'class':'form-control form-control-sm'}),
@@ -55,22 +55,25 @@ class ForkliftForm(forms.ModelForm):
             "brand":forms.Select(attrs={'class':'form-control form-control-sm'}),
             "owner":forms.Select(attrs={'class':'form-control form-control-sm'}),
             "model":forms.TextInput(attrs={'placeholder':'email@example.com','class':'form-control'}),
+            "batery_target": forms.TextInput(attrs={'class': 'form-control form-control-sm', 'placeholder': '5'}),
+            "last_batery":forms.DateInput(attrs={'class': 'form-control form-control-sm'})
         }
     
 
 class CreateForkliftForm(forms.ModelForm):
     class Meta:
         model = Forklifts
-        fields = ['service_provider', 'clave', 'brand', 'modelo', 'serial', 'owner','imagen','powered']
-        widgets={
-            "clave":forms.TextInput(attrs={'class':'form-control form-control-sm','placeholder':tag}),
-            "modelo":forms.TextInput(attrs={'class':'form-control form-control-sm','placeholder':'Example: XHLMI-TDT'}),
-            "serial":forms.TextInput(attrs={'class':'form-control form-control-sm','placeholder':'XHLMI-TDT-1998'}),
-            "service_provider" : forms.SelectMultiple(attrs={'class':'form-control','width':'100%'}),
-            "powered" :forms.Select(attrs={'class':'form-control form-control-sm'}),
-            "brand":forms.Select(attrs={'class':'form-control form-control-sm'}),
-            "owner":forms.Select(attrs={'class':'form-control form-control-sm'}),
-            "model":forms.TextInput(attrs={'placeholder':'email@example.com','class':'form-control'}),
+        fields = ['service_provider', 'clave', 'brand', 'modelo', 'serial', 'owner', 'imagen', 'powered', 'batery_target','last_batery']
+        widgets = {
+            "clave": forms.TextInput(attrs={'class': 'form-control form-control-sm', 'placeholder': 'Enter Clave'}),
+            "modelo": forms.TextInput(attrs={'class': 'form-control form-control-sm', 'placeholder': 'Example: XHLMI-TDT'}),
+            "serial": forms.TextInput(attrs={'class': 'form-control form-control-sm', 'placeholder': 'XHLMI-TDT-1998'}),
+            "service_provider": forms.SelectMultiple(attrs={'class': 'form-control', 'width': '100%'}),
+            "powered": forms.Select(attrs={'class': 'form-control form-control-sm'}),
+            "brand": forms.Select(attrs={'class': 'form-control form-control-sm'}),
+            "owner": forms.Select(attrs={'class': 'form-control form-control-sm'}),
+            "batery_target": forms.TextInput(attrs={'class': 'form-control form-control-sm', 'placeholder': '5'}),
+            "last_batery":forms.DateInput(attrs={'type': 'datetime-local','class': 'form-control form-control-sm'})
         }
 
 class CreateForkliftOwnersForm(forms.ModelForm):
@@ -176,4 +179,105 @@ class EsInspectionForm(forms.ModelForm):
             "des10": forms.Textarea(attrs={'rows':'4','class':'form-control form-control-sm','placeholder':'Observaciones e informacion adicional'}),
             "des11": forms.Textarea(attrs={'rows':'4','class':'form-control form-control-sm','placeholder':'Observaciones e informacion adicional'}),
             "des12": forms.Textarea(attrs={'rows':'4','class':'form-control form-control-sm','placeholder':'Observaciones e informacion adicional'}),
+        }
+class DisEsInspectionForm(forms.ModelForm):
+    class Meta:
+        model = ForkliftInspection
+        fields = ['forklift','check1','check2','check3','check4','check5','check6','check7','check8','check9','check10','check11','check12','des1','des2','des3','des4','des5','des6','des7','des8','des9','des10','des11','des12']
+        widgets={
+            "forklift":forms.Select(attrs={'disabled':'','class':'form-control form-control-sm'}),
+            "check1":forms.CheckboxInput(attrs={'disabled':'','class': 'form-check-input'}),
+            "check2":forms.CheckboxInput(attrs={'disabled':'','class': 'form-check-input'}),
+            "check3":forms.CheckboxInput(attrs={'disabled':'','class': 'form-check-input'}),
+            "check4":forms.CheckboxInput(attrs={'disabled':'','class': 'form-check-input'}),
+            "check5":forms.CheckboxInput(attrs={'disabled':'','class': 'form-check-input'}),
+            "check6":forms.CheckboxInput(attrs={'disabled':'','class': 'form-check-input'}),
+            "check7":forms.CheckboxInput(attrs={'disabled':'','class': 'form-check-input'}),
+            "check8":forms.CheckboxInput(attrs={'disabled':'','class': 'form-check-input'}),
+            "check9":forms.CheckboxInput(attrs={'disabled':'','class': 'form-check-input'}),
+            "check10":forms.CheckboxInput(attrs={'disabled':'','class': 'form-check-input'}),
+            "check11":forms.CheckboxInput(attrs={'disabled':'','class': 'form-check-input'}),
+            "check12":forms.CheckboxInput(attrs={'disabled':'','class': 'form-check-input'}),
+            "des1": forms.Textarea(attrs={'disabled':'','rows':'4','class':'form-control form-control-sm','placeholder':'Observaciones e informacion adicional'}),
+            "des2": forms.Textarea(attrs={'disabled':'','rows':'4','class':'form-control form-control-sm','placeholder':'Observaciones e informacion adicional'}),
+            "des3": forms.Textarea(attrs={'disabled':'','rows':'4','class':'form-control form-control-sm','placeholder':'Observaciones e informacion adicional'}),
+            "des4": forms.Textarea(attrs={'disabled':'','rows':'4','class':'form-control form-control-sm','placeholder':'Observaciones e informacion adicional'}),
+            "des5": forms.Textarea(attrs={'disabled':'','rows':'4','class':'form-control form-control-sm','placeholder':'Observaciones e informacion adicional'}),
+            "des6": forms.Textarea(attrs={'disabled':'','rows':'4','class':'form-control form-control-sm','placeholder':'Observaciones e informacion adicional'}),
+            "des7": forms.Textarea(attrs={'disabled':'','rows':'4','class':'form-control form-control-sm','placeholder':'Observaciones e informacion adicional'}),
+            "des8": forms.Textarea(attrs={'disabled':'','rows':'4','class':'form-control form-control-sm','placeholder':'Observaciones e informacion adicional'}),
+            "des9": forms.Textarea(attrs={'disabled':'','rows':'4','class':'form-control form-control-sm','placeholder':'Observaciones e informacion adicional'}),
+            "des10": forms.Textarea(attrs={'disabled':'','rows':'4','class':'form-control form-control-sm','placeholder':'Observaciones e informacion adicional'}),
+            "des11": forms.Textarea(attrs={'disabled':'','rows':'4','class':'form-control form-control-sm','placeholder':'Observaciones e informacion adicional'}),
+            "des12": forms.Textarea(attrs={'disabled':'','rows':'4','class':'form-control form-control-sm','placeholder':'Observaciones e informacion adicional'}),
+        }
+class EnInspectionForm(forms.ModelForm):
+    class Meta:
+        model = ForkliftInspection
+        fields = ['forklift','check1','check2','check3','check4','check5','check6','check7','check8','check9','check10','check11','check12','des1','des2','des3','des4','des5','des6','des7','des8','des9','des10','des11','des12']
+        widgets={
+            "forklift":forms.Select(attrs={'class':'form-control form-control-sm'}),
+            "check1":forms.CheckboxInput(attrs={'class': 'form-check-input'}),
+            "check2":forms.CheckboxInput(attrs={'class': 'form-check-input'}),
+            "check3":forms.CheckboxInput(attrs={'class': 'form-check-input'}),
+            "check4":forms.CheckboxInput(attrs={'class': 'form-check-input'}),
+            "check5":forms.CheckboxInput(attrs={'class': 'form-check-input'}),
+            "check6":forms.CheckboxInput(attrs={'class': 'form-check-input'}),
+            "check7":forms.CheckboxInput(attrs={'class': 'form-check-input'}),
+            "check8":forms.CheckboxInput(attrs={'class': 'form-check-input'}),
+            "check9":forms.CheckboxInput(attrs={'class': 'form-check-input'}),
+            "check10":forms.CheckboxInput(attrs={'class': 'form-check-input'}),
+            "check11":forms.CheckboxInput(attrs={'class': 'form-check-input'}),
+            "check12":forms.CheckboxInput(attrs={'class': 'form-check-input'}),
+            "des1": forms.Textarea(attrs={'rows':'4','class':'form-control form-control-sm','placeholder':'Observations and additional information'}),
+            "des2": forms.Textarea(attrs={'rows':'4','class':'form-control form-control-sm','placeholder':'Observations and additional information'}),
+            "des3": forms.Textarea(attrs={'rows':'4','class':'form-control form-control-sm','placeholder':'Observations and additional information'}),
+            "des4": forms.Textarea(attrs={'rows':'4','class':'form-control form-control-sm','placeholder':'Observations and additional information'}),
+            "des5": forms.Textarea(attrs={'rows':'4','class':'form-control form-control-sm','placeholder':'Observations and additional information'}),
+            "des6": forms.Textarea(attrs={'rows':'4','class':'form-control form-control-sm','placeholder':'Observations and additional information'}),
+            "des7": forms.Textarea(attrs={'rows':'4','class':'form-control form-control-sm','placeholder':'Observations and additional information'}),
+            "des8": forms.Textarea(attrs={'rows':'4','class':'form-control form-control-sm','placeholder':'Observations and additional information'}),
+            "des9": forms.Textarea(attrs={'rows':'4','class':'form-control form-control-sm','placeholder':'Observations and additional information'}),
+            "des10": forms.Textarea(attrs={'rows':'4','class':'form-control form-control-sm','placeholder':'Observations and additional information'}),
+            "des11": forms.Textarea(attrs={'rows':'4','class':'form-control form-control-sm','placeholder':'Observations and additional information'}),
+            "des12": forms.Textarea(attrs={'rows':'4','class':'form-control form-control-sm','placeholder':'Observations and additional information'}),
+        }
+class DisEnInspectionForm(forms.ModelForm):
+    class Meta:
+        model = ForkliftInspection
+        fields = ['forklift','check1','check2','check3','check4','check5','check6','check7','check8','check9','check10','check11','check12','des1','des2','des3','des4','des5','des6','des7','des8','des9','des10','des11','des12']
+        widgets={
+            "forklift":forms.Select(attrs={'disabled':'','class':'form-control form-control-sm'}),
+            "check1":forms.CheckboxInput(attrs={'disabled':'','class': 'form-check-input'}),
+            "check2":forms.CheckboxInput(attrs={'disabled':'','class': 'form-check-input'}),
+            "check3":forms.CheckboxInput(attrs={'disabled':'','class': 'form-check-input'}),
+            "check4":forms.CheckboxInput(attrs={'disabled':'','class': 'form-check-input'}),
+            "check5":forms.CheckboxInput(attrs={'disabled':'','class': 'form-check-input'}),
+            "check6":forms.CheckboxInput(attrs={'disabled':'','class': 'form-check-input'}),
+            "check7":forms.CheckboxInput(attrs={'disabled':'','class': 'form-check-input'}),
+            "check8":forms.CheckboxInput(attrs={'disabled':'','class': 'form-check-input'}),
+            "check9":forms.CheckboxInput(attrs={'disabled':'','class': 'form-check-input'}),
+            "check10":forms.CheckboxInput(attrs={'disabled':'','class': 'form-check-input'}),
+            "check11":forms.CheckboxInput(attrs={'disabled':'','class': 'form-check-input'}),
+            "check12":forms.CheckboxInput(attrs={'disabled':'','class': 'form-check-input'}),
+            "des1": forms.Textarea(attrs={'disabled':'','rows':'4','class':'form-control form-control-sm','placeholder':'Observations and additional information'}),
+            "des2": forms.Textarea(attrs={'disabled':'','rows':'4','class':'form-control form-control-sm','placeholder':'Observations and additional information'}),
+            "des3": forms.Textarea(attrs={'disabled':'','rows':'4','class':'form-control form-control-sm','placeholder':'Observations and additional information'}),
+            "des4": forms.Textarea(attrs={'disabled':'','rows':'4','class':'form-control form-control-sm','placeholder':'Observations and additional information'}),
+            "des5": forms.Textarea(attrs={'disabled':'','rows':'4','class':'form-control form-control-sm','placeholder':'Observations and additional information'}),
+            "des6": forms.Textarea(attrs={'disabled':'','rows':'4','class':'form-control form-control-sm','placeholder':'Observations and additional information'}),
+            "des7": forms.Textarea(attrs={'disabled':'','rows':'4','class':'form-control form-control-sm','placeholder':'Observations and additional information'}),
+            "des8": forms.Textarea(attrs={'disabled':'','rows':'4','class':'form-control form-control-sm','placeholder':'Observations and additional information'}),
+            "des9": forms.Textarea(attrs={'disabled':'','rows':'4','class':'form-control form-control-sm','placeholder':'Observations and additional information'}),
+            "des10": forms.Textarea(attrs={'disabled':'','rows':'4','class':'form-control form-control-sm','placeholder':'Observations and additional information'}),
+            "des11": forms.Textarea(attrs={'disabled':'','rows':'4','class':'form-control form-control-sm','placeholder':'Observations and additional information'}),
+            "des12": forms.Textarea(attrs={'disabled':'','rows':'4','class':'form-control form-control-sm','placeholder':'Observations and additional information'}),
+        }
+
+class ReleaseInspectionForm(forms.ModelForm):
+    class Meta:
+        model = ForkliftInspection
+        fields = ['valid']
+        widgets={
+            "valid":forms.CheckboxInput(attrs={'class': 'form-check-input'}),
         }

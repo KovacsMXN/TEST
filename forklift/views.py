@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 
 import os
-
+from decimal import Decimal, ROUND_DOWN
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.decorators import user_passes_test
 from django.contrib.auth.models import User
@@ -29,7 +29,9 @@ from .forms import CreateForkliftLOTO
 from .forms import SearchForm
 from .forms import WaterTrackForm
 
-from .forms import EsInspectionForm
+from .forms import EsInspectionForm, EnInspectionForm
+from .forms import DisEsInspectionForm, DisEnInspectionForm
+from .forms import ReleaseInspectionForm
 
 from .models import Loto
 from .models import Forklifts, ForkliftOwners, ForkliftStatus, ForkliftServiceProviders, ForkliftBrands, InitialLoto
@@ -43,7 +45,7 @@ def is_valid_queryparam(param):
 @staff_member_required
 def forklift_index(request):
     return render(request, 'forklifts/index.html')
-
+    
 def generate_water_track():
     forklifts = Forklifts.objects.filter(powered='E')
     water_entries = WaterEntry.objects.values('forklift_id', 'fecha')
@@ -74,7 +76,6 @@ def generate_water_track():
         lista.append((forklift, fecha_registro, color))
 
     return lista
-
 
 @staff_member_required
 def water_track(request):
@@ -139,26 +140,38 @@ def forklift_view(request, id):
         lotoid = get_object_or_404(InitialLoto, forklift=forklifts)
         query2 = ForkliftServiceProviders.objects.filter(forklifts=id)
         status_color = forklifts.status.color if forklifts.status else None
-        year = 2023  # Replace with the desired year
+        today = datetime.now()
+        year = today.year
         all_dates = generate_dates(year, id)
         var = type(all_dates)
-        return render(request, 'forklifts/view.html', {'db_response':forklifts, 'db_response2': query2, 'status_color':status_color,'lotoid':lotoid,'year':year,'dates':all_dates,'var':var})
+        batery_days_ago = (today - forklifts.last_batery).days
+        batery_procentaje = Decimal(batery_days_ago / (forklifts.batery_target*365)) *100
+        batery_procentaje = batery_procentaje.quantize(Decimal('0.00'), rounding=ROUND_DOWN)
+        return render(request, 'forklifts/view.html', {'db_response':forklifts, 'db_response2': query2, 'status_color':status_color,'lotoid':lotoid,'year':year,'dates':all_dates,'var':var,'days_ago':batery_days_ago})
     #CONDICIONAL STATUS SERVICE
     elif forklifts.status.id == 2:
         query2 = ForkliftServiceProviders.objects.filter(forklifts=id)
         status_color = forklifts.status.color if forklifts.status else None
-        year = 2023  # Replace with the desired year
+        today = datetime.now()
+        year = today.year
         all_dates = generate_dates(year, id)
         var = type(all_dates)
-        return render(request, 'forklifts/view.html', {'db_response':forklifts, 'db_response2': query2, 'status_color':status_color,'year':year,'dates':all_dates,'var':var})
+        batery_days_ago = (today - forklifts.last_batery).days
+        batery_procentaje = Decimal(batery_days_ago / (forklifts.batery_target*365)) *100
+        batery_procentaje = batery_procentaje.quantize(Decimal('0.00'), rounding=ROUND_DOWN)
+        return render(request, 'forklifts/view.html', {'db_response':forklifts, 'db_response2': query2, 'status_color':status_color,'year':year,'dates':all_dates,'var':var,'days_ago':batery_days_ago})
     #CONDICIONAL STATUS AVAILABLE
     elif forklifts.status.id == 1:
         query2 = ForkliftServiceProviders.objects.filter(forklifts=id)
         status_color = forklifts.status.color if forklifts.status else None
-        year = 2023  # Replace with the desired year
+        today = datetime.now()
+        year = today.year
         all_dates = generate_dates(year, id)
         var = type(all_dates)
-        return render(request, 'forklifts/view.html', {'db_response':forklifts, 'db_response2': query2, 'status_color':status_color,'year':year,'dates':all_dates,'var':var})
+        batery_days_ago = (today - forklifts.last_batery).days
+        batery_procentaje = Decimal(batery_days_ago / (forklifts.batery_target*365)) *100
+        batery_procentaje = batery_procentaje.quantize(Decimal('0.00'), rounding=ROUND_DOWN)
+        return render(request, 'forklifts/view.html', {'db_response':forklifts, 'db_response2': query2, 'status_color':status_color,'year':year,'dates':all_dates,'var':var,'days_ago':batery_days_ago,'batery_procentaje':batery_procentaje})
 
 def forklift_edit(request, id):
     forklift_instance = get_object_or_404(Forklifts, id=id)
@@ -677,6 +690,74 @@ def inspection(request):
     query = ForkliftInspection.objects.all().filter(valid=0)
     return render(request, 'forklifts/inspection/index.html',{'query':query})
 
+@staff_member_required
+def inspection_log(request):
+    qs = ForkliftInspection.objects.all().order_by('-id')
+    reason_contains_query = request.GET.get('title_contains')
+    usuarioempezo = request.GET.get('title_or_author')
+    usuariotermino = request.GET.get('title_or_author')
+    title_or_author_query = request.GET.get('title_or_author')
+    date_min = request.GET.get('date_min')
+    date_max = request.GET.get('date_max')
+
+    if request.method == 'POST':
+        search = SearchForm(initial=request.POST)
+        items = Loto.objects.all().order_by('-id')
+        q_clave = request.POST['q_clave']
+        q_su = request.POST['formstartusuario']
+
+        sdate_min = request.POST['sdate_min']
+        sdate_max = request.POST['sdate_max']
+
+        if is_valid_queryparam(q_clave):
+            qs = qs.filter(forklift__clave__icontains=q_clave)
+
+        if is_valid_queryparam(q_su):
+            qs = qs.filter(usuario=q_su)
+
+        if is_valid_queryparam(sdate_min):
+            qs = qs.filter(fecha__gte=sdate_min)
+        if is_valid_queryparam(sdate_max):
+            qs = qs.filter(fecha__lt=sdate_max)
+
+        paginator = Paginator(qs, 10)  # Show 10 items per page
+        page_number = request.GET.get('page')
+        page = paginator.get_page(page_number)
+        return render(request, 'forklifts/inspection/log.html',{'page':page,'search':search})
+    else:
+        search = SearchForm()
+        items = ForkliftInspection.objects.all().order_by('-id')
+        paginator = Paginator(items, 10)  # Show 10 items per page
+        page_number = request.GET.get('page')
+        page = paginator.get_page(page_number)
+        return render(request, 'forklifts/inspection/log.html',{'page':page,'search':search})
+
+@staff_member_required
+def inspection_view(request, id):
+    i = get_object_or_404(ForkliftInspection, id=id)
+    form = DisEnInspectionForm(instance=i)
+    return render(request, 'forklifts/inspection/view.html',{'form':form,'i':i})
+
+@staff_member_required
+def inspection_release(request, id):
+   # Obtiene la instancia de ForkliftInspection
+    inspection = get_object_or_404(ForkliftInspection, id=id)
+    
+    if request.method == 'POST':
+        form = ReleaseInspectionForm(request.POST)
+        if form.is_valid():
+            # Cambia el valor de valid a 1 (True)
+            inspection.valid = True
+            
+            # Guarda los cambios en la base de datos
+            inspection.save()
+            
+            # Redirige a la vista de detalles o a donde desees
+            return redirect('inspection')  # Ajusta la redirección según tu configuración
+    else:
+        form = ReleaseInspectionForm()
+    
+    return render(request, 'forklifts/inspection/release.html', {'form': form,'inspection':inspection})
 @login_required
 def inspection_sheet_language(request):
     usuario = get_object_or_404(User, id=request.user.id)
@@ -700,9 +781,9 @@ def inspection_sheet_form_es(request):
             instance.usuario = usuario
                 
             if all(getattr(instance, f'check{i}') == False for i in range(1, 12)):
-                instance.valid = 0
-            else:
                 instance.valid = 1
+            else:
+                instance.valid = 0
             instance.save()
             return redirect('ins_logout_view')  # Redirecciona a una nueva URL
         else:
@@ -718,5 +799,29 @@ def inspection_sheet_form_es(request):
     })
 @login_required
 def inspection_sheet_form_en(request):
-    return render(request, 'forklifts/sheet/sheet_en.html')
-    
+    usuario = get_object_or_404(User, id=request.user.id)
+    query = get_object_or_404(UsersExtension, user=usuario)
+
+    if request.method == 'POST':
+        form = EnInspectionForm(request.POST)
+        if form.is_valid():
+            instance = form.save(commit=False)
+            instance.usuario = usuario
+                
+            if all(getattr(instance, f'check{i}') == False for i in range(1, 12)):
+                instance.valid = 1
+            else:
+                instance.valid = 0
+            instance.save()
+            return redirect('ins_logout_view')  # Redirecciona a una nueva URL
+        else:
+            messages.error(request, 'Hubo errores en el formulario. Por favor, corrígelos.')
+
+    else:
+        form = EnInspectionForm()
+
+    return render(request, 'forklifts/sheet/sheet_en.html', {
+        'usuario': usuario,
+        'query': query,
+        'form': form
+    })
