@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+  SuipluMX - Add Ladder
+{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+  <h1 class="h2">Ladders</h1>
+        <div class="btn-toolbar mb-2 mb-md-0">
+            {% include "ladders/ladder_toolbar.html" %}
+        </div>
+</div>
+<h5>Adding new ladder</h5>
+<script src="{% static 'js/functions_forklifts.js' %}"></script>
+<div class="row">
+  <div class="col-12 p-2 mb-0">
+    <div class="containervieweqipment">
+      <div class="containervieweqipmenthead">
+        <div class="container">
+          <div class="row">
+            <div class="col-6">Ladder's data</div>
+            <div class="col-6"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="containervieweqipmentbody">
+        <form id="forklift_form_edit" action="" method="post" enctype="multipart/form-data">
+          {% csrf_token %}
+          <div class="row">
+            <div class="col-12">
+              <div class="input-group mb-3">
+                <span class="input-group-text pb-1 pt-1" id="basic-addon1">Tag</span>
+                {{ form.clave }}
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-4">
+              <div class="input-group mb-3">
+                <span class="input-group-text pb-1 pt-1" id="basic-addon1">Brand</span>
+                {{ form.brand }}
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="input-group mb-3">
+                <span class="input-group-text pb-1 pt-1" id="basic-addon1">Material</span>
+                {{ form.material }}
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="input-group mb-3">
+                <span class="input-group-text pb-1 pt-1" id="basic-addon1">Model</span>
+                {{ form.modelo }}
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-6">
+              <div class="input-group mb-3">
+                <span class="input-group-text pb-1 pt-1" id="basic-addon1">Steps</span>
+                {{ form.pasos }}
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="input-group mb-3">
+                <span class="input-group-text pb-1 pt-1" id="basic-addon1">Status</span>
+                {{ form.status }}
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <p>{{ form.imagen }}</p>
+          </div>
+
+          <div class="text-end">
+            <button type="submit" class="btn btn-success">Save</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}SuipluMX - Adding inspection record for {{ ladder.clave }}{% endblock %}
+{% block content %}
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+  <h1 class="h2">Adding inspection record for {{ ladder.clave }}</h1>
+  <div class="btn-toolbar mb-2 mb-md-0">
+  </div>
+</div>
+  <h5>{{ ladder.modelo }} by {{ ladder.brand }}</h5>
+<form method="post">
+{% csrf_token %}
+<div class="pt-2">
+<a class="text-decoration-none text-reset">Checked by:</a>
+{{form.usuario}}
+<a class="text-decoration-none text-reset">Ladder:</a>
+{{form.ladder}}
+<button class="mt-4 btn btn-success" type="submit">Add entry</button> 
+</div>
+</form>
+{% endblock %}

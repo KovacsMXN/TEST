@@ -26,7 +26,7 @@
             </div>
           </div>
         </div>
-        <div class="containervieweqipmentbody">   
+        <div class="containervieweqipmentbody">
 <table class="table table-striped">
  <thead>
     <tr>
@@ -39,7 +39,7 @@
   <tbody>
     {% for forklift in forklifts %}
     <tr>
-      <td><a class="btn btn-primary btn-sm" href="{% url 'forklift_view' forklift.0.id %}"><img class="filter-white" src="/static/images/ico/truck.svg"> {{ forklift.0.clave }}</a></td>
+      <td><a class="btn btn-primary btn-sm" href="{% url 'forklift_view' forklift.0.id %}"><img class="filter-white" src="/static/images/ico/truck.svg"> {{ forklift.0.clave }} - {{ forklift.0.brand }}</a></td>
       <td class="align-middle">{{forklift.1}}</td>
       <td><a href="#" data-bs-toggle="tooltip" data-bs-title="{{date.0}}"><div style="background-color: {{ forklift.2 }};" class="commit-node-traycing"></div></a></td>
       <td class="text-end"><a class="btn btn-dark btn-sm" href="{% url 'forklift_view' forklift.0.id %}">    <span class="align-text-bottom">
@@ -64,7 +64,7 @@
             </div>
           </div>
         </div>
-        <div class="containervieweqipmentbody">   
+        <div class="containervieweqipmentbody">
 <table class="table table-striped">
  <thead>
     <tr>

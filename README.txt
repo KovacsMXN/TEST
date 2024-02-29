@@ -1,7 +1,10 @@
 README
 
 INSTALL
-	CREATE STATUS
-		ID1 Lock-Out / Tag-Out #B22222
-		ID2 Available #046131
+	CREATE STATUS FORKLIFT
+		ID1 Available #046131
+		ID2 Lock-Out / Tag-Out #B22222
 		ID3 On maintenance #00529C
+	CREATE STATUS LADDERS
+		ID1 Available #046131
+		ID2 Lock-Out / Tag-Out #B22222

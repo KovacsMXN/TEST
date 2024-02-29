@@ -1,14 +1,14 @@
 {% extends "base.html" %}
 {% load static %}
 {% block title %}
-  SuipluMX - Viewing forklift {{db_response.clave}}
+  SuipluMX - Viewing Ladder {{db_response.clave}}
 {% endblock %}
 
 {% block content %}
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-    <h1 class="h2">Viewing forklift {{db_response.clave}}</h1>
+    <h1 class="h2">Viewing ladder {{db_response.clave}}</h1>
         <div class="btn-toolbar mb-2 mb-md-0">
-            {% include "forklifts/fork_toolbar.html" %}
+            {% include "ladders/ladder_toolbar.html" %}
         </div>
   </div>
   <h5>{{ db_response.modelo }} by {{ db_response.brand }}</h5>
@@ -22,7 +22,7 @@
             <div class="col-6">
               {% if request.user.is_superuser %}
               <div class="text-end">
-                <a href="{% url 'forklift_edit' db_response.id %}" class="nav-link">
+                <a href="{% url 'ladders_edit' db_response.id %}" class="nav-link">
                   <span class="align-text-bottom">
                     <img class="filter-white" src="{% static 'images/ico/pencil-square.svg' %}">
                   </span>
@@ -40,27 +40,6 @@
       <td>{{db_response.clave}}</td>
     </tr>
     <tr>
-      <th scope="row align-middle" >Status</th>
-      <td class="align-middle m-0 p-0">
-       <table class="table table-borderless m-0">
-        <tbody>
-        <tr>
-          <td class="align-middle">
-            <span style="height: 18px;width: 18px;background-color:{{ status_color  }};border-radius: 50%;vertical-align: sub;display: inline-block;" class="dot"></span> {{db_response.status}}
-          </td>
-          <td class="align-middle text-end">
-            {% if db_response.status.id == 1 %}
-              <a  href="{% url 'forklift_loto_add' db_response.id %}" class="btn btn-primary btn-sm"><img class="filter-white" src="{% static 'images/ico/lock.svg' %}"> Lockout–tagout</a>
-            {%elif db_response.status.id == 3 %}
-              <a  href="{% url 'forklift_loto_view' lotoid.id %}" class="btn btn-primary btn-sm"><img class="filter-white" src="{% static 'images/ico/unlock.svg' %}"> Realase</a>
-            {%else%}
-            {%endif%}
-          </td>
-        </tr>
-        </table>
-      </td>
-    </tr>
-    <tr>
       <th scope="row">Brand</th>
       <td>{{db_response.brand}}</td>
     </tr>
@@ -69,55 +48,28 @@
       <td>{{db_response.modelo}}</td>
     </tr>
     <tr>
-      <th scope="row">Serial</th>
-      <td>{{db_response.serial}}</td>
+      <th scope="row">Steps</th>
+      <td>{{db_response.pasos}}</td>
     </tr>
     <tr>
-      <th scope="row">Energy source</th>
-      <td><img src="/static/images/ico/{{ db_response.powered}}.svg"> {{db_response.get_powered_display }}</td>
+      <th scope="row">Material</th>
+      <td>{{db_response.material}}</td>
     </tr>
     <tr>
+      <th scope="row">Added</th>
+      <td>{{db_response.agregado}}</td>
+    </tr>
     <tr>
-      <th scope="row align-middle" >Last battery replacement</th>
+      <th scope="row align-middle" >Status</th>
       <td class="align-middle m-0 p-0">
-<div class="progress m-2">
-  <div class="progress-bar
-    {% if batery_procentaje >= 80 %}bg-danger
-    {% elif batery_procentaje >= 60 %}bg-warning
-    {% else %}bg-success
-    {% endif %}" role="progressbar"
-    style="width: {{ batery_procentaje }}%;"
-    aria-valuenow="{{batery_procentaje}}"
-    aria-valuemin="0"
-    aria-valuemax="100"
-    data-toggle="tooltip"
-    data-placement="top"
-    title="{{db_response.last_batery }} ({{days_ago}} days ago)">
-    {{batery_procentaje}}%
-  </div>
-</div>
-
-      </td>
-    </tr>
-    </tr>
-    <tr>
-      <th scope="row">Holder</th>
-      <td>{{db_response.owner}}</td>
-    </tr>
-    <tr>
-      <th scope="row">Service providers</th>
-      <td>
-        <table class="table table-borderless m-0 p-0">
+       <table class="table table-borderless m-0">
         <tbody>
-        {% for service_provider in db_response2 %}
-        <tr class="text-start">
-          <td class="text-start align-middle"><img width="90" src="/media/{{service_provider.imagen}}"></td>
-          <td class="align-middle"><a class="text-reset text-decoration-none fw-bolder">{{ service_provider.name }}</a></td>
-          <td class="align-middle text-end"><a class="btn btn-primary btn-sm" href="{% url 'forklift_service_providers_view' service_provider.id %}">View</td>
+        <tr>
+          <td class="align-middle">
+            <span style="height: 18px;width: 18px;background-color:{{ status_color  }};border-radius: 50%;vertical-align: sub;display: inline-block;" class="dot"></span> {{db_response.status}}
+          </td>
+
         </tr>
-        {% empty %}
-            No service provider available
-        {% endfor %}
         </table>
       </td>
     </tr>
@@ -130,7 +82,7 @@
       <div class="containervieweqipment">
         <div class="containervieweqipmenthead">
           <div class="row">
-            <div class="col-6">Forklift's image</div>
+            <div class="col-6">Ladder's image</div>
             <div class="col-6">
               <div class="text-end" >
                 {% if request.user.is_superuser %}
@@ -205,10 +157,10 @@
                     <hr>
                     <div class="row">
                         <div class="col-9 align-middle">
-                            <a  class="fw-bolder text-reset text-decoration-none">Delete this forklift</a><br>
-                            <a class="fw-medium text-reset text-decoration-none">Once you delete this forklift, there is no going back. Please be certain.</a>
+                            <a  class="fw-bolder text-reset text-decoration-none">Delete this ladder</a><br>
+                            <a class="fw-medium text-reset text-decoration-none">Once you delete this ladder, there is no going back. Please be certain.</a>
                         </div>
-                        <div class="col-3 text-end"> <button type="button" onClick='delete_content({{db_response.id}})' class="btn btn-danger">Delete this forklift</button></div>
+                        <div class="col-3 text-end"> <button type="button" onClick='delete_content({{db_response.id}})' class="btn btn-danger">Delete this ladder</button></div>
                     </div>
                     <hr>
                 </div>
@@ -225,11 +177,11 @@
     <div class="modal-dialog modal-dialog-centered modal-lg">
       <div class="modal-content">
         <div class="modal-header">
-          <h1 class="modal-title fs-5" id="staticBackdropLabel">Are you sure you want to delete this forklift?</h1>
+          <h1 class="modal-title fs-5" id="staticBackdropLabel">Are you sure you want to delete this ladder?</h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">All related items will be deleted. You can't undo this action.
-          <form class="eliminar-formulario" method="post" action="{% url 'api_del_forklifts' db_response.id %}">
+          <form class="eliminar-formulario" method="post" action="{% url 'ladders_delete' db_response.id %}">
             {% csrf_token %}
             <input type="hidden" name="delete_id" id="delete_id" value="{{db_response.id}}">
         </div>

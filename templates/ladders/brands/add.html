@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+    SuipluMX - Adding new ladder brand
+{% endblock %}
+
+{% block content %}
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">Ladders</h1>
+        <div class="btn-toolbar mb-2 mb-md-0">
+            {% include "ladders/ladder_toolbar.html" %}
+        </div>
+    </div>
+    <h5>Adding new ladder brand</h5>
+    <div class="row p-2 mb-0">
+        <div class="containervieweqipment">
+            <div class="containervieweqipmenthead">
+                <div class="row">
+                    <div class="col-6">General information:</div>
+                    <div class="col-6">
+                        <div class="text-end">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="containervieweqipmentbody">
+                <form action="" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <div class="pb-2 text-end">
+                        <button type="submit" class="btn btn-success">Add</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="{% static 'js/forklifts/forklifts.js' %}"></script>
+{% endblock %}

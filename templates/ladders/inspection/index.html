@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}SuipluMX - Ladder inspection{% endblock %}
+{% block content %}
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+  <h1 class="h2">Ladder Inspections</h1>
+    <div class="btn-toolbar mb-2 mb-md-0">
+        {% include "ladders/ladder_toolbar.html" %}
+    </div>
+</div>
+<h5>Ladder Inspections</h5>
+    <div class="row pb-2 px-1">
+<div class="col-6">
+</div>
+
+        <div class="col-6 text-end">
+        </div>
+    </div>
+  <div class="row">
+    <div class="col-12 p-2 mb-0">
+      <div class="containervieweqipment">
+        <div class="containervieweqipmenthead">
+          <div class="row">
+            <div class="col-6">Available ladders</div>
+            <div class="col-6">
+            </div>
+          </div>
+        </div>
+        <div class="containervieweqipmentbody">   
+<table class="table table-striped">
+ <thead>
+    <tr>
+      <th scope="col">Tag</th>
+      <th scope="col">Last inspection</th>
+      <th scope="col">-2 Month</th>
+      <th scope="col">-1 Month</th>
+      <th scope="col">This Month</th>
+      <th class="text-end" scope="col">Operations</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for ladder in ladders %}
+    <tr>
+      <td><a class="btn btn-primary btn-sm" href="{% url 'ladders_view' ladder.0.id %}"><img class="filter-white" src="/static/images/ico/ladder.svg"> {{ ladder.0.clave }}</a></td>
+      <td class="align-middle">{{ladder.1}}</td>
+      <td class="align-middle">{% if ladder.4 == True %}<img class="filter-green" src="/static/images/ico/check-circle.svg">{% else %}<img class="filter-red" src="/static/images/ico/x-circle.svg">{% endif %}</td>
+      <td class="align-middle">{% if ladder.3 == True %}<img class="filter-green" src="/static/images/ico/check-circle.svg">{% else %}<img class="filter-red" src="/static/images/ico/x-circle.svg">{% endif %}</td>
+      <td class="align-middle">{% if ladder.2 == True %}<img class="filter-green" src="/static/images/ico/check-circle.svg">{% else %}<img class="filter-red" src="/static/images/ico/x-circle.svg">{% endif %}</td>
+      <td class="text-end"><a class="btn btn-dark btn-sm" href="{% url 'ladders_view' ladder.0.id %}">    <span class="align-text-bottom">
+        <img class="filter-white" src="{% static 'images/ico/eye.svg' %}" />
+    </span></a> <a class="btn btn-primary btn-sm" href="{% url 'ladders_inspection_add' ladder.0.id %}">    <span class="align-text-bottom">
+        <img class="filter-white" src="{% static 'images/ico/archive.svg' %}" />
+    </span></a></td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

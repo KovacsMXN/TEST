@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'storage.apps.StorageConfig',
     'staff.apps.StaffConfig',
     'forklift.apps.ForkliftConfig',
+    'ladders.apps.LaddersConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

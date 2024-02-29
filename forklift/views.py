@@ -147,7 +147,7 @@ def forklift_view(request, id):
         batery_days_ago = (today - forklifts.last_batery).days
         batery_procentaje = Decimal(batery_days_ago / (forklifts.batery_target*365)) *100
         batery_procentaje = batery_procentaje.quantize(Decimal('0.00'), rounding=ROUND_DOWN)
-        return render(request, 'forklifts/view.html', {'db_response':forklifts, 'db_response2': query2, 'status_color':status_color,'lotoid':lotoid,'year':year,'dates':all_dates,'var':var,'days_ago':batery_days_ago})
+        return render(request, 'forklifts/view.html', {'db_response':forklifts, 'db_response2': query2, 'status_color':status_color,'lotoid':lotoid,'year':year,'dates':all_dates,'var':var,'days_ago':batery_days_ago,'batery_procentaje':batery_procentaje})
     #CONDICIONAL STATUS SERVICE
     elif forklifts.status.id == 2:
         query2 = ForkliftServiceProviders.objects.filter(forklifts=id)
@@ -159,12 +159,12 @@ def forklift_view(request, id):
         batery_days_ago = (today - forklifts.last_batery).days
         batery_procentaje = Decimal(batery_days_ago / (forklifts.batery_target*365)) *100
         batery_procentaje = batery_procentaje.quantize(Decimal('0.00'), rounding=ROUND_DOWN)
-        return render(request, 'forklifts/view.html', {'db_response':forklifts, 'db_response2': query2, 'status_color':status_color,'year':year,'dates':all_dates,'var':var,'days_ago':batery_days_ago})
+        return render(request, 'forklifts/view.html', {'db_response':forklifts, 'db_response2': query2, 'status_color':status_color,'year':year,'dates':all_dates,'var':var,'days_ago':batery_days_ago,'batery_procentaje':batery_procentaje})
     #CONDICIONAL STATUS AVAILABLE
     elif forklifts.status.id == 1:
         query2 = ForkliftServiceProviders.objects.filter(forklifts=id)
         status_color = forklifts.status.color if forklifts.status else None
-        today = datetime.now(timezone.utc)
+        today = datetime.now()
         year = today.year
         all_dates = generate_dates(year, id)
         var = type(all_dates)
