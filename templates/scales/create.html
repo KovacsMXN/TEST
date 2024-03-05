@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block title %}
+  SuipluMX - Add scale
+{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+  <h1 class="h2">Scales</h1>
+        <div class="btn-toolbar mb-2 mb-md-0">
+            {% include "scales/scales_toolbar.html" %}
+        </div>
+</div>
+<h5>Adding new scale</h5>
+<script src="{% static 'js/functions_forklifts.js' %}"></script>
+<div class="row">
+  <div class="col-12 p-2 mb-0">
+    <div class="containervieweqipment">
+      <div class="containervieweqipmenthead">
+      Scales's data
+      </div>
+
+      <div class="containervieweqipmentbody">
+      {{form.errors}}
+        <form id="forklift_form_edit" action="{% url 'scales_add' %}" method="post" enctype="multipart/form-data">
+          {% csrf_token %}
+          <div class="row">
+          <div class="form-group col-3 mb-0">
+          {{ form.clave|as_crispy_field }}
+          </div>
+          <div class="form-group col-3 mb-0">
+          {{ form.modelo|as_crispy_field }}
+          </div>
+          <div class="form-group col-3 mb-0">
+          {{ form.brand|as_crispy_field }}
+          </div>
+          <div class="form-group col-3 mb-0">
+          {{ form.serial|as_crispy_field }}
+          </div>
+          </div>
+          <div class="row">
+          <div class="form-group col-3 mb-0">
+          {{ form.nmax|as_crispy_field }}
+          </div>
+          <div class="form-group col-3 mb-0">
+          {{ form.clase|as_crispy_field }}
+          </div>
+          <div class="form-group col-3 mb-0">
+          {{ form.powersupply|as_crispy_field }}
+          </div>
+          <div class="form-group col-3 mb-0">
+          {{ form.status|as_crispy_field }}
+          </div>
+          </div>
+          <div class="row">
+          <div class="form-group col-12 mb-0">
+          {{ form.service_provider|as_crispy_field }}
+          </div>
+          </div>
+          <div class="row">
+          <div class="form-group col-12 mb-0">
+          {{ form.imagen|as_crispy_field }}
+          </div>
+          </div>
+          <div class="text-end">
+            <button type="submit" class="btn btn-success">Save</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

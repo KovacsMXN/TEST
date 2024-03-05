@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block title %}
+    SuipluMX - Editing service provider for scales
+{% endblock %}
+
+{% block content %}
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">Scales</h1>
+        <div class="btn-toolbar mb-2 mb-md-0">
+            {% include "scales/scales_toolbar.html" %}
+        </div>
+    </div>
+    <h5>Editing scale service provider</h5>
+    <div class="row p-2 mb-0">
+        <div class="containervieweqipment">
+            <div class="containervieweqipmenthead">
+                <div class="row">
+                    <div class="col-6">General information</div>
+                    <div class="col-6">
+                        <div class="text-end">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="containervieweqipmentbody">
+                {{ form.errors }}
+                <form action="" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-3">{{ form.name|as_crispy_field }}</div>
+                        <div class="col-3">{{ form.contact_person|as_crispy_field }}</div>
+                        <div class="col-3">{{ form.phone_number|as_crispy_field }}</div>
+                        <div class="col-3">{{ form.email|as_crispy_field }}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">{{ form.address|as_crispy_field }}</div>
+                        <div class="col-6">{{ form.website|as_crispy_field }}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">{{ form.service_description|as_crispy_field }}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">{{ form.imagen|as_crispy_field }}</div>
+                    </div>
+                    <div class="pb-2 text-end">
+                        <button type="submit" class="btn btn-success">Add</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="{% static 'js/forklifts/forklifts.js' %}"></script>
+{% endblock %}

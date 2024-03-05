@@ -1,0 +1,38 @@
+{% load static %}
+<div class="btn-group me-2">
+<a href="{% url 'ladders_index_view' %}" class="btn btn-dark">
+    <span class="align-text-bottom">
+        <img class="filter-white" src="{% static 'images/ico/ladder.svg' %}" />
+    </span>
+    Ladders
+</a>
+
+<a href="{% url 'ladders_brands' %}" class="btn btn-dark">
+    <span class="align-text-bottom">
+        <img class="filter-white" src="{% static 'images/ico/card-heading.svg' %}" />
+    </span>
+    Brands
+</a>
+
+<a href="{% url 'ladders_materials' %}" class="btn btn-dark">
+    <span class="align-text-bottom">
+        <img class="filter-white" src="{% static 'images/ico/bricks.svg' %}" />
+    </span>
+    Materials
+</a>
+<a href="{% url 'ladders_status' %}" class="btn btn-dark">
+    <span class="align-text-bottom">
+        <img class="filter-white" src="{% static 'images/ico/hdd-stack.svg' %}" />
+    </span>
+    Status
+</a>
+</div>
+
+<div class="btn-group me-2">
+<a href="{% url 'ladders_inspection' %}" class="btn btn-primary">
+    <span class="align-text-bottom">
+        <img class="filter-white" src="{% static 'images/ico/journal-check.svg' %}" />
+    </span>
+    
+</a>
+</div>

@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
-
+{% load crispy_forms_tags %}
 {% block title %}
   SuipluMX - Add Ladder
 {% endblock %}
@@ -18,65 +18,25 @@
   <div class="col-12 p-2 mb-0">
     <div class="containervieweqipment">
       <div class="containervieweqipmenthead">
-        <div class="container">
-          <div class="row">
-            <div class="col-6">Ladder's data</div>
-            <div class="col-6"></div>
-          </div>
-        </div>
+      Ladder's data
       </div>
 
       <div class="containervieweqipmentbody">
         <form id="forklift_form_edit" action="" method="post" enctype="multipart/form-data">
           {% csrf_token %}
           <div class="row">
-            <div class="col-12">
-              <div class="input-group mb-3">
-                <span class="input-group-text pb-1 pt-1" id="basic-addon1">Tag</span>
-                {{ form.clave }}
-              </div>
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="col-4">
-              <div class="input-group mb-3">
-                <span class="input-group-text pb-1 pt-1" id="basic-addon1">Brand</span>
-                {{ form.brand }}
-              </div>
-            </div>
-            <div class="col-4">
-              <div class="input-group mb-3">
-                <span class="input-group-text pb-1 pt-1" id="basic-addon1">Material</span>
-                {{ form.material }}
-              </div>
-            </div>
-            <div class="col-4">
-              <div class="input-group mb-3">
-                <span class="input-group-text pb-1 pt-1" id="basic-addon1">Model</span>
-                {{ form.modelo }}
-              </div>
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="col-6">
-              <div class="input-group mb-3">
-                <span class="input-group-text pb-1 pt-1" id="basic-addon1">Steps</span>
-                {{ form.pasos }}
-              </div>
-            </div>
-            <div class="col-6">
-              <div class="input-group mb-3">
-                <span class="input-group-text pb-1 pt-1" id="basic-addon1">Status</span>
-                {{ form.status }}
-              </div>
-            </div>
+            <div class="col-4">{{ form.clave|as_crispy_field  }}</div>
+            <div class="col-4">{{ form.brand|as_crispy_field  }}</div>
+            <div class="col-4">{{ form.modelo|as_crispy_field  }}</div>
           </div>
           <div class="row">
-            {{ form.imagen }}
+            <div class="col-4">{{ form.material|as_crispy_field  }}</div>
+            <div class="col-4">{{ form.pasos|as_crispy_field  }}</div>
+            <div class="col-4">{{ form.status|as_crispy_field  }}</div>
           </div>
-
+          <div class="row">
+            <div class="col-12">{{ form.imagen|as_crispy_field  }}</div>
+          </div>
           <div class="text-end">
             <button type="submit" class="btn btn-success">Save</button>
           </div>

@@ -40,7 +40,7 @@
                         <div class="col-6">General information</div>
                         <div class="col-6">
                             <div class="text-end">
-                                {% if request.user.is_superuser %}
+                                {% if perms.forklift.change_forkliftbrands %}
                                 <div class="text-end">
                                     <a href="{% url 'forklift_brands_edit' data.id %}" name="edit_b" id="edit_b" class="nav-link"><span class="align-text-bottom"><img class="filter-white" src="{% static 'images/ico/pencil-square.svg' %}"></span></a>
                                 </div>
@@ -63,7 +63,7 @@
             </div>
         </div>
     </div>
-    {% if request.user.is_superuser %}
+    {% if perms.forklift.delete_forkliftbrands %}
     <div class="row p-2 mb-0">
             <div class="containerdanger">
                 <div class="containerdangerhead">

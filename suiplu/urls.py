@@ -44,6 +44,9 @@ urlpatterns = [
     #URL FOR LADDERS APP
     path('ladders/', include('ladders.urls')),
 
+    #URL FOR SCALES APP
+    path('scales/', include('scales.urls')),
+
     #URL FOR INVENTORY APP
     path('inventory/', include('inventory.urls')),
 

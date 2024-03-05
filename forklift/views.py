@@ -7,7 +7,8 @@ from django.contrib.auth.decorators import user_passes_test
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.admin.views.decorators import staff_member_required
-
+from django.contrib.auth.decorators import user_passes_test, login_required, permission_required
+from django.db import transaction
 from datetime import date, datetime, timedelta, timezone
 import calendar
 
@@ -25,9 +26,10 @@ from .forms import ForkliftForm, CreateForkliftForm, CreateServiceProviderForm
 from .forms import CreateForkliftOwnersForm
 from .forms import CreateForkliftBrands
 from .forms import CreateForkliftStatus
-from .forms import CreateForkliftLOTO
 from .forms import SearchForm
 from .forms import WaterTrackForm
+
+from .forms import CreateForkliftLOTO
 
 from .forms import EsInspectionForm, EnInspectionForm
 from .forms import DisEsInspectionForm, DisEnInspectionForm
@@ -39,10 +41,12 @@ from .models import Forklifts, ForkliftOwners, ForkliftStatus, ForkliftServicePr
 from .models import WaterEntry
 from staff.models import UsersExtension
 from .models import ForkliftInspection
+
 def is_valid_queryparam(param):
     return param != '' and param is not None
 
-@staff_member_required
+@login_required
+@permission_required("forklift.view_forklifts", raise_exception=True)
 def forklift_index(request):
     return render(request, 'forklifts/index.html')
     
@@ -132,7 +136,8 @@ def generate_dates(year, id):
 
     return all_dates
 
-@staff_member_required
+@login_required
+@permission_required("forklift.view_forklifts", raise_exception=True)
 def forklift_view(request, id):
     forklifts = get_object_or_404(Forklifts, id=id)
     #CONDICIONAL STATUS LOCKOUT/TAGOUT
@@ -173,6 +178,8 @@ def forklift_view(request, id):
         batery_procentaje = batery_procentaje.quantize(Decimal('0.00'), rounding=ROUND_DOWN)
         return render(request, 'forklifts/view.html', {'db_response':forklifts, 'db_response2': query2, 'status_color':status_color,'year':year,'dates':all_dates,'var':var,'days_ago':batery_days_ago,'batery_procentaje':batery_procentaje})
 
+@login_required
+@permission_required("forklift.change_forklifts", raise_exception=True)
 def forklift_edit(request, id):
     forklift_instance = get_object_or_404(Forklifts, id=id)
     imagen_anterior = forklift_instance.imagen  # Guarda la referencia a la imagen anterior
@@ -192,7 +199,8 @@ def forklift_edit(request, id):
         form = ForkliftForm(instance=query)
     return render(request, 'forklifts/edit.html', {'form': form,'data':query})
 
-@user_passes_test(lambda u: u.is_superuser)
+@login_required
+@permission_required("forklift.add_forklifts", raise_exception=True)
 def forklift_add(request):
     if request.method == 'POST':
         form = CreateForkliftForm(request.POST, request.FILES)
@@ -207,7 +215,8 @@ def forklift_add(request):
         form = CreateForkliftForm()
     return render(request, 'forklifts/create.html', {'form': form})
 
-@user_passes_test(lambda u: u.is_superuser)
+@login_required
+@permission_required("forklift.delete_forklifts", raise_exception=True)
 def api_del_forklifts(request, id):
     if request.method == 'POST':
         try:
@@ -227,17 +236,19 @@ def api_del_forklifts(request, id):
 
 
 #FORKLIFT HOLDERS
-#HOLDERS
-@staff_member_required
+@login_required
+@permission_required("forklift.view_forkliftowners", raise_exception=True)
 def forklift_holders(request):
     return render(request, 'forklifts/holders/index.html')
 
-@staff_member_required
+@login_required
+@permission_required("forklift.view_forkliftowners", raise_exception=True)
 def forklift_holders_view(request, id):
     query = get_object_or_404(ForkliftOwners, id=id)
     return render(request, 'forklifts/holders/view.html',{'data':query})
 
-@user_passes_test(lambda u: u.is_superuser)
+@login_required
+@permission_required("forklift.change_forkliftowners", raise_exception=True)
 def forklift_holders_edit(request, id):
     query_instance = get_object_or_404(ForkliftOwners, id=id)
     imagen_anterior = query_instance.imagen  # Guarda la referencia a la imagen anterior
@@ -256,7 +267,8 @@ def forklift_holders_edit(request, id):
         form = CreateForkliftOwnersForm(instance=query_instance)
     return render(request, 'forklifts/holders/edit.html', {'form': form,'data':query_instance})
 
-@user_passes_test(lambda u: u.is_superuser)
+@login_required
+@permission_required("forklift.add_forkliftowners", raise_exception=True)
 def forklift_holders_add(request):
     if request.method == 'POST':
         form = CreateForkliftOwnersForm(request.POST, request.FILES)
@@ -268,7 +280,8 @@ def forklift_holders_add(request):
     return render(request, 'forklifts/holders/add.html', {'form': form})
 
 #HOLDERS JSON
-@user_passes_test(lambda u: u.is_superuser)
+@login_required
+@permission_required("forklift.delete_forkliftowners", raise_exception=True)
 def api_del_forkliftowners(request, id):
     if request.method == 'POST':
         try:
@@ -287,17 +300,19 @@ def api_del_forkliftowners(request, id):
 
 
 
-#SERVICE PROVIDERS    
-@staff_member_required
+@login_required
+@permission_required("forklift.view_forkliftserviceproviders", raise_exception=True)
 def forklift_service_providers(request):
     return render(request, 'forklifts/service_providers/index.html')
 
-@staff_member_required
+@login_required
+@permission_required("forklift.view_forkliftserviceproviders", raise_exception=True)
 def forklift_service_providers_view(request, id):
     query = get_object_or_404(ForkliftServiceProviders, id=id)
     return render(request, 'forklifts/service_providers/view.html', {'data':query})
 
-@user_passes_test(lambda u: u.is_superuser)
+@login_required
+@permission_required("forklift.add_forkliftserviceproviders", raise_exception=True)
 def forklift_service_providers_add(request):
     if request.method == 'POST':
         form = CreateServiceProviderForm(request.POST, request.FILES)
@@ -308,7 +323,8 @@ def forklift_service_providers_add(request):
         form = CreateServiceProviderForm()
     return render(request, 'forklifts/service_providers/add.html', {'form': form})
 
-@user_passes_test(lambda u: u.is_superuser)
+@login_required
+@permission_required("forklift.change_forkliftserviceproviders", raise_exception=True)
 def forklift_service_providers_edit(request, id):
     query_instance = get_object_or_404(ForkliftServiceProviders, id=id)
     imagen_anterior = query_instance.imagen  # Guarda la referencia a la imagen anterior
@@ -327,7 +343,8 @@ def forklift_service_providers_edit(request, id):
         form = CreateServiceProviderForm(instance=query)
     return render(request, 'forklifts/service_providers/edit.html', {'form': form,'data':query})
 
-@user_passes_test(lambda u: u.is_superuser)
+@login_required
+@permission_required("forklift.delete_forkliftserviceproviders", raise_exception=True)
 def api_del_forklifts_service_provider(request, id):
     if request.method == 'POST':
         try:
@@ -337,7 +354,7 @@ def api_del_forklifts_service_provider(request, id):
             from django.conf import settings
             os.remove(os.path.join(settings.MEDIA_ROOT,str(ruta)))
             registro.delete()
-            return redirect('forklift_brands')
+            return redirect('forklift_service_providers')
         except ForkliftServiceProviders.DoesNotExist:
             response_data = {'mensaje': 'El registro no existe.'}
         return JsonResponse(response_data)
@@ -347,14 +364,19 @@ def api_del_forklifts_service_provider(request, id):
 
 
 #BRANDS
-@staff_member_required
+@login_required
+@permission_required("forklift.view_forkliftbrands", raise_exception=True)
 def forklift_brands(request):
     return render(request, 'forklifts/brands/index.html')
-@staff_member_required
+
+@login_required
+@permission_required("forklift.view_forkliftbrands", raise_exception=True)
 def forklift_brands_view(request, id):
     query = get_object_or_404(ForkliftBrands, id=id)
     return render(request, 'forklifts/brands/view.html', {'data':query})
-@user_passes_test(lambda u: u.is_superuser)
+
+@login_required
+@permission_required("forklift.change_forkliftbrands", raise_exception=True)
 def forklift_brands_edit(request,id):
     query_instance = get_object_or_404(ForkliftBrands, id=id)
     imagen_anterior = query_instance.imagen  # Guarda la referencia a la imagen anterior
@@ -372,7 +394,9 @@ def forklift_brands_edit(request,id):
         query = get_object_or_404(ForkliftBrands, id=id)
         form = CreateForkliftBrands(instance=query)
     return render(request, 'forklifts/brands/edit.html', {'form': form,'data':query})
-@user_passes_test(lambda u: u.is_superuser)
+
+@login_required
+@permission_required("forklift.add_forkliftbrands", raise_exception=True)
 def forklift_brands_add(request):
     if request.method == 'POST':
         form = CreateForkliftBrands(request.POST, request.FILES)
@@ -382,7 +406,9 @@ def forklift_brands_add(request):
     else:
         form = CreateForkliftBrands()
     return render(request, 'forklifts/brands/add.html', {'form': form})
-@user_passes_test(lambda u: u.is_superuser)
+
+@login_required
+@permission_required("forklift.view_forkliftbrands", raise_exception=True)
 def api_del_forklifts_brands(request, id):
     if request.method == 'POST':
         try:
@@ -400,8 +426,13 @@ def api_del_forklifts_brands(request, id):
         return JsonResponse({'mensaje': 'Método no permitido'}, status=405)
 
 #STATUS
-@staff_member_required
+@login_required
+@permission_required("forklift.view_forkliftstatus", raise_exception=True)
 def forklift_status(request):
+    if not ForkliftStatus.objects.exists():
+        with transaction.atomic():
+            default_status = ForkliftStatus.objects.create(name="Default Status (Rename)",color="#98eb34")
+            default_status.save()
     forklift_statuses = ForkliftStatus.objects.all()
     for status in forklift_statuses:
         statusconteo = Forklifts.objects.filter().count()
@@ -409,7 +440,8 @@ def forklift_status(request):
         status.forklifts = Forklifts.objects.filter(status=status)
     return render(request, 'forklifts/status/index.html', {'status_counts': forklift_statuses, 'conteo':statusconteo})
 
-@user_passes_test(lambda u: u.is_superuser)
+@login_required
+@permission_required("forklift.delete_forkliftstatus", raise_exception=True)
 def api_del_forklifts_status(request, id):
     if request.method == 'POST':
         try:
@@ -422,14 +454,16 @@ def api_del_forklifts_status(request, id):
     else:
         return JsonResponse({'mensaje': 'Método no permitido'}, status=405)
 
-@staff_member_required
+@login_required
+@permission_required("forklift.view_forkliftstatus", raise_exception=True)
 def forklift_status_view(request, id):
     query = get_object_or_404(ForkliftStatus, id=id)
     query_conteo = Forklifts.objects.filter(status_id=id)
     conteo = query_conteo.count()
     return render(request, 'forklifts/status/view.html', {'data':query, 'conteo': conteo,'mas_data':query_conteo})
 
-@user_passes_test(lambda u: u.is_superuser)
+@login_required
+@permission_required("forklift.change_forkliftstatus", raise_exception=True)
 def forklift_status_edit(request,id):
     query = get_object_or_404(ForkliftStatus, id=id)
     if request.method == 'POST':
@@ -442,7 +476,8 @@ def forklift_status_edit(request,id):
         form = CreateForkliftStatus(instance=query)
     return render(request, 'forklifts/status/edit.html', {'form': form,'data':query})
 
-@user_passes_test(lambda u: u.is_superuser)
+@login_required
+@permission_required("forklift.add_forkliftstatus", raise_exception=True)
 def forklift_status_add(request):
     if request.method == 'POST':
         form = CreateForkliftStatus(request.POST)
@@ -613,7 +648,9 @@ def forklift_loto_delete(request, id):
     else:
         return JsonResponse({'mensaje': 'Método no permitido'}, status=405)
 
-@staff_member_required
+#VIEW FORKLIFT PULL
+@login_required
+@permission_required("forklift.view_forklifts", raise_exception=True)
 def api_pull_forklifts(request):
     query = list(Forklifts.objects.values(
         'id',
@@ -628,7 +665,9 @@ def api_pull_forklifts(request):
     data = {'forklifts':query}
     return JsonResponse(data)
 
-@staff_member_required
+#VIEW FORKLIFT OWNERS PULL
+@login_required
+@permission_required("forklift.view_forkliftowners", raise_exception=True)
 def api_pull_holders(request):
     owners = ForkliftOwners.objects.annotate(
         num_forklifts=Count('forklifts'),
@@ -654,7 +693,9 @@ def api_pull_holders(request):
     response_data = {'owners': owners_data}
     return JsonResponse(response_data)
 
-@staff_member_required
+#VIEW FORKLIFT SERVICE PROVIDERS PULL
+@login_required
+@permission_required("forklift.view_forkliftserviceproviders", raise_exception=True)
 def api_pull_serviceproviders(request):
     providers = ForkliftServiceProviders.objects.all()
 
@@ -666,7 +707,9 @@ def api_pull_serviceproviders(request):
     }
     return JsonResponse(response, safe=False)
 
-@staff_member_required
+#VIEW FORKLIFT BRANDS PULL
+@login_required
+@permission_required("forklift.view_forkliftbrands", raise_exception=True)
 def api_pull_brands(request):
     brands = ForkliftBrands.objects.all()
 
@@ -676,7 +719,9 @@ def api_pull_brands(request):
     }
     return JsonResponse(response, safe=False)
 
-@staff_member_required
+#VIEW FORKLIFT STATUS PULL
+@login_required
+@permission_required("forklift.view_forkliftstatus", raise_exception=True)
 def api_pull_status(request, id):
     statuses = ForkliftStatus.objects.annotate(
     forklift_count=Count('forklifts__id', filter=Q(forklifts__owner_id=id))
@@ -685,11 +730,14 @@ def api_pull_status(request, id):
     return render(request, 'forklifts/misc/status_holders.html', {'status_counts': status_counts})
 
 
-@staff_member_required
+#VIEW INSPECTION INSPECTION
+@login_required
+@permission_required("forklift.view_forkliftinspection", raise_exception=True)
 def inspection(request):
     query = ForkliftInspection.objects.all().filter(valid=0)
     return render(request, 'forklifts/inspection/index.html',{'query':query})
 
+#VIEW INSPECTION LOG
 @staff_member_required
 def inspection_log(request):
     qs = ForkliftInspection.objects.all().order_by('-id')
@@ -732,32 +780,28 @@ def inspection_log(request):
         page = paginator.get_page(page_number)
         return render(request, 'forklifts/inspection/log.html',{'page':page,'search':search})
 
+#VIEW INSPECTION VIEW
 @staff_member_required
 def inspection_view(request, id):
     i = get_object_or_404(ForkliftInspection, id=id)
     form = DisEnInspectionForm(instance=i)
     return render(request, 'forklifts/inspection/view.html',{'form':form,'i':i})
 
+#VIEW INSPECTION RELEASE
 @staff_member_required
 def inspection_release(request, id):
-   # Obtiene la instancia de ForkliftInspection
     inspection = get_object_or_404(ForkliftInspection, id=id)
-    
     if request.method == 'POST':
         form = ReleaseInspectionForm(request.POST)
         if form.is_valid():
-            # Cambia el valor de valid a 1 (True)
             inspection.valid = True
-            
-            # Guarda los cambios en la base de datos
             inspection.save()
-            
-            # Redirige a la vista de detalles o a donde desees
             return redirect('inspection')  # Ajusta la redirección según tu configuración
     else:
         form = ReleaseInspectionForm()
-    
     return render(request, 'forklifts/inspection/release.html', {'form': form,'inspection':inspection})
+
+#VIEW INSPECTION SELECT LANGUAGE
 @login_required
 def inspection_sheet_language(request):
     usuario = get_object_or_404(User, id=request.user.id)
@@ -769,17 +813,16 @@ def inspection_sheet_language(request):
     else:
         return render(request, 'forklifts/sheet/index.html')
 
+#VIEW INSPECTION FORM ES
 @login_required
 def inspection_sheet_form_es(request):
     usuario = get_object_or_404(User, id=request.user.id)
     query = get_object_or_404(UsersExtension, user=usuario)
-
     if request.method == 'POST':
         form = EsInspectionForm(request.POST)
         if form.is_valid():
             instance = form.save(commit=False)
             instance.usuario = usuario
-                
             if all(getattr(instance, f'check{i}') == False for i in range(1, 12)):
                 instance.valid = 1
             else:
@@ -788,26 +831,24 @@ def inspection_sheet_form_es(request):
             return redirect('ins_logout_view')  # Redirecciona a una nueva URL
         else:
             messages.error(request, 'Hubo errores en el formulario. Por favor, corrígelos.')
-
     else:
         form = EsInspectionForm()
-
     return render(request, 'forklifts/sheet/sheet_es.html', {
         'usuario': usuario,
         'query': query,
         'form': form
     })
+
+#VIEW INSPECTION FORM EN
 @login_required
 def inspection_sheet_form_en(request):
     usuario = get_object_or_404(User, id=request.user.id)
     query = get_object_or_404(UsersExtension, user=usuario)
-
     if request.method == 'POST':
         form = EnInspectionForm(request.POST)
         if form.is_valid():
             instance = form.save(commit=False)
             instance.usuario = usuario
-                
             if all(getattr(instance, f'check{i}') == False for i in range(1, 12)):
                 instance.valid = 1
             else:
@@ -816,10 +857,8 @@ def inspection_sheet_form_en(request):
             return redirect('ins_logout_view')  # Redirecciona a una nueva URL
         else:
             messages.error(request, 'Hubo errores en el formulario. Por favor, corrígelos.')
-
     else:
         form = EnInspectionForm()
-
     return render(request, 'forklifts/sheet/sheet_en.html', {
         'usuario': usuario,
         'query': query,

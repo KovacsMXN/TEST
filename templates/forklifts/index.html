@@ -14,7 +14,7 @@
 </div>
 
         <div class="col-6 text-end">
-            {% if request.user.is_superuser %}
+            {% if perms.forklift.add_forklifts %}
             <a href="{% url 'forklift_add' %}" class="btn btn-dark">
             <span class="align-text-bottom">
             <img class="filter-white" src="{% static 'images/ico/plus-square.svg' %}" />

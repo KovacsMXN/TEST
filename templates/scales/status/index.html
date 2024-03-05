@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}SuipluMX - Registrated status for scales{% endblock %}
+{% block content %}
+      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">Scales</h1>
+        <div class="btn-toolbar mb-2 mb-md-0">
+            {% include "scales/scales_toolbar.html" %}
+        </div>
+      </div>
+  <div class="row pb-2 px-1">
+    <div class="col-6">
+      <h5>Registrated scales status</h5>
+    </div>
+    <div class="col-6">
+      {% if perms.scales.add_scalesstatus %}
+        <div class="text-end">
+          <a href="{% url 'scales_status_add' %}" class="btn btn-dark">
+            <img class="filter-white" src="{% static 'images/ico/hdd-stack.svg' %}" /> Add status
+          </a>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+<table class="table">
+  <thead>
+    <tr>
+      <th width="15%" scope="col">Status</th>
+      <th width="5%" scope="col">Count</th>
+      <th width="0%" scope="col">Percentage</th>
+      <th width="40%" scope="col">Scales</th>
+      <th width="10%" class="text-end" scope="col">Operations</th>
+    </tr>
+  </thead>
+  <tbody>
+        {% for status in status_counts %}
+        <tr>
+            <td ><span style="height: 18px;width: 18px;background-color:{{ status.color }};border-radius: 50%;vertical-align: sub;display: inline-block;" class="dot"></span> {{ status.name }}</td>
+            <td>{{ status.count }} Scales</td>
+            <td><div class="progress m-2">
+  <div class="progress-bar
+    bg-success
+    " role="progressbar" style="width:{% widthratio status.count conteo 100 %}%;" aria-valuenow="{% widthratio status.count conteo 100 %}" aria-valuemin="0" aria-valuemax="100" data-toggle="tooltip" data-placement="top" data-bs-original-title="{% widthratio status.count conteo 100 %} %">
+    {% widthratio status.count conteo 100 %} %
+  </div>
+</div></td>
+            <td>
+                    
+<div class="accordion" id="accordionPanelsStayOpenExample">
+  <div class="accordion-item">
+    <h2 class="accordion-header">
+      <button class="accordion-button collapsed header_fkl_count" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree{{status.id}}" aria-expanded="false" aria-controls="panelsStayOpen-collapseThree">
+        {{ status.count }} out of {{ conteo }} scales</button>
+    </h2>
+    <div id="panelsStayOpen-collapseThree{{status.id}}" class="accordion-collapse collapse">
+      <div class="accordion-body">
+        {% if status.count %}
+        {% for obj in status.objs.all %}
+        <a href="{% url 'scales_view' obj.id %}" type="button" class="btn btn-sm btn-primary"><div class="pb-1"><img  class="filter-white" src="{% static 'images/ico/arrows-collapse.svg' %}" /> {{ obj.clave }}</div></a>
+        {% endfor %}
+        {% else %}
+            <a type="button" class="btn btn-sm btn-primary"><div class="pb-1">Nothing to show</div></a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+            </td>
+            <td class='text-end align-middle'><a href="{% url 'scales_status_view' status.id %}" class="btn btn-dark btn-sm">View</a></td>
+        </tr>
+        {% empty %}
+            <td>No status available</td>
+        {% endfor %}
+</table>
+      <script>
+const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+    </script>
+<script>
+$(document).ready(function(){
+    $('[data-toggle="tooltip"]').tooltip();
+});
+</script>
+{% endblock %}

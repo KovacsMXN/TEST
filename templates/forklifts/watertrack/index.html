@@ -44,9 +44,14 @@
       <td><a href="#" data-bs-toggle="tooltip" data-bs-title="{{date.0}}"><div style="background-color: {{ forklift.2 }};" class="commit-node-traycing"></div></a></td>
       <td class="text-end"><a class="btn btn-dark btn-sm" href="{% url 'forklift_view' forklift.0.id %}">    <span class="align-text-bottom">
         <img class="filter-white" src="{% static 'images/ico/eye.svg' %}" />
-    </span></a> <a class="btn btn-primary btn-sm" href="{% url 'water_track_add' forklift.0.id %}">    <span class="align-text-bottom">
+    </span></a> 
+    {% if perms.forklift.add_waterentry %}
+    <a class="btn btn-primary btn-sm" href="{% url 'water_track_add' forklift.0.id %}">  <span class="align-text-bottom">
         <img class="filter-white" src="{% static 'images/ico/droplet.svg' %}" />
-    </span></a></td>
+    </span></a>
+    {% else %}
+    {% endif %}
+  </td>
     </tr>
     {% endfor %}
   </tbody>

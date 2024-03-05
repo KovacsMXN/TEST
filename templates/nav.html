@@ -5,36 +5,48 @@
             <li class="nav-item">
                 <a class="nav-link" aria-current="page" href="{% url 'index' %}"><span class="align-text-bottom"><img src="{% static 'images/ico/house.svg' %}" /></span> Dashboard</a>
             </li>
+            <!--
 		    <li class="nav-item">
                 <a class="nav-link" href="{% url 'view_inv_index' %}"><span class="align-text-bottom"><img src="{% static 'images/ico/box-seam.svg' %}" /></span> Inventory</a>
             </li>
 		    <li class="nav-item">
                 <a class="nav-link" href="{% url 'equipment_index' %}"><span class="align-text-bottom"><img src="{% static 'images/ico/cpu.svg' %}" /> </span> Equipment</a>
             </li>
-        </ul>
+        </ul> -->
     <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted text-uppercase">
         <span>Inspection & Control</span>
     </h6>
         <ul class="nav flex-column mb-2">
+            {% if perms.forklift.view_forklifts %}
             <li class="nav-item">
                 <a class="nav-link" href="{% url 'forklift_index_view' %}"><span class="align-text-bottom"><img src="{% static 'images/ico/truck.svg' %}" /></span> Forklifts</a>
             </li>
+            {% else %}
+            {% endif %}
+            {% if perms.ladders.view_ladders %}
             <li class="nav-item">
                 <a class="nav-link" href="{% url 'ladders_index_view' %}"><span class="align-text-bottom"><img src="{% static 'images/ico/ladder.svg' %}" /></span> Ladders</a>
             </li>
+            {% else %}
+            {% endif %}
+            {% if perms.scales.view_scales %}
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'scales_index_view' %}"><span class="align-text-bottom"><img src="{% static 'images/ico/arrows-collapse.svg' %}" /></span> Scales</a>
+            </li>
+            {% else %}
+            {% endif %}
             <!-- <li class="nav-item">
                 <a class="nav-link" href="{% url 'ladders_index_view' %}"><span class="align-text-bottom"><img src="{% static 'images/ico/lock.svg' %}" /></span> Lockout/Tagout</a>
             </li> -->
         </ul>
 
-    {% if request.user.is_superuser %}
-    <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted text-uppercase">
+    <!--<h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted text-uppercase">
         <span>Records</span>
     </h6>
         <ul class="nav flex-column mb-2">
             <li class="nav-item">
                 <a class="nav-link" href="{% url 'ladders_index_view' %}"><span class="align-text-bottom"><img src="{% static 'images/ico/clipboard-pulse.svg' %}" /></span> Triangle Air Actuator Records</a>
-            <!-- <li class="nav-item">
+             <li class="nav-item">
                 <a class="nav-link" href="{% url 'ladders_index_view' %}"><span class="align-text-bottom"><img src="{% static 'images/ico/lock.svg' %}" /></span> Lockout/Tagout</a>
             </li> -->
         </ul>
@@ -43,12 +55,12 @@
     </h6>
         <ul class="nav flex-column mb-2">
 		    <li class="nav-item">
-                <a class="nav-link" href="{% url 'storage_index' %}"><span class="align-text-bottom"><img src="{% static 'images/ico/archive.svg' %}" /></span> Storage</a>
+                <a class="nav-link" href="{% url 'storage_index' %}"><span class="align-text-bottom"><img src="{% static 'images/ico/archive.svg' %}" /></span> Storage</a></li>
             <li class="nav-item">
                 <a class="nav-link" href="{% url 'locations_index' %}"><span class="align-text-bottom"><img src="{% static 'images/ico/geo-alt.svg' %}" /></span> Locations</a>
             </li>
-		    </li>
         </ul>
+{% if perms.auth.view_user %}
     <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted text-uppercase">
 	    <span>Staff</span>
     </h6>
@@ -57,8 +69,8 @@
 			    <a class="nav-link" href="{% url 'staff_index' %}"><span class="align-text-bottom"><img src="{% static 'images/ico/people.svg' %}" /></span> Accounts</a>
 		    </li>
 	    </ul>
-    {% else %}
-    {% endif %}
+{% else %}
+{% endif %}
     <footer id="footer">
     <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
         <div class="text-center"><img class="m-1" width="12%" src="{% static 'images/mx.png' %}"> © 2023 Lebni Pérez Maro</div>

@@ -20,8 +20,11 @@ class CreateLadderStatus(forms.ModelForm):
         model = LattersStatus
         fields = '__all__'
         widgets={
-            "name":forms.TextInput(attrs={'class':'form-control form-control-sm','placeholder':'Name of the new ladder status'}),
-            "color":forms.TextInput(attrs={'class':'form-control form-control-sm', 'data-jscolor="{}"': '', 'value': color}),
+            "name":forms.TextInput(attrs={'placeholder':'Name of the new ladder status'}),
+            "color":forms.TextInput(attrs={'data-jscolor="{}"': '', 'value': color}),
+        }
+        labels = {
+            "name": "Name of the status",
         }
 
 class CreateLadderMaterials(forms.ModelForm):
@@ -29,16 +32,22 @@ class CreateLadderMaterials(forms.ModelForm):
         model = LattersMaterials
         fields = '__all__'
         widgets={
-            "name":forms.TextInput(attrs={'class':'form-control form-control-sm','placeholder':'Name of the new ladder material'}),
-            "color":forms.TextInput(attrs={'class':'form-control form-control-sm', 'data-jscolor="{}"': '', 'value': color}),
+            "name":forms.TextInput(attrs={'placeholder':'Name of the new ladder material'}),
+            "color":forms.TextInput(attrs={'data-jscolor="{}"': '', 'value': color}),
+        }
+        labels = {
+            "name": "Name of the material",
         }
 class CreateLadderBrands(forms.ModelForm):
     class Meta:
         model = LattersBrands
         fields = '__all__'
         widgets={
-            "name":forms.TextInput(attrs={'class':'form-control form-control-sm'}),
+            "name":forms.TextInput(attrs={'class':'form-control form-control-sm','placeholder':'Name of the new ladder brand'}),
             "color":forms.TextInput(attrs={'class':'form-control', 'data-jscolor="{}"': '', 'value': color }),
+        }
+        labels = {
+            "name": "Name of the brand",
         }
 class CreateLadderForm(forms.ModelForm):
     class Meta:
@@ -51,6 +60,10 @@ class CreateLadderForm(forms.ModelForm):
             "material": forms.Select(attrs={'class': 'form-control form-control-sm'}),
             "pasos": forms.TextInput(attrs={'class': 'form-control form-control-sm', 'placeholder': 'Enter # of steps'}),
             "status": forms.Select(attrs={'class': 'form-control form-control-sm'}),
+        }
+        labels = {
+            "clave": "Identification tag",
+            "modelo": "Model",
         }
 class LadderInspectionForm(forms.ModelForm):
     class Meta:

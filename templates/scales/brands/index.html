@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}SuipluMX - Registrated scale brands{% endblock %}
+{% block content %}
+      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">Scales</h1>
+        <div class="btn-toolbar mb-2 mb-md-0">
+            {% include "scales/scales_toolbar.html" %}
+        </div>
+      </div>
+<div class="row pb-2 px-1">
+  <div class="col-6"><h5>Registrated scales brands</h5></div>
+  <div class="col-6">
+      {% if perms.scales.add_scalesbrands %}
+          <div class="text-end"><a href="{% url 'scales_brands_add' %}" class="btn btn-dark"><img class="filter-white" src="{% static 'images/ico/card-heading.svg' %}" /> Add brand</a></div>
+      {% else %}
+      {% endif %}
+  </div>
+</div>
+<table id="datatable-contenido" class="pt-2 table table-striped table-hover">
+    <thead>
+        <tr>
+            <th>Banner</th>
+            <th>Brand</th>
+            <th class="text-end">Operations</th>
+        </tr>
+    </thead>
+    <tbody id="tableContenido_results"></tbody>
+</table>
+<script src="{% static 'js/forklifts/brands.js' %}"></script>
+<script src="{% static 'js/scales/complex_brands.js' %}"></script>
+{% endblock %}

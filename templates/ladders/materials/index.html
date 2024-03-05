@@ -11,7 +11,7 @@
 <div class="row pb-2 px-1">
   <div class="col-6"><h5>Registrated ladder materials</h5></div>
   <div class="col-6">
-      {% if request.user.is_superuser %}
+      {% if perms.ladders.add_lattersmaterials %}
           <div class="text-end"><a href="{% url 'ladders_materials_add' %}" class="btn btn-dark"><img class="filter-white" src="{% static 'images/ico/bricks.svg' %}" /> Add material</a></div>
       {% else %}
       {% endif %}

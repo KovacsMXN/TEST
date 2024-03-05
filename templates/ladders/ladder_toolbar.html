@@ -1,33 +1,43 @@
 {% load static %}
 <div class="btn-group me-2">
+{% if perms.ladders.view_ladders %}
 <a href="{% url 'ladders_index_view' %}" class="btn btn-dark">
     <span class="align-text-bottom">
         <img class="filter-white" src="{% static 'images/ico/ladder.svg' %}" />
     </span>
     Ladders
 </a>
-
+{% else %}
+{% endif %}
+{% if perms.ladders.view_lattersbrands %}
 <a href="{% url 'ladders_brands' %}" class="btn btn-dark">
     <span class="align-text-bottom">
         <img class="filter-white" src="{% static 'images/ico/card-heading.svg' %}" />
     </span>
     Brands
 </a>
-
+{% else %}
+{% endif %}
+{% if perms.ladders.view_lattersmaterials %}
 <a href="{% url 'ladders_materials' %}" class="btn btn-dark">
     <span class="align-text-bottom">
         <img class="filter-white" src="{% static 'images/ico/bricks.svg' %}" />
     </span>
     Materials
 </a>
+{% else %}
+{% endif %}
+{% if perms.ladders.view_lattersstatus %}
 <a href="{% url 'ladders_status' %}" class="btn btn-dark">
     <span class="align-text-bottom">
         <img class="filter-white" src="{% static 'images/ico/hdd-stack.svg' %}" />
     </span>
     Status
 </a>
+{% else %}
+{% endif %}
 </div>
-
+{% if perms.ladders.view_ladderinspectionentry %}
 <div class="btn-group me-2">
 <a href="{% url 'ladders_inspection' %}" class="btn btn-primary">
     <span class="align-text-bottom">
@@ -36,3 +46,5 @@
     
 </a>
 </div>
+{% else %}
+{% endif %}

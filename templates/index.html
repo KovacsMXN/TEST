@@ -7,5 +7,11 @@
   <div class="btn-toolbar mb-2 mb-md-0">
   </div>
 </div>
-UND_DEV
+UNDER DEVELOPMENT
+
+PERMESSION CHECKER
+{% for permission in user_permissions %}
+            <li>{{ permission }}</li>
+        {% endfor %}
+
 {% endblock %}

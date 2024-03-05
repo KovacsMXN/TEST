@@ -25,9 +25,10 @@
 <table class="table">
   <thead>
     <tr>
-      <th width="20%" scope="col">Status</th>
-      <th width="10%" scope="col">Count</th>
-      <th width="60%" scope="col">Forklifts</th>
+      <th width="12%" scope="col">Status</th>
+      <th width="8%" scope="col">Count</th>
+      <th width="30%" scope="col">Percentage</th>
+      <th width="40%" scope="col">Forklifts</th>
       <th width="10%" class="text-end" scope="col">Operations</th>
     </tr>
   </thead>
@@ -36,29 +37,36 @@
         <tr>
             <td ><span style="height: 18px;width: 18px;background-color:{{ status.color }};border-radius: 50%;vertical-align: sub;display: inline-block;" class="dot"></span> {{ status.name }}</td>
             <td>{{ status.count }} Forklifts</td>
+            <td><div class="progress m-2">
+  <div class="progress-bar
+    bg-success
+    " role="progressbar" style="width:{% widthratio status.count conteo 100 %}%;" aria-valuenow="{% widthratio status.count conteo 100 %}" aria-valuemin="0" aria-valuemax="100" data-toggle="tooltip" data-placement="top" data-bs-original-title="{% widthratio status.count conteo 100 %} %">
+    {% widthratio status.count conteo 100 %} %
+  </div>
+</div></td>
             <td>
                     
 <div class="accordion" id="accordionPanelsStayOpenExample">
   <div class="accordion-item">
     <h2 class="accordion-header">
       <button class="accordion-button collapsed header_fkl_count" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree{{status.id}}" aria-expanded="false" aria-controls="panelsStayOpen-collapseThree">
-        {% widthratio status.count conteo 100 %}% of total</button>
+        {{ status.count }} out of {{ conteo }} forklifts</button>
     </h2>
     <div id="panelsStayOpen-collapseThree{{status.id}}" class="accordion-collapse collapse">
       <div class="accordion-body">
         {% if status.count %}
         {% for forklift in status.forklifts.all %}
-        <a href="{% url 'forklift_view' forklift.id %}" type="button" class="btn btn-sm btn-dark"><div class="pb-1"><img  class="filter-white" src="{% static 'images/ico/truck.svg' %}" /> {{ forklift.clave }}</div></a>
+        <a href="{% url 'forklift_view' forklift.id %}" type="button" class="btn btn-sm btn-primary"><div class="pb-1"><img  class="filter-white" src="{% static 'images/ico/truck.svg' %}" /> {{ forklift.clave }}</div></a>
         {% endfor %}
         {% else %}
-            <a type="button" class="btn btn-sm btn-secondary"><div class="pb-1">Nothing to show</div></a>
+            <a type="button" class="btn btn-sm btn-primary"><div class="pb-1">Nothing to show</div></a>
         {% endif %}
       </div>
     </div>
   </div>
 </div>
             </td>
-            <td class='text-end align-middle'><a href="view/{{status.id}}" class="btn btn-dark btn-sm">View</a></td>
+            <td class='text-end align-middle'><a href="{% url 'forklift_status_view' status.id %}" class="btn btn-dark btn-sm">View</a></td>
         </tr>
         {% empty %}
             <td>No status available</td>

@@ -4,8 +4,6 @@ from django.urls import path, include
 #INCLUDE LADDERS APP VIEWS
 #IMPORT MAIN INDEX
 from .views import ladders_index, ladders_index_json, ladders_view, ladders_add, ladders_delete, ladders_edit
-#IMPORT BRANDS
-from .views import ladders_brands, ladders_brands_json
 #IMPORT MATERIALS
 from .views import ladders_materials, ladders_materials_json, ladders_materials_add, ladders_materials_view, ladders_materials_edit, ladders_materials_delete
 #IMPORT STATUS
@@ -13,8 +11,8 @@ from .views import ladders_status, ladders_status_add, ladders_status_view, ladd
 #IMPORT INSPECTION
 from .views import ladders_inspection, ladders_inspection_add
 #IMPORT BRANDS
-from .views import ladders_brands, ladders_brands_view, ladders_brands_edit, ladders_brands_add, ladders_brands_delete
-#URL PATTERNS
+from .views import ladders_brands, ladders_brands_json, ladders_brands_view, ladders_brands_edit, ladders_brands_add, ladders_brands_delete
+
 urlpatterns = [
     #URL PATTERN INDEX
     path('', ladders_index, name='ladders_index_view'),

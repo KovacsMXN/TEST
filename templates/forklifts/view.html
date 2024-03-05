@@ -20,7 +20,7 @@
           <div class="row">
             <div class="col-6">General information</div>
             <div class="col-6">
-              {% if request.user.is_superuser %}
+              {% if perms.forklift.change_forklifts %}
               <div class="text-end">
                 <a href="{% url 'forklift_edit' db_response.id %}" class="nav-link">
                   <span class="align-text-bottom">
@@ -113,7 +113,11 @@
         <tr class="text-start">
           <td class="text-start align-middle"><img width="90" src="/media/{{service_provider.imagen}}"></td>
           <td class="align-middle"><a class="text-reset text-decoration-none fw-bolder">{{ service_provider.name }}</a></td>
+          {% if perms.forklift.view_forkliftserviceproviders %}
           <td class="align-middle text-end"><a class="btn btn-primary btn-sm" href="{% url 'forklift_service_providers_view' service_provider.id %}">View</td>
+          {% else %}
+          {% endif %}
+          
         </tr>
         {% empty %}
             No service provider available
@@ -132,14 +136,6 @@
           <div class="row">
             <div class="col-6">Forklift's image</div>
             <div class="col-6">
-              <div class="text-end" >
-                {% if request.user.is_superuser %}
-                <a class="nav-link" href="/forklifts/imagen/upload/{{ db_response.id }}">
-                  <span class="align-text-bottom">
-                  </span>
-                </a>
-                {% endif %}
-              </div>
             </div>
           </div>
         </div>
@@ -189,7 +185,7 @@
 
   <div class="row">
     <div class="col-12 p-2 mb-0">
-            {% if request.user.is_superuser %}
+            {% if perms.forklift.delete_forklifts %}
             <div class="row p-2 mb-0">
             <div class="containerdanger">
                 <div class="containerdangerhead">

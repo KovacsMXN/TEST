@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}SuipluMX - Registrated scales service providers {% endblock %}
+{% block content %}
+      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">Scales</h1>
+        <div class="btn-toolbar mb-2 mb-md-0">
+            {% include "scales/scales_toolbar.html" %}
+        </div>
+      </div>
+  <div class="row pb-2 px-1">
+    <div class="col-6">
+      <h5>Registrated scales service providers</h5>
+    </div>
+    <div class="col-6">
+      {% if perms.scales.add_scalesserviceproviders %}
+        <div class="text-end">
+          <a href="{% url 'scales_serviceprovider_add' %}" class="btn btn-dark">
+            <img class="filter-white" src="{% static 'images/ico/person-gear.svg' %}" /> Add service provider
+          </a>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+<table class="table">
+  <thead>
+    <tr>
+      <th width="20%" scope="col">Banner</th>
+      <th width="20%" scope="col">Service provider</th>
+      <th width="60%" class="text-end" scope="col">Operations</th>
+    </tr>
+  </thead>
+  <tbody>
+        {% for element in data %}
+        <tr>
+            <td class="align-middle"><img height="50px" src="/media/{{ element.imagen }}"></td>
+            <td class="align-middle"> {{ element.name }}</td>
+            <td class='text-end align-middle'><a href="{% url 'scales_serviceprovider_view' element.id %}" class="btn btn-dark btn-sm">View</a></td>
+        </tr>
+        {% empty %}
+            <td><p class="fw-normal">No records found in database</p></td>
+            <td></td>
+            <td></td>
+        {% endfor %}
+</table>
+{% endblock %}

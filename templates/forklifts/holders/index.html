@@ -17,7 +17,7 @@
       <h5>Registrated forklift holders</h5>
     </div>
     <div class="col-6">
-      {% if request.user.is_superuser %}
+      {% if perms.forklift.add_forkliftowners %}
         <div class="text-end">
           <a href="{% url 'forklift_holders_add' %}" class="btn btn-dark">
             <img class="filter-white" src="{% static 'images/ico/person-bounding-box.svg' %}" /> Add holder

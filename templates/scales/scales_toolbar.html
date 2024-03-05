@@ -1,0 +1,42 @@
+{% load static %}
+<div class="btn-group me-2">
+{% if perms.scales.view_scales%}
+<a href="{% url 'scales_index_view' %}" class="btn btn-dark">
+    <span class="align-text-bottom">
+        <img class="filter-white" src="{% static 'images/ico/arrows-collapse.svg' %}" />
+    </span>
+    Scales
+</a>
+{% else %}
+{% endif %}
+
+{% if perms.scales.view_scalesbrands%}
+<a href="{% url 'scale_brands_view' %}" class="btn btn-dark">
+    <span class="align-text-bottom">
+        <img class="filter-white" src="{% static 'images/ico/card-heading.svg' %}" />
+    </span>
+    Brands
+</a>
+{% else %}
+{% endif %}
+
+{% if perms.scales.view_scalesserviceproviders%}
+<a href="{% url 'scales_serviceprovider_index' %}" class="btn btn-dark">
+    <span class="align-text-bottom">
+        <img class="filter-white" src="{% static 'images/ico/person-gear.svg' %}" />
+    </span>
+    Service Providers
+</a>
+{% else %}
+{% endif %}
+
+{% if perms.scales.view_scalesstatus%}
+<a href="{% url 'scales_status_index' %}" class="btn btn-dark">
+    <span class="align-text-bottom">
+        <img class="filter-white" src="{% static 'images/ico/hdd-stack.svg' %}" />
+    </span>
+    Status
+</a>
+{% else %}
+{% endif %}
+</div>

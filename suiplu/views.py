@@ -10,7 +10,17 @@ from django.contrib.admin.views.decorators import staff_member_required
 #CREATE VIEW FOR MAIN INDEX DOMAIN
 @staff_member_required(login_url='/login/')
 def index(request):
-    return render(request, 'index.html')
+# Get the current user
+    user = request.user
+
+    # Fetch the permissions of the user
+    user_permissions = user.user_permissions.all()
+
+    # Pass the permissions to the template
+    context = {
+        'user_permissions': user_permissions,
+    }
+    return render(request, 'index.html',context)
 
 #VIEW FOR INDEX EQUIPMENT
 @login_required

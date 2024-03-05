@@ -20,7 +20,7 @@
           <div class="row">
             <div class="col-6">General information</div>
             <div class="col-6">
-              {% if request.user.is_superuser %}
+              {% if perms.ladders.change_ladders %}
               <div class="text-end">
                 <a href="{% url 'ladders_edit' db_response.id %}" class="nav-link">
                   <span class="align-text-bottom">
@@ -106,42 +106,9 @@
     </div>
 
   </div>
-
-
-{% if db_response.powered == "E" %}
   <div class="row">
     <div class="col-12 p-2 mb-0">
-            <div class="row p-2 mb-0">
-            <div class="containervieweqipment">
-                <div class="containervieweqipmenthead">
-                    <div class="row">
-                        <div class="col-6">Batery check tracker</div>
-                        <div class="col-6">
-                            <div class="text-end">
-                            <a href="{% url 'water_track_add' db_response.id %}" class="text-reset text-decoration-none"><img class="filter-white" src="/static/images/ico/plus-square.svg" /></span></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="containervieweqipmentbody">
-<div class="commit-graph">
-        <div class="year">
-        {% for date in dates %}
-            <a href="#" data-bs-toggle="tooltip" data-bs-title="{{date.0}}"><div style="background-color: {{ date.1 }};" class="commit-node"></div></a>
-        {% endfor %}
-    </div>
-</div>
-                </div>
-            </div>
-            </div>
-    </div>
-  </div>
-{% else %}
-{% endif %}
-
-  <div class="row">
-    <div class="col-12 p-2 mb-0">
-            {% if request.user.is_superuser %}
+            {% if perms.ladders.delete_ladders %}
             <div class="row p-2 mb-0">
             <div class="containerdanger">
                 <div class="containerdangerhead">

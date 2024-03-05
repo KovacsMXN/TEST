@@ -41,7 +41,7 @@
                         <div class="col-6">Contact information</div>
                         <div class="col-6">
                             <div class="text-end">
-                                {% if request.user.is_superuser %}
+                                {% if perms.forklift.change_forkliftowners %}
                                 <div class="text-end">
                                     <a href="{% url 'forklift_holders_edit' data.id %}" name="edit_b" id="edit_b" class="nav-link"><span class="align-text-bottom"><img class="filter-white" src="{% static 'images/ico/pencil-square.svg' %}"></span></a>
                                 </div>
@@ -97,7 +97,7 @@
         </div>
     </div>
     <script src="{% static 'js/forklifts/holders.js' %}"></script>
-            {% if request.user.is_superuser %}
+            {% if perms.forklift.delete_forkliftowners %}
             <div class="row p-2 mb-0">
             <div class="containerdanger">
                 <div class="containerdangerhead">

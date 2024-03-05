@@ -14,7 +14,7 @@
 </div>
 
         <div class="col-6 text-end">
-            {% if request.user.is_superuser %}
+            {% if perms.ladders.add_ladders %}
             <a href="{% url 'ladders_add' %}" class="btn btn-dark">
             <span class="align-text-bottom">
             <img class="filter-white" src="{% static 'images/ico/plus-square.svg' %}" />
@@ -39,7 +39,8 @@
                     <th class="text-end">Operations</th>
                 </tr>
             </thead>
-            <tbody id="tableForklifts_results"></tbody>
+            <tbody id="tableForklifts_results">
+            </tbody>
         </table>
     </div>
     <script src="{% static 'js/ladders/ladders.js' %}"></script>

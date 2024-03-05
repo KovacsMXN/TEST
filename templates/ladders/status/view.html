@@ -23,7 +23,7 @@
                         <div class="col-6">General information</div>
                         <div class="col-6">
                             <div class="text-end">
-                                {% if request.user.is_superuser %}
+                                {% if perms.ladders.change_lattersstatus %}
                                 <div class="text-end">
                                     <a href="{% url 'ladders_status_edit' data.id %}" name="edit_b" id="edit_b" class="nav-link"><span class="align-text-bottom"><img class="filter-white" src="{% static 'images/ico/pencil-square.svg' %}"></span></a>
                                 </div>
@@ -58,16 +58,16 @@
                 <div class="containervieweqipmentbody">
                     {%if mas_data %}
                     {% for forklift in mas_data %}
-                        <a href="{% url 'ladders_view' forklift.id %}" type="button" class="btn btn-sm btn-dark"><div class="pb-1"><img  class="filter-white" src="{% static 'images/ico/ladder.svg' %}" /> {{ forklift.clave }}</div></a>
+                        <a href="{% url 'ladders_view' forklift.id %}" type="button" class="btn btn-sm btn-primary"><div class="pb-1"><img  class="filter-white" src="{% static 'images/ico/ladder.svg' %}" /> {{ forklift.clave }}</div></a>
                     {% endfor %}
                     {% else%}
-                        <a type="button" class="btn btn-sm btn-secondary"><div class="pb-1">Nothing to show</div></a>
+                        <a type="button" class="btn btn-sm btn-primary"><div class="pb-1">Nothing to show</div></a>
                     {% endif%}
                 </div>
             </div>
         </div>
     </div>
-            {% if request.user.is_superuser %}
+            {% if perms.ladders.delete_lattersstatus %}
             <div class="row p-2 mb-0">
             <div class="containerdanger">
                 <div class="containerdangerhead">
