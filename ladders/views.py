@@ -34,6 +34,8 @@ def ladders_index_json(request):
         'id',
         'imagen',
         'clave',
+        'location__name',
+        'location__color',
         'brand',
         'brand__color',
         'brand__name',

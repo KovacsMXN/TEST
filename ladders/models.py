@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from datetime import date, datetime, timedelta, timezone
 from django.utils import timezone
+from storage.models import Locations
 #LADDERS BRANDS
 class LattersBrands(models.Model):
 	id = models.AutoField(primary_key=True)
@@ -38,6 +39,7 @@ class Ladders(models.Model):
 	material = models.ForeignKey(LattersMaterials, on_delete=models.CASCADE)
 	pasos = models.IntegerField()
 	status = models.ForeignKey(LattersStatus, on_delete=models.CASCADE)
+	location = models.ForeignKey(Locations, on_delete=models.PROTECT)
 	def __str__(self):
 		return str(self.clave) +  str(" / ") + str(self.brand) +  str(" / ") + str(self.modelo)
 

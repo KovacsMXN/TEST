@@ -31,6 +31,7 @@ const listFrokslifts = async () => {
             content += `
                 <tr>
                     <!-- CLAVE --><td>${ladder.clave}</td>
+                    <!-- CAPACIDAD --><td>${ladder.pesomax}</td>
                     <!-- BRAND --><td><span style="height: 18px;width: 18px;background-color: ${ladder.brand__color};border-radius: 0%;vertical-align: sub;display: inline-block;" class="dot"></span> ${ladder.brand__name}</td>
                     <!-- MODELO --><td>${ladder.modelo}</td>
                     <!-- SERIAL --><td>${ladder.serial}</td>

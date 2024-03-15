@@ -58,7 +58,7 @@
                 <div class="containervieweqipmentbody">
                     {%if mas_data %}
                     {% for forklift in mas_data %}
-                        <a href="{% url 'ladders_view' forklift.id %}" type="button" class="btn btn-sm btn-primary"><div class="pb-1"><img  class="filter-white" src="{% static 'images/ico/ladder.svg' %}" /> {{ forklift.clave }}</div></a>
+                        <a href="{% url 'ladders_view' forklift.id %}" type="button" class="m-1 btn btn-sm btn-primary"><img  class="filter-white" src="{% static 'images/ico/ladder.svg' %}" /> {{ forklift.clave }}</a>
                     {% endfor %}
                     {% else%}
                         <a type="button" class="btn btn-sm btn-primary"><div class="pb-1">Nothing to show</div></a>

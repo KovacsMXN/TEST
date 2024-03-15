@@ -103,36 +103,75 @@ def water_track_add(request, id):
     return render(request, 'forklifts/watertrack/add.html', {'form': form, 'forklift': forklift})
 
 def generate_dates(year, id):
+    #START DATE
     start_date = date(year, 1, 1)
+    #END DATE
     end_date = date(year, 12, 31)
+    #TODAYS DATE
     todaysdate = date.today()
-    delta = timedelta(days=1)
-    delta1 = timedelta(days=2)
-    delta2 = timedelta(days=3)
-    delta3 = timedelta(days=4)
+
+    #CALCULATION OF DELTAS
+    d1 = timedelta(days=1)
+    d2 = timedelta(days=2)
+    d3 = timedelta(days=3)
+    d4 = timedelta(days=4)
+    d5 = timedelta(days=5)
+    d6 = timedelta(days=6)
+
+    d8 = timedelta(days=7)
+    d9 = timedelta(days=8)
+    d10 = timedelta(days=9)
+    d11 = timedelta(days=10)
+    d12 = timedelta(days=11)
+    d13 = timedelta(days=12)
+
+
+    #GENERATES ALL DATES IN A YEAR
     all_dates = []
+
+    #GETS FORKLIFT DATA & WATER ENTRYS
     forklift = get_object_or_404(Forklifts, id=id)
     water_entry_dates = set(WaterEntry.objects.filter(fecha__year=year).filter(forklift=forklift).values_list('fecha__date', flat=True))
 
+    #START GENERATING COLORS DEPENDING ON CALCULATIONS
     current_date = start_date
     while current_date <= end_date:
         if current_date == todaysdate:
             color = "#0366d6"
         elif current_date in water_entry_dates:
-            color = "#3ad353"  
-        elif (current_date - delta) in water_entry_dates:
-            color = "#26a641"
-        elif (current_date - delta1) in water_entry_dates:
-            color = "#016d31"
-        elif (current_date - delta2) in water_entry_dates:
-            color = "#0d4429"
-        elif (current_date - delta3) in water_entry_dates:
-            color = "#082e1b"
+            color = "#43e35c"
+        elif (current_date - d1) in water_entry_dates:
+            color = "#41d659"
+        elif (current_date - d2) in water_entry_dates:
+            color = "#3fc956"
+        elif (current_date - d3) in water_entry_dates:
+            color = "#3dbc53"
+        elif (current_date - d4) in water_entry_dates:
+            color = "#3bae50"
+        elif (current_date - d5) in water_entry_dates:
+            color = "#39a14d"
+        elif (current_date - d6) in water_entry_dates:
+            color = "#37944a"
+
+        elif current_date in water_entry_dates:
+            color = "#358747"
+        elif (current_date - d8) in water_entry_dates:
+            color = "#337a44"
+        elif (current_date - d9) in water_entry_dates:
+            color = "#316d41"
+        elif (current_date - d10) in water_entry_dates:
+            color = "#2f603e"
+        elif (current_date - d11) in water_entry_dates:
+            color = "#2d523b"
+        elif (current_date - d12) in water_entry_dates:
+            color = "#2b4538"
+        elif (current_date - d13) in water_entry_dates:
+            color = "#293835"
         else:
-            color = "#04120b"
+            color = "#272b32"
 
         all_dates.append((current_date, color))
-        current_date += delta
+        current_date += d1
 
     return all_dates
 

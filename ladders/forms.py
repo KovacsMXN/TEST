@@ -52,7 +52,7 @@ class CreateLadderBrands(forms.ModelForm):
 class CreateLadderForm(forms.ModelForm):
     class Meta:
         model = Ladders
-        fields = ['clave', 'brand', 'modelo', 'material', 'pasos', 'status', 'imagen']
+        fields = ['clave', 'brand', 'modelo', 'material', 'pasos', 'status', 'imagen','location']
         widgets = {
             "clave": forms.TextInput(attrs={'class': 'form-control form-control-sm', 'placeholder': 'Enter Clave'}),
             "brand": forms.Select(attrs={'class': 'form-control form-control-sm'}),
@@ -60,10 +60,13 @@ class CreateLadderForm(forms.ModelForm):
             "material": forms.Select(attrs={'class': 'form-control form-control-sm'}),
             "pasos": forms.TextInput(attrs={'class': 'form-control form-control-sm', 'placeholder': 'Enter # of steps'}),
             "status": forms.Select(attrs={'class': 'form-control form-control-sm'}),
+            "location": forms.Select(attrs={'class': 'form-control form-control-sm'}),
+
         }
         labels = {
             "clave": "Identification tag",
             "modelo": "Model",
+            "location": "Location"
         }
 class LadderInspectionForm(forms.ModelForm):
     class Meta:

@@ -20,7 +20,7 @@ def tag():
 class CreateScaleForm(forms.ModelForm):
     class Meta:
         model = Scales
-        fields = ['clave', 'brand', 'service_provider', 'modelo', 'serial', 'nmax', 'clase', 'powersupply', 'imagen', 'status']
+        fields = ['clave', 'brand', 'service_provider', 'modelo', 'serial', 'nmax','pesomax', 'clase', 'powersupply', 'imagen', 'status']
         widgets={
             "clave":forms.TextInput(attrs={'placeholder':'SCL-XXXX'}),
             "brand":forms.Select(),
@@ -28,6 +28,7 @@ class CreateScaleForm(forms.ModelForm):
             "modelo":forms.TextInput(attrs={'placeholder':'Model'}),
             "clase":forms.TextInput(attrs={'placeholder':'lll'}),
             "nmax":forms.TextInput(attrs={'placeholder':'10000'}),
+            "pesomax":forms.TextInput(attrs={'placeholder':'Example: 10LB X 0.002LBS'}),
             "powersupply":forms.TextInput(attrs={'placeholder':'115 VAC 50/60Hz 1.0AMPS'}),
         }
         labels = {
@@ -35,6 +36,7 @@ class CreateScaleForm(forms.ModelForm):
             "modelo": "Model",
             "powersupply": "Input",
             "clase": "Class",
+            "pesomax": "Maximum Weight Capacity",
         }
 
 class CreateScaleBrands(forms.ModelForm):
@@ -86,38 +88,3 @@ class CreateScaleServiceProviderForm(forms.ModelForm):
             "color": "Color",
             "imagen": "Banner",
         }
-'''
-
-class CreateLadderMaterials(forms.ModelForm):
-    class Meta:
-        model = LattersMaterials
-        fields = '__all__'
-        widgets={
-            "name":forms.TextInput(attrs={'class':'form-control form-control-sm','placeholder':'Name of the new ladder material'}),
-            "color":forms.TextInput(attrs={'class':'form-control form-control-sm', 'data-jscolor="{}"': '', 'value': color}),
-        }
-class CreateLadderBrands(forms.ModelForm):
-    class Meta:
-        model = LattersBrands
-        fields = '__all__'
-        widgets={
-            "name":forms.TextInput(attrs={'class':'form-control form-control-sm'}),
-            "color":forms.TextInput(attrs={'class':'form-control', 'data-jscolor="{}"': '', 'value': color }),
-        }
-class LadderInspectionForm(forms.ModelForm):
-    class Meta:
-        model = LadderInspectionEntry
-        fields = ['usuario','ladder']
-        widgets={
-            "ladder":forms.Select(attrs={'class':'form-control form-control-sm'}),
-            "usuario":forms.Select(attrs={'class':'form-control form-control-sm'}),
-        }
-    def __init__(self, *args, **kwargs):
-        ladder_predefined1 = kwargs.pop('ladder', None)
-        ladder_predefined2 = kwargs.pop('usuario', None)
-        super(LadderInspectionForm, self).__init__(*args, **kwargs)
-        if ladder_predefined1:
-            self.fields['ladder'].initial = ladder_predefined1
-            self.fields['ladder'].disabled = True  # Hace el campo deshabilitado
-            self.fields['usuario'].initial = ladder_predefined2
-            self.fields['usuario'].disabled = True  # Hace el campo deshabilitado'''

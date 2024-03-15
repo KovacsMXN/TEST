@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'forklift.apps.ForkliftConfig',
     'ladders.apps.LaddersConfig',
     'scales.apps.ScalesConfig',
+    'polybagairactuatorlog.apps.PolybagairactuatorlogConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -46,6 +47,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'equipment.apps.EquipmentConfig',
+    'inventory.apps.InventoryConfig',
     'crispy_forms',
     'crispy_bootstrap5',
 ]

@@ -37,6 +37,7 @@ class Scales(models.Model):
 	modelo = models.CharField(max_length=255)
 	serial = models.CharField(max_length=255)
 	nmax = models.CharField(max_length=255)
+	pesomax = models.CharField(max_length=255)
 	clase = models.CharField(max_length=255)
 	powersupply = models.CharField(max_length=255)
 	imagen = models.ImageField(upload_to='scales/equipment/', null=True)

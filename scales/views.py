@@ -32,7 +32,7 @@ def scales_index(request):
 @login_required
 @permission_required("scales.view_scales", raise_exception=True)
 def scales_index_json(request):
-    query = list(Scales.objects.values("id","clave","brand__name","brand__color","service_provider__name","modelo","serial","nmax","clase","powersupply","imagen","status__name","status__color"))
+    query = list(Scales.objects.values("id","clave","pesomax","brand__name","brand__color","service_provider__name","modelo","serial","nmax","clase","powersupply","imagen","status__name","status__color"))
     data = {'ladders':query}
     return JsonResponse(data)
 

@@ -29,6 +29,7 @@
 <div class="containervieweqipmentbody">
 <form method="post" action="" enctype="multipart/form-data">
 {% csrf_token %}
+          {% csrf_token %}
           <div class="row">
           <div class="form-group col-3 mb-0">
           {{ form.clave|as_crispy_field }}
@@ -50,10 +51,15 @@
           <div class="form-group col-3 mb-0">
           {{ form.clase|as_crispy_field }}
           </div>
-          <div class="form-group col-3 mb-0">
+          <div class="form-group col-6 mb-0">
+          {{ form.pesomax|as_crispy_field }}
+          </div>
+          </div>
+          <div class="row">
+          <div class="form-group col-6 mb-0">
           {{ form.powersupply|as_crispy_field }}
           </div>
-          <div class="form-group col-3 mb-0">
+          <div class="form-group col-6 mb-0">
           {{ form.status|as_crispy_field }}
           </div>
           </div>

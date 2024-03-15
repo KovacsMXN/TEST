@@ -36,6 +36,7 @@ const listFrokslifts = async () => {
                     <!-- PASOS --><td>${ladder.pasos}</td>
                     <!-- STATUS --><td><span style="height: 18px;width: 18px;background-color: ${ladder.status__color};border-radius: 0%;vertical-align: sub;display: inline-block;" class="dot"></span> ${ladder.status__name}</td>
                     <!-- material --><td><span style="height: 18px;width: 18px;background-color: ${ladder.material__color};border-radius: 100%;vertical-align: sub;display: inline-block;" class="dot"></span> ${ladder.material__name}</td>
+                    <!-- LOCATION --><td><span style="height: 18px;width: 18px;background-color: ${ladder.location__color};border-radius: 100%;vertical-align: sub;display: inline-block;" class="dot"></span> ${ladder.location__name}</td>
                     <!-- AGREGADO --><td>${ladder.agregado}</td>
                     <td class='text-end'>
                         <a href="view/${ladder.id}" class="btn btn-dark btn-sm">View</a>

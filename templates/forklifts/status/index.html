@@ -56,7 +56,7 @@
       <div class="accordion-body">
         {% if status.count %}
         {% for forklift in status.forklifts.all %}
-        <a href="{% url 'forklift_view' forklift.id %}" type="button" class="btn btn-sm btn-primary"><div class="pb-1"><img  class="filter-white" src="{% static 'images/ico/truck.svg' %}" /> {{ forklift.clave }}</div></a>
+        <a href="{% url 'forklift_view' forklift.id %}" type="button" class="m-1 btn btn-sm btn-primary"><img  class="filter-white" src="{% static 'images/ico/truck.svg' %}" /> {{ forklift.clave }}</a>
         {% endfor %}
         {% else %}
             <a type="button" class="btn btn-sm btn-primary"><div class="pb-1">Nothing to show</div></a>
